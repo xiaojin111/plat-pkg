@@ -1,14 +1,12 @@
 package main
 
 import (
-	"crypto/rsa"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/jinmukeji/plat-pkg/jwt"
 )
 
 func main() {
@@ -22,53 +20,15 @@ func main() {
 	dur, err := time.ParseDuration(interval)
 	die(err)
 
-	key, err := LoadRSAPrivateKeyFromPEM(keyFile)
+	key, err := jwt.LoadRSAPrivateKeyFromPEM(keyFile)
 	die(err)
 
-	claims := CreateClaims(appId, dur)
+	claims := jwt.CreateClaims(appId, dur)
 
-	ss, err := SignJWT(claims, key)
+	ss, err := jwt.RS256SignJWT(claims, key)
 	die(err)
 
 	fmt.Println(ss)
-}
-
-func LoadRSAPrivateKeyFromPEM(file string) (*rsa.PrivateKey, error) {
-	keyFile, err := ioutil.ReadFile(file)
-	if err != nil {
-		return nil, err
-	}
-
-	key, err := jwt.ParseRSAPrivateKeyFromPEM(keyFile)
-	if err != nil {
-		return nil, err
-	}
-
-	return key, nil
-}
-
-func CreateClaims(appId string, duration time.Duration) *jwt.StandardClaims {
-	// Create the Claims
-	now := time.Now()
-	claims := &jwt.StandardClaims{
-		IssuedAt:  now.Unix(),
-		ExpiresAt: now.Add(duration).Unix(),
-		Issuer:    "app-test",
-	}
-
-	return claims
-}
-
-func SignJWT(claims *jwt.StandardClaims, key *rsa.PrivateKey) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
-	ss, err := token.SignedString(key)
-
-	log.Printf("alg: %s", token.Method.Alg())
-	log.Printf("iss: %s", claims.Issuer)
-	log.Printf("iat: %d", claims.IssuedAt)
-	log.Printf("exp: %d", claims.ExpiresAt)
-
-	return ss, err
 }
 
 func die(err error) {
