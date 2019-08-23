@@ -3,7 +3,13 @@ SOURCE_FILES?=./...
 export PATH := ./bin:$(PATH)
 export GO111MODULE := on
 export GOPROXY := https://goproxy.cn
+export GOVERSION := $(shell go version | awk '{print $$3}')
+# GORELEASER is the path to the goreleaser binary.
+export GORELEASER := $(shell which goreleaser)
 
+# all is the default target
+all: release
+.PHONY: all
 
 # Install all the build and lint dependencies
 setup:
@@ -26,6 +32,10 @@ go-mod-tidy:
 	# @git --no-pager diff HEAD
 	# @git --no-pager diff-index --quiet HEAD
 .PHONY: go-mod-tidy
+
+generate:
+	@go generate ./...
+.PHONY: generate
 
 # Format go files
 format:
@@ -51,4 +61,10 @@ test:
 ci: go-update lint build test
 .PHONY: ci
 
-.DEFAULT_GOAL := ci
+# Release wia goreleaser
+release:
+	@[ -x "$(GORELEASER)" ] || ( echo "goreleaser not installed"; exit 1)
+	@goreleaser --snapshot --skip-publish --rm-dist
+.PHONY: release
+
+.DEFAULT_GOAL := all

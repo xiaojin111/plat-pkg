@@ -1,0 +1,61 @@
+project_name: template-service
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod download
+    - make generate
+    - make format
+    - make lint
+    - make test
+builds:
+  - id: "jm-micro"
+    binary: jm-micro
+    main: ./jm-micro
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+    flags:
+      - -v
+    asmflags:
+      - all=-trimpath={{.Env.PWD}}
+    gcflags:
+      - all=-trimpath={{.Env.PWD}}
+    ldflags:
+      - >-
+        -s -w
+        -X main.version={{.Version}}
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+dockers:
+  - goos: linux
+    goarch: amd64
+    binaries:
+      - jm-micro
+    # Templates of the Docker image names.
+    image_templates:
+      - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:latest"
+      - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:{{ .Tag }}"
+      - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:v{{ .Major }}.{{ .Minor }}"
+    dockerfile: jm-micro/Dockerfile
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-{{.ShortCommit}}"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'

@@ -8,7 +8,7 @@ import (
 const (
 	name        = "jm-micro"
 	description = "A microservice runtime for Jinmu Platform (based on Go Micro)"
-	version     = "1.0.0"
+	version     = "Not Defined"
 )
 
 func main() {
