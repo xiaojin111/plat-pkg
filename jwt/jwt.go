@@ -12,32 +12,32 @@ import (
 
 // LoadRSAPrivateKeyFromPEM 加载 RSA 私钥
 func LoadRSAPrivateKeyFromPEM(file string) (*rsa.PrivateKey, error) {
-	keyFile, err := ioutil.ReadFile(file)
+	f, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
 
-	key, err := jwt.ParseRSAPrivateKeyFromPEM(keyFile)
-	if err != nil {
-		return nil, err
-	}
+	return LoadRASPrivateKey(f)
+}
 
-	return key, nil
+// LoadRASPrivateKey 从字节序列中加载 RSA 私钥
+func LoadRASPrivateKey(key []byte) (*rsa.PrivateKey, error) {
+	return jwt.ParseRSAPrivateKeyFromPEM(key)
 }
 
 // LoadRSAPublicKeyFromPEM 加载 RSA 公钥
 func LoadRSAPublicKeyFromPEM(file string) (*rsa.PublicKey, error) {
-	keyFile, err := ioutil.ReadFile(file)
+	f, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
 
-	key, err := jwt.ParseRSAPublicKeyFromPEM(keyFile)
-	if err != nil {
-		return nil, err
-	}
+	return LoadRSAPublicKey(f)
+}
 
-	return key, nil
+// LoadRSAPublicKey 从字节序列中加载 RSA 公钥
+func LoadRSAPublicKey(key []byte) (*rsa.PublicKey, error) {
+	return jwt.ParseRSAPublicKeyFromPEM(key)
 }
 
 // CreateClaims 根据 APP ID 与过期时间间隔创建一个 JWT Claims
@@ -55,7 +55,21 @@ func CreateClaims(appId string, inr time.Duration) *jwt.StandardClaims {
 
 // RS256SignJWT 使用 RS256 算法对 claims 进行签名
 func RS256SignJWT(claims *jwt.StandardClaims, key *rsa.PrivateKey) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
+	return signJWT(jwt.SigningMethodRS256, key, claims)
+}
+
+// RS384SignJWT 使用 RS84 算法对 claims 进行签名
+func RS384SignJWT(claims *jwt.StandardClaims, key *rsa.PrivateKey) (string, error) {
+	return signJWT(jwt.SigningMethodRS384, key, claims)
+}
+
+// RS512SignJWT 使用 RS512 算法对 claims 进行签名
+func RS512SignJWT(claims *jwt.StandardClaims, key *rsa.PrivateKey) (string, error) {
+	return signJWT(jwt.SigningMethodRS512, key, claims)
+}
+
+func signJWT(method jwt.SigningMethod, key interface{}, claims jwt.Claims) (string, error) {
+	token := jwt.NewWithClaims(method, claims)
 	ss, err := token.SignedString(key)
 
 	return ss, err
