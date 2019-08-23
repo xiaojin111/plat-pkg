@@ -6,18 +6,21 @@ import (
 )
 
 const (
-	name        = "jm-micro"
-	description = "A microservice runtime for Jinmu Platform (based on Go Micro)"
-	version     = "Not Defined"
+	Name        = "jm-micro"
+	Description = "A microservice runtime for Jinmu Platform (based on Go Micro)"
+)
+
+var (
+	Version = "Not Defined"
 )
 
 func main() {
 	cmd.Setup(icmd.App())
 
 	err := icmd.Init(
-		icmd.Name(name),
-		icmd.Description(description),
-		icmd.Version(version),
+		icmd.Name(Name),
+		icmd.Description(Description),
+		icmd.Version(Version),
 	)
 	die(err)
 }
