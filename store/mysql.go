@@ -8,8 +8,9 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// complains compiling error if MySqlStore doesn't implement Tx interface.
+// complains compiling error if MySqlStore doesn't implement interfaces.
 var _ tx.Tx = (*MySqlStore)(nil)
+var _ Closer = (*MySqlStore)(nil)
 
 type MySqlStore struct {
 	client *mysqldb.DbClient
@@ -21,7 +22,16 @@ func NewMySqlStore(client *mysqldb.DbClient) *MySqlStore {
 	}
 }
 
-// 实现事务控制接口
+// 实现 Closer 接口
+
+func (s *MySqlStore) Close() error {
+	if s.client != nil {
+		return s.client.Close()
+	}
+	return nil
+}
+
+// 实现事务控制接口 tx.Tx
 
 type txDbKey string
 

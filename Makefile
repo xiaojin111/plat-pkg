@@ -58,7 +58,7 @@ test:
 .PHONY: test
 
 # Run all code checks
-ci: go-update lint build test
+ci: generate format lint build test
 .PHONY: ci
 
 # Release wia goreleaser

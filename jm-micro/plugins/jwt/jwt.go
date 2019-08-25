@@ -31,6 +31,9 @@ func (p *jwt) Handler() plugin.Handler {
 			token := r.Header.Get("x-jwt")
 			log.Printf("JWT Token: %s", token)
 
+			// write response header
+			rw.Header().Add("x-rsp", "abc123456")
+
 			// serve the request
 			h.ServeHTTP(rw, r)
 		})
