@@ -1,0 +1,47 @@
+version: '3'
+services:
+  consul:
+    image: progrium/consul:latest
+    command:
+      - "-server"
+      - "-bootstrap"
+      - "-rejoin"
+    hostname: "registry"
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+  
+  api:
+    build: .
+    image: 949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:latest
+    command:
+      - "--registry_address=registry:8500"
+      - "--register_interval=5"
+      - "--register_ttl=10"
+      - "--server_name=com.jinmuhealth.platform.api"
+      - "api"
+      - "--handler=rpc"
+      - "--enable_rpc"
+      - "--namespace=com.jinmuhealth.platform.srv"
+    depends_on:
+      - consul
+    ports:
+      - "8080:8080"
+
+  web:
+    build: .
+    image: 949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:latest
+    command:
+      - "--registry_address=registry:8500"
+      - "--register_interval=5"
+      - "--register_ttl=10"
+      - "--server_name=com.jinmuhealth.platform.web"
+      - "web"
+      - "--namespace=com.jinmuhealth.platform.srv"
+    depends_on:
+      - consul
+    ports:
+      - "8082:8082"
+

@@ -36,4 +36,3 @@ go run main.go plugin.go
 # or
 go run .
 ```
-
