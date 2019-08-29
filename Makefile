@@ -54,7 +54,7 @@ build:
 
 # Go test all
 test:
-	@go test ./...
+	@go test -v ./...
 .PHONY: test
 
 # Run all code checks
