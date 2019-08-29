@@ -16,4 +16,5 @@ require (
 	github.com/micro/micro v1.9.1
 	github.com/nats-io/nats-server/v2 v2.0.4 // indirect
 	github.com/sirupsen/logrus v1.4.2
+	github.com/stretchr/testify v1.3.0
 )

@@ -1,5 +1,3 @@
-// +build ignore
-
 package main
 
 import (
@@ -26,7 +24,10 @@ func main() {
 	die(err)
 
 	valid, err := jwt.RSAVerifyJWT(tokenString, key, DefaultMaxExpirationInterval)
-	fmt.Printf("IsValid: %v (%v)\n", valid, err)
+	fmt.Printf("IsValid: %v\n", valid)
+	if err != nil {
+		fmt.Printf("Validation Error: %v\n", err)
+	}
 }
 
 func die(err error) {

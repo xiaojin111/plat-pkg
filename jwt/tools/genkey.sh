@@ -8,10 +8,11 @@ CUR=`dirname $0`
 cd ${CUR}
 
 APP_ID=${1:-app} 
+OUT_DIR=${2:-.}
 
-PRIVATE_KEY_FILE=${APP_ID}.pem
-PUBLIC_KEY_FILE=${APP_ID}.pub
-FINGERPRINT_FILE=${APP_ID}.fp.txt
+PRIVATE_KEY_FILE=${OUT_DIR}/${APP_ID}.pem
+PUBLIC_KEY_FILE=${OUT_DIR}/${APP_ID}.pub
+FINGERPRINT_FILE=${OUT_DIR}/${APP_ID}.fp.txt
 
 # Generate private key
 openssl genrsa -out ${PRIVATE_KEY_FILE} 2048
