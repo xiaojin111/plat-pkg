@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/cid"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
 	"github.com/micro/micro/api"
@@ -13,6 +14,8 @@ func init() {
 	die(err)
 
 	// api 服务插件
+	err = api.Register(cid.NewPlugin())
+	die(err)
 	err = api.Register(jwt.NewPlugin())
 	die(err)
 }

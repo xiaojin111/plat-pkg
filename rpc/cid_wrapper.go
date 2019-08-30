@@ -3,6 +3,7 @@ package rpc
 import (
 	"context"
 
+	id "github.com/jinmukeji/plat-pkg/cid"
 	"github.com/micro/go-micro/server"
 )
 
@@ -13,7 +14,7 @@ func CidWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		cid := CidFromContext(ctx)
 		// 如果没有找到 cid，则生成一个新的
 		if cid == "" {
-			cid = NewCid()
+			cid = id.NewCid()
 			ctx = ContextWithCid(ctx, cid)
 		}
 		err := fn(ctx, req, rsp)
