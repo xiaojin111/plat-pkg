@@ -1,0 +1,5 @@
+id: "${APP_ID}"
+disabled: ${DISABLED}
+fingerprint: "${FINGERPRINT}"
+public_key: |
+$(awk '{printf "  %s\n", $0}' < ${PUBLIC_KEY_FILE})

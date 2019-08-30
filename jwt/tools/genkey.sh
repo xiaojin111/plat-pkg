@@ -25,3 +25,6 @@ openssl rsa -in ${PRIVATE_KEY_FILE} -pubout -outform DER | \
     openssl sha1 -c | \
     awk '{print $2}' \
     > ${FINGERPRINT_FILE}
+
+# Generate yaml config
+./gen-yml.sh ${APP_ID} ${OUT_DIR}
