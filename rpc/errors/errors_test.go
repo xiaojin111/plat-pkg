@@ -59,7 +59,6 @@ func (suite *ErrorsTestSuite) TestExtractErrCode() {
 	}
 
 	for _, tt := range tests {
-
 		suite.Run(tt.name, func() {
 			code, ok := errors.ExtractErrCode((tt.args.err))
 			suite.Assert().Equal(tt.wantCode, code)
