@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/rsa"
 	"flag"
 	"fmt"
 	"log"
@@ -23,7 +24,15 @@ func main() {
 	key, err := jwt.LoadRSAPublicKeyFromPEM(keyFile)
 	die(err)
 
-	valid, err := jwt.RSAVerifyJWT(tokenString, key, DefaultMaxExpirationInterval)
+	opt := jwt.VerifyOption{
+		MaxExpInterval: DefaultMaxExpirationInterval,
+		GetPublicKeyFunc: func(iss string) *rsa.PublicKey {
+			// ignore iss check
+
+			return key
+		},
+	}
+	valid, err := jwt.RSAVerifyJWT(tokenString, opt)
 	fmt.Printf("IsValid: %v\n", valid)
 	if err != nil {
 		fmt.Printf("Validation Error: %v\n", err)

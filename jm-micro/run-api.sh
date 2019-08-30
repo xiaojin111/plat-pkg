@@ -14,8 +14,10 @@ LOG_LEVEL=DEBUG go run . \
     --register_interval=5 \
     --register_ttl=10 \
     --client_pool_size=100 \
+    --server_name=com.jinmuhealth.platform.api \
     api \
     --address=${SERVER_IP}:${SERVER_PORT} \
 	--handler=rpc \
 	--enable_rpc \
-	--namespace=com.jinmuhealth.platform.srv
+	--namespace=com.jinmuhealth.platform.srv \
+    --enable_jwt

@@ -75,9 +75,16 @@ func signJWT(method jwt.SigningMethod, key interface{}, claims jwt.Claims) (stri
 	return ss, err
 }
 
+type GetPublicKeyFunc func(iss string) *rsa.PublicKey
+
+type VerifyOption struct {
+	MaxExpInterval   int64            // 最大过期时间间隔，单位为秒.
+	GetPublicKeyFunc GetPublicKeyFunc // PublicKey 查找函数
+}
+
 // RSAVerifyJWT 使用 RSA 算法（RS256/RS384/RS512) 对 JWT Token 进行验证.
-// maxExpInterval 为最大过期时间间隔，单位为秒.
-func RSAVerifyJWT(tokenString string, key *rsa.PublicKey, maxExpInterval int64) (bool, error) {
+func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, error) {
+	var stdClaims *jwt.StandardClaims
 
 	// Parse takes the token string and a function for looking up the key. The latter is especially
 	// useful if you use multiple keys for your application.  The standard is to use 'kid' in the
@@ -90,18 +97,29 @@ func RSAVerifyJWT(tokenString string, key *rsa.PublicKey, maxExpInterval int64) 
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 
-		return key, nil
+		claims, ok := token.Claims.(*jwt.StandardClaims)
+		if !ok {
+			return nil, errors.New("failed to parse not standard claims")
+		}
+
+		stdClaims = claims
+
+		if opt.GetPublicKeyFunc != nil {
+			key := opt.GetPublicKeyFunc(claims.Issuer)
+			return key, nil
+		}
+
+		return nil, errors.New("unabled to get public key")
 	})
 
-	claims, ok := token.Claims.(*jwt.StandardClaims)
-	if !ok {
-		return false, errors.New("failed to parse not standard claims")
+	if token == nil {
+		return false, errors.New("token is empty")
 	}
 
 	if token.Valid {
-		inr := claims.ExpiresAt - claims.IssuedAt
-		if inr > maxExpInterval {
-			return false, fmt.Errorf("expiration interval exceeds the limit: %ds", maxExpInterval)
+		inr := stdClaims.ExpiresAt - stdClaims.IssuedAt
+		if inr > opt.MaxExpInterval {
+			return false, fmt.Errorf("expiration interval exceeds the limit: %ds", opt.MaxExpInterval)
 		}
 
 		return true, nil
