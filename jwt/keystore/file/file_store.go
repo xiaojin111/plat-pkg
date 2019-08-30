@@ -1,4 +1,4 @@
-package keystore
+package file
 
 import (
 	"crypto/rsa"
@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/jinmukeji/plat-pkg/jwt"
+	"github.com/jinmukeji/plat-pkg/jwt/keystore"
 )
 
 type fileKeyItem struct {
@@ -19,7 +20,7 @@ type fileKeyItem struct {
 	publicKeyFile string
 }
 
-var _ KeyItem = (*fileKeyItem)(nil)
+var _ keystore.KeyItem = (*fileKeyItem)(nil)
 
 func (i fileKeyItem) ID() string {
 	return i.id
@@ -37,7 +38,7 @@ type FileStore struct {
 	keys map[string]*fileKeyItem
 }
 
-var _ Store = (*FileStore)(nil)
+var _ keystore.Store = (*FileStore)(nil)
 
 func NewFileStore() *FileStore {
 	return &FileStore{
@@ -45,7 +46,7 @@ func NewFileStore() *FileStore {
 	}
 }
 
-func (s *FileStore) Get(id string) KeyItem {
+func (s *FileStore) Get(id string) keystore.KeyItem {
 	if k, ok := s.keys[id]; ok {
 		return k
 	}

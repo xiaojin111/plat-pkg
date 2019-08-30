@@ -10,7 +10,8 @@ import (
 
 	mlog "github.com/jinmukeji/go-pkg/log"
 	j "github.com/jinmukeji/plat-pkg/jwt"
-	jwtStore "github.com/jinmukeji/plat-pkg/jwt/keystore"
+	"github.com/jinmukeji/plat-pkg/jwt/keystore"
+	fstore "github.com/jinmukeji/plat-pkg/jwt/keystore/file"
 )
 
 var (
@@ -24,7 +25,7 @@ func init() {
 type jwt struct {
 	enabled   bool
 	headerKey string // HTTP Request Header 中的 jwt 使用的 key
-	store     jwtStore.Store
+	store     keystore.Store
 }
 
 const (
@@ -101,8 +102,8 @@ func NewPlugin() plugin.Plugin {
 
 func NewJWT() plugin.Plugin {
 	// create plugin
-	fstore := jwtStore.NewFileStore()
-	err := fstore.Load("../jwt/tools/testdata", "app-test1")
+	s := fstore.NewFileStore()
+	err := s.Load("../jwt/tools/testdata", "app-test1")
 	if err != nil {
 		panic(err)
 	}
@@ -110,7 +111,7 @@ func NewJWT() plugin.Plugin {
 	p := &jwt{
 		enabled:   false,
 		headerKey: defaultJwtKey,
-		store:     fstore,
+		store:     s,
 	}
 
 	return p

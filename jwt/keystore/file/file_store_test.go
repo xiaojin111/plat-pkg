@@ -1,7 +1,7 @@
-package keystore_test
+package file_test
 
 import (
-	"github.com/jinmukeji/plat-pkg/jwt/keystore"
+	"github.com/jinmukeji/plat-pkg/jwt/keystore/file"
 
 	"testing"
 
@@ -14,7 +14,7 @@ type FileStoreTestSuite struct {
 }
 
 const (
-	testdataDir = "../tools/testdata"
+	testdataDir = "../../tools/testdata"
 )
 
 // SetupSuite 设置测试环境
@@ -23,7 +23,7 @@ func (suite *FileStoreTestSuite) SetupSuite() {
 
 // TestLoad 测试 Load 方法
 func (suite *FileStoreTestSuite) TestLoad() {
-	store := keystore.NewFileStore()
+	store := file.NewFileStore()
 
 	err := store.Load(testdataDir, "app-test1")
 	suite.Assert().NoError(err)
@@ -36,7 +36,7 @@ func (suite *FileStoreTestSuite) TestLoad() {
 }
 
 func (suite *FileStoreTestSuite) TestGet() {
-	store := keystore.NewFileStore()
+	store := file.NewFileStore()
 	_ = store.Load(testdataDir, "app-test1")
 
 	key := store.Get("app-test1")
