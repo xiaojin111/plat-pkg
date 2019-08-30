@@ -11,7 +11,6 @@ import (
 	mlog "github.com/jinmukeji/go-pkg/log"
 	j "github.com/jinmukeji/plat-pkg/jwt"
 	"github.com/jinmukeji/plat-pkg/jwt/keystore"
-	fstore "github.com/jinmukeji/plat-pkg/jwt/keystore/file"
 )
 
 var (
@@ -96,22 +95,16 @@ func (p *jwt) String() string {
 	return "jwt"
 }
 
-func NewPlugin() plugin.Plugin {
-	return NewJWT()
+func NewPlugin(store keystore.Store) plugin.Plugin {
+	return NewJWT(store)
 }
 
-func NewJWT() plugin.Plugin {
+func NewJWT(store keystore.Store) plugin.Plugin {
 	// create plugin
-	s := fstore.NewFileStore()
-	err := s.Load("../jwt/tools/testdata", "app-test1")
-	if err != nil {
-		panic(err)
-	}
-
 	p := &jwt{
 		enabled:   false,
 		headerKey: defaultJwtKey,
-		store:     s,
+		store:     store,
 	}
 
 	return p
