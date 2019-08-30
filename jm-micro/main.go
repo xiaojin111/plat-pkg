@@ -15,13 +15,15 @@ var (
 )
 
 func main() {
-	cmd.Setup(icmd.App())
+	app := icmd.App()
+	cmd.Setup(app)
 
 	err := icmd.Init(
 		icmd.Name(Name),
 		icmd.Description(Description),
 		icmd.Version(Version),
 	)
+
 	die(err)
 }
 

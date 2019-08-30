@@ -6,9 +6,13 @@ import (
 
 	"github.com/micro/cli"
 	"github.com/micro/micro/plugin"
+
+	jwtStore "github.com/jinmukeji/plat-pkg/jwt/keystore"
 )
 
-type jwt struct{}
+type jwt struct {
+	store jwtStore.Store
+}
 
 func (p *jwt) Flags() []cli.Flag {
 	return []cli.Flag{
@@ -40,7 +44,7 @@ func (p *jwt) Handler() plugin.Handler {
 	}
 }
 
-func (w *jwt) Init(ctx *cli.Context) error {
+func (p *jwt) Init(ctx *cli.Context) error {
 	return nil
 }
 
@@ -54,7 +58,15 @@ func NewPlugin() plugin.Plugin {
 
 func NewJWT() plugin.Plugin {
 	// create plugin
-	p := &jwt{}
+	fstore := jwtStore.NewFileStore()
+	err := fstore.Load("../jwt/tools/testdata", "app-test1")
+	if err != nil {
+		panic(err)
+	}
+
+	p := &jwt{
+		store: fstore,
+	}
 
 	return p
 }

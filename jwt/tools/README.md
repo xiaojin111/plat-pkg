@@ -7,7 +7,7 @@
 **命令：**
 
 ```sh
-export APP_ID="app-test1"
+	export APP_ID="app-test1"
 export OUT_DIR="testdata"
 
 # 1. 生成私钥

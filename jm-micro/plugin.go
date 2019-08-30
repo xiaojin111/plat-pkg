@@ -2,11 +2,17 @@ package main
 
 import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
 	"github.com/micro/micro/api"
+	"github.com/micro/micro/plugin"
 )
 
 func init() {
-	// 将 JWT 插件注入到 api 服务之中
-	err := api.Register(jwt.NewJWT())
+	// 全局插件
+	err := plugin.Register(log.NewPlugin(Name))
+	die(err)
+
+	// api 服务插件
+	err = api.Register(jwt.NewPlugin())
 	die(err)
 }
