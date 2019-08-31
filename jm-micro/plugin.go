@@ -18,6 +18,7 @@ func init() {
 	err = api.Register(cid.NewPlugin())
 	die(err)
 
+	// TODO: 使用正式数据源
 	s := fstore.NewFileStore()
 	err = s.Load("../jwt/tools/testdata", "app-test1")
 	if err != nil {

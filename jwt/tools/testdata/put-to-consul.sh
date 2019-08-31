@@ -4,7 +4,7 @@ set -u
 set -o pipefail
 
 CUR=`dirname $0`
-KEY_PREFIX="micro/config/jm/app-key"
+KEY_PREFIX="micro/config/jm/platform/app-key"
 
 cd ${CUR}
 

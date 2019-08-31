@@ -35,7 +35,7 @@ func (suite *FileStoreTestSuite) TestLoad() {
 	suite.Assert().Error(err)
 }
 
-func (suite *FileStoreTestSuite) TestGet() {
+func (suite *FileStoreTestSuite) TestFileStore_Get() {
 	store := file.NewFileStore()
 	_ = store.Load(testdataDir, "app-test1")
 
