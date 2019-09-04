@@ -14,15 +14,15 @@ type Options struct {
 }
 
 const (
-	defaultMaxExpInterval  = 10 * time.Minute // 10分钟
-	defaultMicroConfigPath = "platform/app-key"
+	DefaultMaxExpInterval  = 10 * time.Minute // 10分钟
+	DefaultMicroConfigPath = "platform/app-key"
 )
 
 func DefaultOptions() Options {
 	return Options{
 		Enabled:         false,
-		MaxExpInterval:  defaultMaxExpInterval,
+		MaxExpInterval:  DefaultMaxExpInterval,
 		HeaderKey:       jwt.MetaJwtKey,
-		MicroConfigPath: defaultMicroConfigPath,
+		MicroConfigPath: DefaultMicroConfigPath,
 	}
 }
