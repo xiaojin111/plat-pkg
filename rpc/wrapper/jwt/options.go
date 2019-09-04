@@ -20,7 +20,6 @@ const (
 
 func DefaultOptions() Options {
 	return Options{
-		Enabled:         false,
 		MaxExpInterval:  DefaultMaxExpInterval,
 		HeaderKey:       jwt.MetaJwtKey,
 		MicroConfigPath: DefaultMicroConfigPath,

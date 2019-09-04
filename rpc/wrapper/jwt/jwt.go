@@ -46,9 +46,7 @@ func NewHandlerWrapper(opt Options) server.HandlerWrapper {
 
 	return func(fn server.HandlerFunc) server.HandlerFunc {
 		return func(ctx context.Context, req server.Request, rsp interface{}) error {
-			if !w.opt.Enabled {
-				return fn(ctx, req, rsp)
-			}
+
 			token := jwt.JwtFromContext(ctx)
 			log.Debugf("Received JWT Token: %s", token)
 
