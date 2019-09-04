@@ -4,6 +4,7 @@ import (
 	"crypto/rsa"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/micro/cli"
 	"github.com/micro/micro/plugin"
@@ -11,6 +12,7 @@ import (
 	mlog "github.com/jinmukeji/go-pkg/log"
 	j "github.com/jinmukeji/plat-pkg/jwt"
 	"github.com/jinmukeji/plat-pkg/jwt/keystore"
+	mc "github.com/jinmukeji/plat-pkg/jwt/keystore/micro-config"
 )
 
 var (
@@ -22,13 +24,15 @@ func init() {
 }
 
 type jwt struct {
-	enabled   bool
-	headerKey string // HTTP Request Header 中的 jwt 使用的 key
-	store     keystore.Store
+	enabled         bool
+	headerKey       string // HTTP Request Header 中的 jwt 使用的 key
+	microConfigPath string
+	store           keystore.Store
 }
 
 const (
-	defaultJwtKey = "x-jwt"
+	defaultJwtKey          = "x-jwt"
+	defaultMicroConfigPath = "platform/app-key"
 )
 
 func (p *jwt) Flags() []cli.Flag {
@@ -45,6 +49,13 @@ func (p *jwt) Flags() []cli.Flag {
 			EnvVar:      "JWT_KEY",
 			Value:       defaultJwtKey,
 			Destination: &(p.headerKey),
+		},
+		cli.StringFlag{
+			Name:        "jwt_config_path",
+			Usage:       "Micro config path for JWT",
+			EnvVar:      "JWT_CONFIG_PATH",
+			Value:       defaultMicroConfigPath,
+			Destination: &(p.microConfigPath),
 		},
 	}
 }
@@ -88,23 +99,32 @@ func (p *jwt) Handler() plugin.Handler {
 }
 
 func (p *jwt) Init(ctx *cli.Context) error {
+	baseKeyPath := SplitPath(p.microConfigPath)
+
+	store := mc.NewMicroConfigStore(baseKeyPath...)
+	p.store = store
+
 	return nil
+}
+
+func SplitPath(p string) []string {
+	s := strings.Trim(p, "/")
+	return strings.Split(s, "/")
 }
 
 func (p *jwt) String() string {
 	return "jwt"
 }
 
-func NewPlugin(store keystore.Store) plugin.Plugin {
-	return NewJWT(store)
+func NewPlugin() plugin.Plugin {
+	return NewJWT()
 }
 
-func NewJWT(store keystore.Store) plugin.Plugin {
+func NewJWT() plugin.Plugin {
 	// create plugin
 	p := &jwt{
 		enabled:   false,
 		headerKey: defaultJwtKey,
-		store:     store,
 	}
 
 	return p

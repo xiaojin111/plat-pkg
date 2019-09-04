@@ -106,10 +106,13 @@ func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, error) {
 
 		if opt.GetPublicKeyFunc != nil {
 			key := opt.GetPublicKeyFunc(claims.Issuer)
-			return key, nil
+
+			if key != nil {
+				return key, nil
+			}
 		}
 
-		return nil, errors.New("unabled to get public key")
+		return nil, errors.New("no public key to verify JWT")
 	})
 
 	if token == nil {

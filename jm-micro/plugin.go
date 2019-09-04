@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/cid"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/configloader"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
 	"github.com/micro/micro/api"
 	"github.com/micro/micro/plugin"
@@ -12,16 +14,13 @@ func init() {
 	err := plugin.Register(log.NewPlugin(Name))
 	die(err)
 
+	err = plugin.Register(configloader.NewPlugin())
+	die(err)
+
 	// api 服务插件
 	err = api.Register(cid.NewPlugin())
 	die(err)
 
-	// TODO: 使用正式数据源
-	// s := fstore.NewFileStore()
-	// err = s.Load("../jwt/tools/testdata", "app-test1")
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// err = api.Register(jwt.NewPlugin(s))
-	// die(err)
+	err = api.Register(jwt.NewPlugin())
+	die(err)
 }
