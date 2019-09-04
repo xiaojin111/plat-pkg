@@ -1,4 +1,4 @@
-package rpc
+package log
 
 import (
 	"context"
@@ -13,7 +13,7 @@ import (
 
 var (
 	// log is the package global logger
-	log = mlog.StandardLogger()
+	logger = mlog.StandardLogger()
 )
 
 const (
@@ -29,7 +29,7 @@ const (
 // ContextLogger 打印ctx中的cid
 func ContextLogger(ctx context.Context) *logrus.Entry {
 	cid := rc.CidFromContext(ctx)
-	return log.WithField(logCidKey, cid)
+	return logger.WithField(logCidKey, cid)
 }
 
 // LogWrapper is a handler wrapper that logs server request.
@@ -46,7 +46,7 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 		// l.Infof("%s %s", rpcMetadata, flatMetadata(md))
 
-		l := log.
+		l := logger.
 			WithField(logRpcCallKey, req.Method()).
 			WithField(logCidKey, cid).
 			WithField(logLatencyKey, latency.String())
