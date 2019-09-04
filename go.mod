@@ -8,7 +8,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/hashicorp/consul/api v1.1.0
-	github.com/jinmukeji/go-pkg v0.0.0-20190830094451-a7211b53a749
+	github.com/jinmukeji/go-pkg v0.0.0-20190903135406-4df896d59d2c
 	github.com/jinzhu/gorm v1.9.10
 	github.com/lusis/go-slackbot v0.0.0-20180109053408-401027ccfef5 // indirect
 	github.com/lusis/slack-test v0.0.0-20190426140909-c40012f20018 // indirect
