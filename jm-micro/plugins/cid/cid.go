@@ -6,11 +6,7 @@ import (
 	"github.com/micro/cli"
 	"github.com/micro/micro/plugin"
 
-	id "github.com/jinmukeji/plat-pkg/cid"
-)
-
-const (
-	defaultCidHeaderKey = "x-cid"
+	rc "github.com/jinmukeji/plat-pkg/rpc/cid"
 )
 
 type cidPlugin struct {
@@ -24,7 +20,7 @@ func (p *cidPlugin) Flags() []cli.Flag {
 			Name:        "cid_header_key",
 			Usage:       "cid HTTP header key",
 			EnvVar:      "CID_HEADER_KEY",
-			Value:       defaultCidHeaderKey,
+			Value:       rc.MetaCidKey,
 			Destination: &(p.headerKey),
 		},
 
@@ -50,7 +46,7 @@ func (p *cidPlugin) Handler() plugin.Handler {
 			// Header 中提取的cid为空，或者开启强制生成cid
 			if cid == "" || p.ignoreOriginCid {
 				// 生成新的 cid，并注入到 Request Header 之中
-				cid = id.NewCid()
+				cid = rc.NewCid()
 				r.Header.Set(p.headerKey, cid)
 			}
 

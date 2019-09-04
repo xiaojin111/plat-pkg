@@ -4,6 +4,8 @@ import (
 	"context"
 	"time"
 
+	rc "github.com/jinmukeji/plat-pkg/rpc/cid"
+
 	mlog "github.com/jinmukeji/go-pkg/log"
 	"github.com/micro/go-micro/server"
 	"github.com/sirupsen/logrus"
@@ -26,7 +28,7 @@ const (
 
 // ContextLogger 打印ctx中的cid
 func ContextLogger(ctx context.Context) *logrus.Entry {
-	cid := CidFromContext(ctx)
+	cid := rc.CidFromContext(ctx)
 	return log.WithField(logCidKey, cid)
 }
 
@@ -40,7 +42,7 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		//no time.Since in order to format it well after
 		end := time.Now()
 		latency := end.Sub(start)
-		cid := CidFromContext(ctx)
+		cid := rc.CidFromContext(ctx)
 
 		// l.Infof("%s %s", rpcMetadata, flatMetadata(md))
 

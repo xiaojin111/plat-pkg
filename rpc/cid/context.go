@@ -1,4 +1,4 @@
-package rpc
+package cid
 
 import (
 	"context"
