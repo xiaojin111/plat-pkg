@@ -78,7 +78,7 @@ func signJWT(method jwt.SigningMethod, key interface{}, claims jwt.Claims) (stri
 type GetPublicKeyFunc func(iss string) *rsa.PublicKey
 
 type VerifyOption struct {
-	MaxExpInterval   int64            // 最大过期时间间隔，单位为秒.
+	MaxExpInterval   time.Duration    // 最大过期时间间隔，单位为秒.
 	GetPublicKeyFunc GetPublicKeyFunc // PublicKey 查找函数
 }
 
@@ -120,9 +120,9 @@ func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, error) {
 	}
 
 	if token.Valid {
-		inr := stdClaims.ExpiresAt - stdClaims.IssuedAt
-		if inr > opt.MaxExpInterval {
-			return false, fmt.Errorf("expiration interval exceeds the limit: %ds", opt.MaxExpInterval)
+		inr := float64(stdClaims.ExpiresAt - stdClaims.IssuedAt)
+		if inr > opt.MaxExpInterval.Seconds() {
+			return false, fmt.Errorf("expiration interval exceeds the limit: %fs", opt.MaxExpInterval.Seconds())
 		}
 
 		return true, nil

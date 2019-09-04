@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	m "github.com/jinmukeji/plat-pkg/jwt/keystore/micro-config"
+	m "github.com/jinmukeji/plat-pkg/rpc/jwt/keystore/micro-config"
 	"github.com/micro/go-micro/config"
 	"github.com/micro/go-micro/config/encoder/yaml"
 	"github.com/micro/go-micro/config/source"

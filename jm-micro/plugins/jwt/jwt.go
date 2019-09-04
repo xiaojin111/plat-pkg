@@ -2,36 +2,33 @@ package jwt
 
 import (
 	"crypto/rsa"
-	"fmt"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/micro/cli"
 	"github.com/micro/micro/plugin"
 
 	mlog "github.com/jinmukeji/go-pkg/log"
-	j "github.com/jinmukeji/plat-pkg/jwt"
-	"github.com/jinmukeji/plat-pkg/jwt/keystore"
-	mc "github.com/jinmukeji/plat-pkg/jwt/keystore/micro-config"
+	j "github.com/jinmukeji/plat-pkg/rpc/jwt"
+	"github.com/jinmukeji/plat-pkg/rpc/jwt/keystore"
+	mc "github.com/jinmukeji/plat-pkg/rpc/jwt/keystore/micro-config"
 )
 
 var (
-	log *mlog.Logger
+	log *mlog.Logger = mlog.StandardLogger()
 )
-
-func init() {
-	log = mlog.StandardLogger()
-}
 
 type jwt struct {
 	enabled         bool
 	headerKey       string // HTTP Request Header 中的 jwt 使用的 key
 	microConfigPath string
+	maxExpInterval  time.Duration // 最大过期时间间隔
 	store           keystore.Store
 }
 
 const (
-	defaultJwtKey          = "x-jwt"
+	defaultMaxExpInterval  = 10 * time.Minute // 10分钟
 	defaultMicroConfigPath = "platform/app-key"
 )
 
@@ -47,7 +44,7 @@ func (p *jwt) Flags() []cli.Flag {
 			Name:        "jwt_key",
 			Usage:       "JWT HTTP header key",
 			EnvVar:      "JWT_KEY",
-			Value:       defaultJwtKey,
+			Value:       j.MetaJwtKey,
 			Destination: &(p.headerKey),
 		},
 		cli.StringFlag{
@@ -56,6 +53,13 @@ func (p *jwt) Flags() []cli.Flag {
 			EnvVar:      "JWT_CONFIG_PATH",
 			Value:       defaultMicroConfigPath,
 			Destination: &(p.microConfigPath),
+		},
+		cli.DurationFlag{
+			Name:        "jwt_max_exp_interval",
+			Usage:       "JWT max expiration interval",
+			EnvVar:      "JWT_MAX_EXP_INTERVAL",
+			Value:       defaultMaxExpInterval,
+			Destination: &(p.maxExpInterval),
 		},
 	}
 }
@@ -76,7 +80,7 @@ func (p *jwt) Handler() plugin.Handler {
 			log.Debugf("Received JWT Token: %s", token)
 
 			opt := j.VerifyOption{
-				MaxExpInterval: 600,
+				MaxExpInterval: p.maxExpInterval,
 				GetPublicKeyFunc: func(iss string) *rsa.PublicKey {
 					log.Debugf("Issuer from JWT: %s", iss)
 					if key := p.store.Get(iss); key != nil {
@@ -88,7 +92,7 @@ func (p *jwt) Handler() plugin.Handler {
 
 			if valid, err := j.RSAVerifyJWT(token, opt); !valid {
 				log.Warnf("failed to validate JWT: %v", err)
-				http.Error(rw, fmt.Sprintf("forbidden: %v", err), 403)
+				http.Error(rw, "forbidden: JWT is invalid", 403)
 				return
 			}
 
@@ -99,7 +103,7 @@ func (p *jwt) Handler() plugin.Handler {
 }
 
 func (p *jwt) Init(ctx *cli.Context) error {
-	baseKeyPath := SplitPath(p.microConfigPath)
+	baseKeyPath := splitPath(p.microConfigPath)
 
 	store := mc.NewMicroConfigStore(baseKeyPath...)
 	p.store = store
@@ -107,7 +111,7 @@ func (p *jwt) Init(ctx *cli.Context) error {
 	return nil
 }
 
-func SplitPath(p string) []string {
+func splitPath(p string) []string {
 	s := strings.Trim(p, "/")
 	return strings.Split(s, "/")
 }
@@ -123,8 +127,7 @@ func NewPlugin() plugin.Plugin {
 func NewJWT() plugin.Plugin {
 	// create plugin
 	p := &jwt{
-		enabled:   false,
-		headerKey: defaultJwtKey,
+		enabled: false,
 	}
 
 	return p

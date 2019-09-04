@@ -22,4 +22,5 @@ go run . \
     --handler=rpc \
     --enable_rpc \
     --namespace=com.jinmuhealth.platform.srv \
-    --enable_jwt
+    --enable_jwt \
+    --jwt_max_exp_interval=600s

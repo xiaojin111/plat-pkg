@@ -5,13 +5,14 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"time"
 
-	"github.com/jinmukeji/plat-pkg/jwt"
+	"github.com/jinmukeji/plat-pkg/rpc/jwt"
 )
 
 const (
 	// DefaultMaxExpirationInterval 默认最大的过期时间间隔（10分钟）
-	DefaultMaxExpirationInterval = 600 // in seconds
+	DefaultMaxExpirationInterval = 10 * time.Minute
 )
 
 func main() {

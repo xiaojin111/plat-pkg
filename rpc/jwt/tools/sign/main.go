@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/jinmukeji/plat-pkg/jwt"
+	"github.com/jinmukeji/plat-pkg/rpc/jwt"
 )
 
 func main() {
