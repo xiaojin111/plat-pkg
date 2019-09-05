@@ -23,10 +23,14 @@ builds:
       - amd64
     flags:
       - -v
+      # go1.13
+      - -trimpath
     asmflags:
-      - all=-trimpath={{.Env.PWD}}
+      # use go build -trimpath instead for go1.13
+      # - all=-trimpath={{.Env.PWD}}
     gcflags:
-      - all=-trimpath={{.Env.PWD}}
+      # use go build -trimpath instead for go1.13
+      # - all=-trimpath={{.Env.PWD}}
     ldflags:
       - >-
         -s -w

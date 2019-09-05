@@ -2,6 +2,7 @@ SOURCE_FILES?=./...
 
 export PATH := ./bin:$(PATH)
 export GO111MODULE := on
+export GOPATH := $(shell go env GOPATH)
 export GOPROXY := https://goproxy.io,direct
 export GOPRIVATE := github.com/jinmukeji/*
 export GOVERSION := $(shell go version | awk '{print $$3}')
@@ -14,7 +15,10 @@ all: release
 
 # Install all the build and lint dependencies
 setup:
-	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
+	# TODO: 官方 golangci-lint 发行包不兼容 go 1.13，需要使用手动编译的版本
+	#curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
+	GO111MODULE=off go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+	cp $(GOPATH)/bin/golangci-lint bin/
 	curl -L https://git.io/misspell | sh
 	go mod download
 .PHONY: setup
