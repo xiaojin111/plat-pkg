@@ -95,7 +95,7 @@ func (p *configLoaderPlugin) Init(ctx *cli.Context) error {
 		)
 
 		if err := config.Load(consulSource); err != nil {
-			return fmt.Errorf("failed to load config from consul at %s with prefix of [%s]: %s", p.cfgConsulAddr, p.cfgConsulPrefix, err)
+			return fmt.Errorf("failed to load config from consul at %s with prefix of [%s]: %w", p.cfgConsulAddr, p.cfgConsulPrefix, err)
 		}
 
 		log.Infof("Loaded config from consul at %s with prefix of [%s]", p.cfgConsulAddr, p.cfgConsulPrefix)
@@ -109,7 +109,7 @@ func (p *configLoaderPlugin) Init(ctx *cli.Context) error {
 		)
 
 		if err := config.Load(fileSource); err != nil {
-			return fmt.Errorf("failed to load config file %s: %s", f, err)
+			return fmt.Errorf("failed to load config file %s: %w", f, err)
 		}
 
 		log.Infof("Loaded config from file: %s", f)
@@ -121,7 +121,7 @@ func (p *configLoaderPlugin) Init(ctx *cli.Context) error {
 		env.WithStrippedPrefix(p.cfgEnvPrefix),
 	)
 	if err := config.Load(envSource); err != nil {
-		return fmt.Errorf("failed to load config from environment variables: %s", err)
+		return fmt.Errorf("failed to load config from environment variables: %w", err)
 	}
 
 	log.Infof("Loaded config from environment variables with prefix of [%s]", p.cfgEnvPrefix)

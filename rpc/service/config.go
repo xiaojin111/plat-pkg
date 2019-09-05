@@ -77,7 +77,7 @@ func loadServiceConfig() error {
 		)
 
 		if err := config.Load(consulSource); err != nil {
-			return fmt.Errorf("failed to load config from consul at %s with prefix of [%s]: %s", cfgConsulAddr, cfgConsulPrefix, err)
+			return fmt.Errorf("failed to load config from consul at %s with prefix of [%s]: %w", cfgConsulAddr, cfgConsulPrefix, err)
 		}
 
 		log.Infof("Loaded config from consul at %s with prefix of [%s]", cfgConsulAddr, cfgConsulPrefix)
@@ -91,7 +91,7 @@ func loadServiceConfig() error {
 		)
 
 		if err := config.Load(fileSource); err != nil {
-			return fmt.Errorf("failed to load config file %s: %s", f, err)
+			return fmt.Errorf("failed to load config file %s: %w", f, err)
 		}
 
 		log.Infof("Loaded config from file: %s", f)
@@ -103,7 +103,7 @@ func loadServiceConfig() error {
 		env.WithStrippedPrefix(cfgEnvPrefix),
 	)
 	if err := config.Load(envSource); err != nil {
-		return fmt.Errorf("failed to load config from environment variables: %s", err)
+		return fmt.Errorf("failed to load config from environment variables: %w", err)
 	}
 
 	log.Infof("Loaded config from environment variables with prefix of [%s]", cfgEnvPrefix)

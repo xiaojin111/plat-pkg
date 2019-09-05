@@ -41,6 +41,10 @@ func splitPath(p string) []string {
 	return strings.Split(s, "/")
 }
 
+var (
+	ErrInvalidJWT = errors.New("forbidden: JWT is invalid")
+)
+
 func NewHandlerWrapper(opt Options) server.HandlerWrapper {
 	w := newJwtWrapper(opt)
 
@@ -63,7 +67,7 @@ func NewHandlerWrapper(opt Options) server.HandlerWrapper {
 
 			if valid, err := jwt.RSAVerifyJWT(token, opt); !valid {
 				log.Warnf("failed to validate JWT: %v", err)
-				return errors.New("forbidden: JWT is invalid")
+				return ErrInvalidJWT
 			}
 
 			err := fn(ctx, req, rsp)

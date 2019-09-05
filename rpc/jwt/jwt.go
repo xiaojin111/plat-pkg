@@ -10,6 +10,12 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+var (
+	ErrParseClaimsFailed = errors.New("failed to parse not standard claims")
+	ErrNoPublicKey       = errors.New("no public key to verify JWT")
+	ErrEmptyToken        = errors.New("token is empty")
+)
+
 // LoadRSAPrivateKeyFromPEM 加载 RSA 私钥
 func LoadRSAPrivateKeyFromPEM(file string) (*rsa.PrivateKey, error) {
 	f, err := ioutil.ReadFile(file)
@@ -99,7 +105,7 @@ func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, error) {
 
 		claims, ok := token.Claims.(*jwt.StandardClaims)
 		if !ok {
-			return nil, errors.New("failed to parse not standard claims")
+			return nil, ErrParseClaimsFailed
 		}
 
 		stdClaims = claims
@@ -112,11 +118,11 @@ func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, error) {
 			}
 		}
 
-		return nil, errors.New("no public key to verify JWT")
+		return nil, ErrNoPublicKey
 	})
 
 	if token == nil {
-		return false, errors.New("token is empty")
+		return false, ErrEmptyToken
 	}
 
 	if token.Valid {
