@@ -1,0 +1,83 @@
+# 定义错误码
+#   错误码规则：
+#   1. 0~999, 2000~8999 为保留号段，暂不使用；
+#   2. 从 1000 作为起始的错误码号码；
+#   3. 1000 ~ 1999 号段作为标准通用类型错误码；
+#   4. 9000 及以上号段作为各个微服务自己扩展的自定义错误码；
+#   5. 不推荐使用自定义错误码，尽量使用通用错误码代替。
+# --------------------------------------------------
+#
+#
+# 标准通用错误码
+- code: 1000
+  key: Unknown
+  msg: unknown error
+  comment: 未知错误
+- code: 1001
+  key: NotImplemented
+  msg: not implemented
+  comment: 方法未实现
+- code: 1002
+  key: Internal
+  msg: internal error
+  comment: 内部错误
+- code: 1003
+  key: Unavailable
+  msg: unavailable
+  comment: 服务不可用
+- code: 1004
+  key: InvalidArgument
+  msg: invalid argument
+  comment: 非法的参数
+- code: 1005
+  key: OutOfRange
+  msg: out of range
+  comment: 参数超出范围
+- code: 1006
+  key: InvalidRequest
+  msg: invalid request
+  comment: 非法的 Request 消息
+- code: 1007
+  key: Unauthenticated
+  msg: unauthenticated
+  comment: 未认证
+- code: 1008
+  key: PermissionDenied
+  msg: permission denied
+  comment: 拒绝访问
+- code: 1009
+  key: NotFound
+  msg: not found
+  comment: 资源未找到
+- code: 1010
+  key: AlreadyExists
+  msg: already exists
+  comment: 资源已存在
+- code: 1011
+  key: Cancelled
+  msg: cancelled
+  comment: 已取消
+- code: 1012
+  key: DataLoss
+  msg: data loss
+  comment: 数据丢失
+- code: 1013
+  key: DataAccessFailed
+  msg: data access failed
+  comment: 数据访问失败
+- code: 1014
+  key: InvalidOperation
+  msg: invalid operation
+  comment: 非法的操作
+# 
+# --------------------------------------------------
+#
+#
+# 以下是各个微服务自定义错误码：
+# 
+# 平台-模板服务
+# com.jinmuhealth.srv.template-svc
+- code: 9000
+  key: CustomizedExample
+  msg: a customized example error
+  comment: 一个示例自定义错误

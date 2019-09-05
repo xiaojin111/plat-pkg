@@ -24,4 +24,5 @@ require (
 	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297 // indirect
 	google.golang.org/genproto v0.0.0-20190819201941-24fa4b261c55 // indirect
 	google.golang.org/grpc v1.23.0 // indirect
+	gopkg.in/yaml.v2 v2.2.2
 )
