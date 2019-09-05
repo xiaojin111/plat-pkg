@@ -88,7 +88,7 @@ func setupService(svc micro.Service, opts *Options) error {
 	)
 
 	// Setup wrappers
-	svc.Init(micro.WrapHandler(handlerWrappers()...))
+	setupHandlerWrappers(svc, opts)
 
 	return nil
 }
@@ -147,17 +147,29 @@ func jwtFlags() []cli.Flag {
 	}
 }
 
-func handlerWrappers() []server.HandlerWrapper {
-	wrappers := []server.HandlerWrapper{
+func setupHandlerWrappers(svc micro.Service, opts *Options) {
+	wrappers := []server.HandlerWrapper{}
+
+	// 自定义 pre
+	if len(opts.PreServerHandlerWrappers) > 0 {
+		wrappers = append(wrappers, opts.PreServerHandlerWrappers...)
+	}
+
+	wrappers = append(wrappers,
 		wcid.CidWrapper,
 		wlog.LogWrapper,
-	}
+	)
 
 	if enableJwt {
 		wrappers = append(wrappers, wjwt.NewHandlerWrapper(jwtOption))
 	}
 
-	return wrappers
+	// 自定义 post
+	if len(opts.PostServerHandlerWrappers) > 0 {
+		wrappers = append(wrappers, opts.PostServerHandlerWrappers...)
+	}
+
+	svc.Init(micro.WrapHandler(wrappers...))
 }
 
 func setupServer(srv server.Server, opts *Options) error {
@@ -171,8 +183,8 @@ func setupServer(srv server.Server, opts *Options) error {
 		return err
 	}
 
-	if opts.RegisterServerHook != nil {
-		err = opts.RegisterServerHook(srv)
+	if opts.RegisterServer != nil {
+		err = opts.RegisterServer(srv)
 		if err != nil {
 			return err
 		}

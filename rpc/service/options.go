@@ -23,7 +23,14 @@ type Options struct {
 	// BuildTime is go build time
 	BuildTime string
 
-	RegisterServerHook RegisterServerFunc
+	// 自定义HandlerWrapper，在标准 HandlerWrapper 之前注册
+	PreServerHandlerWrappers []server.HandlerWrapper
+
+	// 自定义HandlerWrapper，在标准 HandlerWrapper 之后注册
+	PostServerHandlerWrappers []server.HandlerWrapper
+
+	// 注册 micro.Server
+	RegisterServer RegisterServerFunc
 }
 
 // ServiceFQDN 返回微服务的全名

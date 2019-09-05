@@ -32,13 +32,15 @@ var (
 
 func main() {
 	opts := &service.Options{
-		Name:               ServiceName,
-		Namespace:          ServiceNamespace,
-		ProductVersion:     ProductVersion,
-		GitCommit:          GitCommit,
-		GoVersion:          GoVersion,
-		BuildTime:          BuildTime,
-		RegisterServerHook: register,
+		Name:                      ServiceName,
+		Namespace:                 ServiceNamespace,
+		ProductVersion:            ProductVersion,
+		GitCommit:                 GitCommit,
+		GoVersion:                 GoVersion,
+		BuildTime:                 BuildTime,
+		RegisterServer:            register,
+		PreServerHandlerWrappers:  preHandlerWrappers(),
+		PostServerHandlerWrappers: postHandlerWrappers(),
 	}
 	svc := service.CreateService(opts)
 
@@ -48,7 +50,19 @@ func main() {
 }
 
 func register(srv server.Server) error {
-	// TODO: 注册 API 服务、设置订阅
+	// TODO: 注册自定义 API 服务、设置订阅
+
+	return nil
+}
+
+func preHandlerWrappers() []server.HandlerWrapper {
+	// TODO: 注册自定义 HandlerWrapper, 在标准 HandlerWrapper 之前注册
+
+	return nil
+}
+
+func postHandlerWrappers() []server.HandlerWrapper {
+	// TODO: 注册自定义 HandlerWrapper, 在标准 HandlerWrapper 之后注册
 
 	return nil
 }
