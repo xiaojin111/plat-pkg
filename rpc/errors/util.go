@@ -1,8 +1,11 @@
 package errors
 
 import (
+	"fmt"
 	"regexp"
 	"strconv"
+
+	goerr "errors"
 )
 
 var (
@@ -21,4 +24,20 @@ func ExtractErrCode(err error) (int, bool) {
 		return c, true
 	}
 	return 0, false
+}
+
+// WrapError 包装一个内部 error
+func WrapError(err error, ierr error) error {
+	if ierr == nil {
+		return err
+	}
+	return fmt.Errorf("%v: %w", err, ierr)
+}
+
+// WrapErrorMsg 包装一个 msg 作为内部 error
+func WrapErrorMsg(err error, msg string) error {
+	if msg == "" {
+		return WrapError(err, nil)
+	}
+	return WrapError(err, goerr.New(msg))
 }
