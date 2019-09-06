@@ -8,7 +8,6 @@ import (
 
 	mlog "github.com/jinmukeji/go-pkg/log"
 	"github.com/micro/go-micro/server"
-	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -26,29 +25,27 @@ const (
 	rpcOk     = "[RPC OK]"
 )
 
-// ContextLogger 打印ctx中的cid
-func ContextLogger(ctx context.Context) *logrus.Entry {
-	cid := rc.CidFromContext(ctx)
-	return logger.WithField(logCidKey, cid)
-}
-
 // LogWrapper is a handler wrapper that logs server request.
 func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 	return func(ctx context.Context, req server.Request, rsp interface{}) error {
 		start := time.Now()
-		err := fn(ctx, req, rsp)
+		cid := rc.CidFromContext(ctx)
+
+		// 注入一个包含 cid Field 的 logger.Entry
+		c := contextWithLogger(ctx, cid)
+
+		err := fn(c, req, rsp)
 		// RPC 计算经历的时间长度
 		//no time.Since in order to format it well after
 		end := time.Now()
 		latency := end.Sub(start)
-		cid := rc.CidFromContext(ctx)
 
 		// l.Infof("%s %s", rpcMetadata, flatMetadata(md))
 
 		l := logger.
-			WithField(logRpcCallKey, req.Method()).
 			WithField(logCidKey, cid).
+			WithField(logRpcCallKey, req.Method()).
 			WithField(logLatencyKey, latency.String())
 
 		// Log rpc call execution result
