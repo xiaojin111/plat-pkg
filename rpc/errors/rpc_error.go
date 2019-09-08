@@ -103,7 +103,7 @@ func (e *RpcError) DetailedError() string {
 	}
 
 	if e.Cause != nil {
-		return fmt.Sprintf("%s ~~ %v", e.Error(), e.Cause)
+		return fmt.Sprintf("%s ╭∩╮ %v", e.Error(), e.Cause)
 	}
 
 	return e.Error()
