@@ -48,9 +48,25 @@ func Errorf(c codes.Code, format string, a ...interface{}) error {
 	return Newf(c, format, a...)
 }
 
+// Error returns an error with cause and msg.
+func ErrorWithCause(c codes.Code, cause error, msg string) error {
+	re := New(c, msg)
+	return re.WithCause(cause)
+}
+
+// Error returns an error with cause and formatted msg.
+func ErrorfWithCause(c codes.Code, cause error, format string, a ...interface{}) error {
+	re := Newf(c, format, a...)
+	return re.WithCause(cause)
+}
+
 // WithCause encupsale an err as cause
-func (e *RpcError) WithCause(err error) {
-	e.Cause = err
+func (e *RpcError) WithCause(err error) *RpcError {
+	if e != nil {
+		e.Cause = err
+	}
+
+	return e
 }
 
 func (e *RpcError) leading() string {
