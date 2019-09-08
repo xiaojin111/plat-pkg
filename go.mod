@@ -9,7 +9,7 @@ require (
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/hashicorp/consul/api v1.2.0
-	github.com/jinmukeji/go-pkg v0.0.0-20190905045659-8cb3c40a95c6
+	github.com/jinmukeji/go-pkg v0.0.0-20190908165241-d2e61a4295a0
 	github.com/jinzhu/gorm v1.9.10
 	github.com/micro/cli v0.2.0
 	github.com/micro/go-micro v1.9.1

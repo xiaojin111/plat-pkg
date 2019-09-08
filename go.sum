@@ -197,6 +197,8 @@ github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99/go.mod h1:1lJo3i
 github.com/jessevdk/go-flags v1.4.0/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
 github.com/jinmukeji/go-pkg v0.0.0-20190905045659-8cb3c40a95c6 h1:i8RJ5FEnIpRVVsS+JOLiAO4dKtMuW6yZ9uN+jcYbnK4=
 github.com/jinmukeji/go-pkg v0.0.0-20190905045659-8cb3c40a95c6/go.mod h1:fMdTluv63rfd9wKsKjz4gWD3zrmVd8dmQgNNqLPn4SA=
+github.com/jinmukeji/go-pkg v0.0.0-20190908165241-d2e61a4295a0 h1:5e22KlMAWuuLIuCTK4RA1aqwfwy8jzhXR6y5FPjW+Cw=
+github.com/jinmukeji/go-pkg v0.0.0-20190908165241-d2e61a4295a0/go.mod h1:fMdTluv63rfd9wKsKjz4gWD3zrmVd8dmQgNNqLPn4SA=
 github.com/jinzhu/gorm v1.9.10 h1:HvrsqdhCW78xpJF67g1hMxS6eCToo9PZH4LDB8WKPac=
 github.com/jinzhu/gorm v1.9.10/go.mod h1:Kh6hTsSGffh4ui079FHrR5Gg+5D0hgihqDcsDN2BBJY=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=

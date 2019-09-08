@@ -16,8 +16,8 @@ func contextWithLogger(ctx context.Context, cid string) context.Context {
 }
 
 func LoggerFromContext(ctx context.Context) *logrus.Entry {
-	if logger, ok := ctx.Value(defaultLoggerContextKey).(*logrus.Entry); ok {
-		return logger
+	if l, ok := ctx.Value(defaultLoggerContextKey).(*logrus.Entry); ok {
+		return l
 	}
-	return nil
+	return logger.NewEntry()
 }
