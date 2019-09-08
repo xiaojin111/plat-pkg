@@ -4,9 +4,9 @@ set -u
 set -o pipefail
 
 CUR=`dirname $0`
-CONFIG_FILE="${CUR}/errors.yml"
-OUT_FILE="${CUR}/error.gen.go"
-PKG_NAME="errors"
+CONFIG_FILE="${CUR}/error_codes.yml"
+OUT_FILE="${CUR}/codes.gen.go"
+PKG_NAME="codes"
 
 cd ${CUR}
 

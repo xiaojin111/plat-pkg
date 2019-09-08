@@ -9,6 +9,10 @@
 #
 #
 # 标准通用错误码
+- code: 0
+  key: OK
+  msg: ok
+  comment: OK is returned on success.
 - code: 1000
   key: Unknown
   msg: unknown error
@@ -54,9 +58,11 @@
   msg: already exists
   comment: 资源已存在
 - code: 1011
-  key: Cancelled
-  msg: cancelled
+  key: Canceled
+  msg: canceled
   comment: 已取消
+  description: |
+    Canceled indicates the operation was canceled (typically by the caller).
 - code: 1012
   key: DataLoss
   msg: data loss

@@ -23,7 +23,7 @@ func (suite *ErrorsTestSuite) TestExtractErrCode() {
 	tests := []struct {
 		name     string // 用例名称
 		args     args   // 输入参数
-		wantCode int
+		wantCode uint32
 		wantOk   bool
 	}{
 		{

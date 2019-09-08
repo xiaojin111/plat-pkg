@@ -1,3 +1,5 @@
+.goreleaser.ci.yml
+
 bin/
 dist/
 
