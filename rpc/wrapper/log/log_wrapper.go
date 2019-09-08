@@ -25,7 +25,8 @@ const (
 	rpcFailed = "[RPC ERR]"
 	rpcOk     = "[RPC OK]"
 
-	errorField = "error"
+	errorField     = "error"
+	errorCodeField = "errcode"
 )
 
 // LogWrapper is a handler wrapper that logs server request.
@@ -56,9 +57,12 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		case nil:
 			l.Info(rpcOk)
 		case *errors.RpcError:
-			l.WithField(errorField, v.DetailedError()).Warn(rpcFailed)
+			l.WithField(errorField, v.DetailedError()).
+				WithField(errorCodeField, v.Code).
+				Warn(rpcFailed)
 		case error:
-			l.WithField(errorField, err.Error()).Warn(rpcFailed)
+			l.WithField(errorField, err.Error()).
+				Warn(rpcFailed)
 		default:
 			l.Errorf("unknown error type: %v", v)
 		}
