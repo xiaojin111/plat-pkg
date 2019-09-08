@@ -37,7 +37,8 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		cid := rc.CidFromContext(ctx)
 
 		// 注入一个包含 cid Field 的 logger.Entry
-		c := contextWithLogger(ctx, cid)
+		cl := logger.WithField(logCidKey, cid)
+		c := contextWithLogger(ctx, cl)
 
 		err := fn(c, req, rsp)
 		// RPC 计算经历的时间长度
@@ -47,8 +48,7 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 		// l.Infof("%s %s", rpcMetadata, flatMetadata(md))
 
-		l := logger.
-			WithField(logCidKey, cid).
+		l := cl.
 			WithField(logRpcCallKey, req.Method()).
 			WithField(logLatencyKey, latency.String())
 

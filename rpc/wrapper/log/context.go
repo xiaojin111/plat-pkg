@@ -10,8 +10,8 @@ type loggerContextKey string
 
 var defaultLoggerContextKey = loggerContextKey("ctx-logger")
 
-func contextWithLogger(ctx context.Context, cid string) context.Context {
-	c := context.WithValue(ctx, defaultLoggerContextKey, logger.WithField(logCidKey, cid))
+func contextWithLogger(ctx context.Context, l *logrus.Entry) context.Context {
+	c := context.WithValue(ctx, defaultLoggerContextKey, l)
 	return c
 }
 
@@ -19,5 +19,5 @@ func LoggerFromContext(ctx context.Context) *logrus.Entry {
 	if l, ok := ctx.Value(defaultLoggerContextKey).(*logrus.Entry); ok {
 		return l
 	}
-	return logger.NewEntry()
+	return nil
 }
