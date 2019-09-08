@@ -5,6 +5,7 @@ import (
 	"time"
 
 	rc "github.com/jinmukeji/plat-pkg/rpc/cid"
+	"github.com/jinmukeji/plat-pkg/rpc/errors"
 
 	mlog "github.com/jinmukeji/go-pkg/log"
 	"github.com/micro/go-micro/server"
@@ -23,6 +24,8 @@ const (
 	// rpcMetadata   = "[RPC METADATA]"
 	rpcFailed = "[RPC ERR]"
 	rpcOk     = "[RPC OK]"
+
+	errorField = "error"
 )
 
 // LogWrapper is a handler wrapper that logs server request.
@@ -49,10 +52,15 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 			WithField(logLatencyKey, latency.String())
 
 		// Log rpc call execution result
-		if err != nil {
-			l.WithError(err).Warn(rpcFailed)
-		} else {
+		switch v := err.(type) {
+		case nil:
 			l.Info(rpcOk)
+		case *errors.RpcError:
+			l.WithField(errorField, v.DetailedError()).Warn(rpcFailed)
+		case error:
+			l.WithField(errorField, err.Error()).Warn(rpcFailed)
+		default:
+			l.Errorf("unknown error type: %v", v)
 		}
 
 		return err
