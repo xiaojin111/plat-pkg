@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/cid"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/reqmeta"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/configloader"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/reqmeta"
 	"github.com/micro/micro/api"
 	"github.com/micro/micro/plugin"
 )
