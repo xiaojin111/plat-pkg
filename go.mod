@@ -10,7 +10,7 @@ require (
 	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/hashicorp/consul/api v1.2.0
 	github.com/jinmukeji/go-pkg v0.0.0-20190908165241-d2e61a4295a0
-	github.com/jinmukeji/proto v0.0.0-20190906091151-b2deb56e0efa
+	github.com/jinmukeji/proto v0.0.0-20190909052444-48ae1aa3c845
 	github.com/jinzhu/gorm v1.9.10
 	github.com/micro/cli v0.2.0
 	github.com/micro/go-micro v1.9.1
