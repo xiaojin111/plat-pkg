@@ -4,12 +4,15 @@ import (
 	mlog "github.com/jinmukeji/go-pkg/log"
 	"github.com/jinmukeji/plat-pkg/rpc/service"
 
+	echosvc "github.com/jinmukeji/plat-pkg/rpc/service/minimal-example/handler"
+	echopb "github.com/jinmukeji/proto/gen/micro/idl/examples/echo/v1"
+
 	"github.com/micro/go-micro/server"
 )
 
 const (
 	// ServiceName 是本微服务的名称
-	ServiceName = "minimal-example"
+	ServiceName = "template-service"
 	// ServiceNamespace 是微服务的命名空间
 	ServiceNamespace = "com.jinmuhealth.platform.srv"
 )
@@ -51,13 +54,16 @@ func main() {
 
 func register(srv server.Server) error {
 	// TODO: 注册自定义 API 服务、设置订阅
+	echoAPI := &echosvc.EchoAPIService{}
+	if err := echopb.RegisterEchoAPIHandler(srv, echoAPI); err != nil {
+		return err
+	}
 
 	return nil
 }
 
 func preHandlerWrappers() []server.HandlerWrapper {
 	// TODO: 注册自定义 HandlerWrapper, 在标准 HandlerWrapper 之前注册
-
 	return nil
 }
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/cid"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/reqmeta"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/configloader"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
@@ -22,5 +23,8 @@ func init() {
 	die(err)
 
 	err = api.Register(jwt.NewPlugin())
+	die(err)
+
+	err = api.Register(reqmeta.NewPlugin())
 	die(err)
 }

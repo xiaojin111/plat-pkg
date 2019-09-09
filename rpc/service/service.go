@@ -7,12 +7,16 @@ import (
 
 	"github.com/micro/cli"
 	micro "github.com/micro/go-micro"
+	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/server"
+
+	wsvc "github.com/micro/go-plugins/wrapper/service"
 
 	j "github.com/jinmukeji/plat-pkg/rpc/jwt"
 	wcid "github.com/jinmukeji/plat-pkg/rpc/wrapper/cid"
 	wjwt "github.com/jinmukeji/plat-pkg/rpc/wrapper/jwt"
 	wlog "github.com/jinmukeji/plat-pkg/rpc/wrapper/log"
+	wme "github.com/jinmukeji/plat-pkg/rpc/wrapper/microerr"
 )
 
 func CreateService(opts *Options) micro.Service {
@@ -148,28 +152,48 @@ func jwtFlags() []cli.Flag {
 }
 
 func setupHandlerWrappers(svc micro.Service, opts *Options) {
-	wrappers := []server.HandlerWrapper{}
+	// 设置 Server Handler Wrappers
+	srvWrappers := []server.HandlerWrapper{}
 
 	// 自定义 pre
 	if len(opts.PreServerHandlerWrappers) > 0 {
-		wrappers = append(wrappers, opts.PreServerHandlerWrappers...)
+		srvWrappers = append(srvWrappers, opts.PreServerHandlerWrappers...)
 	}
 
-	wrappers = append(wrappers,
+	srvWrappers = append(srvWrappers,
+		// 默认的的 wrappers
+		wsvc.NewHandlerWrapper(svc),
 		wcid.CidWrapper,
+		wme.MicroErrWrapper,
 		wlog.LogWrapper,
 	)
 
 	if enableJwt {
-		wrappers = append(wrappers, wjwt.NewHandlerWrapper(jwtOption))
+		srvWrappers = append(srvWrappers, wjwt.NewHandlerWrapper(jwtOption))
 	}
 
 	// 自定义 post
 	if len(opts.PostServerHandlerWrappers) > 0 {
-		wrappers = append(wrappers, opts.PostServerHandlerWrappers...)
+		srvWrappers = append(srvWrappers, opts.PostServerHandlerWrappers...)
 	}
 
-	svc.Init(micro.WrapHandler(wrappers...))
+	svc.Init(micro.WrapHandler(srvWrappers...))
+
+	// 设置 Client Wrappers
+	clientWrappers := []client.Wrapper{}
+	if len(opts.PreClientWrappers) > 0 {
+		clientWrappers = append(clientWrappers, opts.PreClientWrappers...)
+	}
+
+	clientWrappers = append(clientWrappers,
+		// 默认的的 wrappers
+		wsvc.NewClientWrapper(svc),
+	)
+	if len(opts.PostClientWrappers) > 0 {
+		clientWrappers = append(clientWrappers, opts.PostClientWrappers...)
+	}
+
+	svc.Init(micro.WrapClient(clientWrappers...))
 }
 
 func setupServer(srv server.Server, opts *Options) error {
