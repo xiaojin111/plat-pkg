@@ -3,8 +3,6 @@
     "go.lintOnSave": "package",
     "go.formatTool": "goimports",
     "go.autocompleteUnimportedPackages": true,
-    "todo-tree.flat": true,
-    "todo-tree.expanded": true,
     "git.ignoreLimitWarning": true,
     "cSpell.enabledLanguageIds": [
         "asciidoc",
@@ -62,5 +60,7 @@
     "python.linting.pylintEnabled": true,
     "atlascode.jira.workingSite": {
         "baseUrlSuffix": "atlassian.net"
-    }
+    },
+    "todo-tree.tree.expanded": true,
+    "todo-tree.tree.flat": true
 }
