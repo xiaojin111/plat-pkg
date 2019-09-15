@@ -10,6 +10,7 @@ import (
 	"github.com/micro/micro/plugin"
 
 	mlog "github.com/jinmukeji/go-pkg/log"
+	cm "github.com/jinmukeji/plat-pkg/rpc/ctxmeta"
 	j "github.com/jinmukeji/plat-pkg/rpc/jwt"
 	"github.com/jinmukeji/plat-pkg/rpc/jwt/keystore"
 	mc "github.com/jinmukeji/plat-pkg/rpc/jwt/keystore/micro-config"
@@ -44,7 +45,7 @@ func (p *jwt) Flags() []cli.Flag {
 			Name:        "jwt_key",
 			Usage:       "JWT HTTP header key",
 			EnvVar:      "JWT_KEY",
-			Value:       j.MetaJwtKey,
+			Value:       cm.MetaJwtKey,
 			Destination: &(p.headerKey),
 		},
 		cli.StringFlag{
@@ -68,6 +69,8 @@ func (p *jwt) Commands() []cli.Command {
 	return nil
 }
 
+const AppIdKey = "x-app-id"
+
 func (p *jwt) Handler() plugin.Handler {
 	return func(h http.Handler) http.Handler {
 		if !p.enabled {
@@ -90,11 +93,15 @@ func (p *jwt) Handler() plugin.Handler {
 				},
 			}
 
-			if valid, err := j.RSAVerifyJWT(token, opt); !valid {
+			valid, claims, err := j.RSAVerifyJWT(token, opt)
+			if !valid {
 				log.Warnf("failed to validate JWT: %v", err)
 				http.Error(rw, "forbidden: JWT is invalid", 403)
 				return
 			}
+
+			// 从 claims 中提取 iss，即 App ID
+			r.Header.Set(AppIdKey, claims.Issuer)
 
 			// serve the request
 			h.ServeHTTP(rw, r)

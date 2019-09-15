@@ -33,7 +33,7 @@ func main() {
 			return key
 		},
 	}
-	valid, err := jwt.RSAVerifyJWT(tokenString, opt)
+	valid, _, err := jwt.RSAVerifyJWT(tokenString, opt)
 	fmt.Printf("IsValid: %v\n", valid)
 	if err != nil {
 		fmt.Printf("Validation Error: %v\n", err)

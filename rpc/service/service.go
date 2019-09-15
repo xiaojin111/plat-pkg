@@ -12,11 +12,12 @@ import (
 
 	wsvc "github.com/micro/go-plugins/wrapper/service"
 
-	j "github.com/jinmukeji/plat-pkg/rpc/jwt"
 	wcid "github.com/jinmukeji/plat-pkg/rpc/wrapper/cid"
 	wjwt "github.com/jinmukeji/plat-pkg/rpc/wrapper/jwt"
 	wlog "github.com/jinmukeji/plat-pkg/rpc/wrapper/log"
 	wme "github.com/jinmukeji/plat-pkg/rpc/wrapper/microerr"
+
+	cm "github.com/jinmukeji/plat-pkg/rpc/ctxmeta"
 )
 
 func CreateService(opts *Options) micro.Service {
@@ -131,7 +132,7 @@ func jwtFlags() []cli.Flag {
 			Name:        "jwt_key",
 			Usage:       "JWT HTTP header key",
 			EnvVar:      "JWT_KEY",
-			Value:       j.MetaJwtKey,
+			Value:       cm.MetaJwtKey,
 			Destination: &(jwtOption.HeaderKey),
 		},
 		cli.StringFlag{

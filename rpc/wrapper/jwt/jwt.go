@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	mlog "github.com/jinmukeji/go-pkg/log"
+	cm "github.com/jinmukeji/plat-pkg/rpc/ctxmeta"
 	"github.com/jinmukeji/plat-pkg/rpc/jwt"
 	"github.com/jinmukeji/plat-pkg/rpc/jwt/keystore"
 	mc "github.com/jinmukeji/plat-pkg/rpc/jwt/keystore/micro-config"
@@ -51,7 +52,7 @@ func NewHandlerWrapper(opt Options) server.HandlerWrapper {
 	return func(fn server.HandlerFunc) server.HandlerFunc {
 		return func(ctx context.Context, req server.Request, rsp interface{}) error {
 
-			token := jwt.JwtFromContext(ctx)
+			token := cm.JwtFromContext(ctx)
 			log.Debugf("Received JWT Token: %s", token)
 
 			opt := jwt.VerifyOption{
@@ -65,12 +66,15 @@ func NewHandlerWrapper(opt Options) server.HandlerWrapper {
 				},
 			}
 
-			if valid, err := jwt.RSAVerifyJWT(token, opt); !valid {
+			valid, claims, err := jwt.RSAVerifyJWT(token, opt)
+			if !valid {
 				log.Warnf("failed to validate JWT: %v", err)
 				return ErrInvalidJWT
 			}
 
-			err := fn(ctx, req, rsp)
+			ctx = cm.ContextWithAppId(ctx, claims.Issuer)
+
+			err = fn(ctx, req, rsp)
 			return err
 		}
 	}

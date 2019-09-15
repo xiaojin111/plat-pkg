@@ -89,7 +89,7 @@ type VerifyOption struct {
 }
 
 // RSAVerifyJWT 使用 RSA 算法（RS256/RS384/RS512) 对 JWT Token 进行验证.
-func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, error) {
+func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, *jwt.StandardClaims, error) {
 	var stdClaims *jwt.StandardClaims
 
 	// Parse takes the token string and a function for looking up the key. The latter is especially
@@ -122,17 +122,17 @@ func RSAVerifyJWT(tokenString string, opt VerifyOption) (bool, error) {
 	})
 
 	if token == nil {
-		return false, ErrEmptyToken
+		return false, nil, ErrEmptyToken
 	}
 
 	if token.Valid {
 		inr := float64(stdClaims.ExpiresAt - stdClaims.IssuedAt)
 		if inr > opt.MaxExpInterval.Seconds() {
-			return false, fmt.Errorf("expiration interval exceeds the limit: %fs", opt.MaxExpInterval.Seconds())
+			return false, nil, fmt.Errorf("expiration interval exceeds the limit: %fs", opt.MaxExpInterval.Seconds())
 		}
 
-		return true, nil
+		return true, stdClaims, nil
 	} else {
-		return false, err
+		return false, nil, err
 	}
 }

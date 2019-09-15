@@ -3,7 +3,7 @@ package jwt
 import (
 	"time"
 
-	"github.com/jinmukeji/plat-pkg/rpc/jwt"
+	cm "github.com/jinmukeji/plat-pkg/rpc/ctxmeta"
 )
 
 type Options struct {
@@ -21,7 +21,7 @@ const (
 func DefaultOptions() Options {
 	return Options{
 		MaxExpInterval:  DefaultMaxExpInterval,
-		HeaderKey:       jwt.MetaJwtKey,
+		HeaderKey:       cm.MetaJwtKey,
 		MicroConfigPath: DefaultMicroConfigPath,
 	}
 }
