@@ -30,12 +30,13 @@ services:
       - "--client_pool_size=10"
       - "--server_name=com.jinmuhealth.platform.api"
       - "--config_consul_address=consul:8500"
+      # 生产环境对外部署时使用 MicroSimple
+      - "--metadata=X-Err-Style=MicroDetailed"
       - "api"
       - "--address=0.0.0.0:8080"
       - "--handler=rpc"
       - "--enable_rpc"
       - "--namespace=com.jinmuhealth.platform.srv"
-      - "--client_meta=X-Err-Style=MicroSimple"
       - "--enable_jwt"
       - "--jwt_max_exp_interval=600s"
     depends_on:
