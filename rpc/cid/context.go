@@ -9,7 +9,7 @@ import (
 
 const (
 	// MetaCidKey Metadata 中 cid 的 key.
-	MetaCidKey = "x-cid"
+	MetaCidKey = "X-Cid"
 )
 
 func ContextWithCid(ctx context.Context, cid string) context.Context {

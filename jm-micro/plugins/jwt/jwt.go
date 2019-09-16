@@ -69,7 +69,7 @@ func (p *jwt) Commands() []cli.Command {
 	return nil
 }
 
-const AppIdKey = "x-app-id"
+const AppIdKey = "X-App-Id"
 
 func (p *jwt) Handler() plugin.Handler {
 	return func(h http.Handler) http.Handler {
