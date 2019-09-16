@@ -23,5 +23,5 @@ go run . \
     --enable_rpc \
     --namespace=com.jinmuhealth.platform.srv \
     --client_meta=X-Err-Style=MicroSimple \
-    # --enable_jwt \
-    # --jwt_max_exp_interval=600s
+    --enable_jwt \
+    --jwt_max_exp_interval=600s

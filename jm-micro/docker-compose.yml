@@ -1,12 +1,17 @@
 version: '3'
 services:
   consul:
-    image: progrium/consul:latest
+    image: consul:latest
     command:
+      - "agent"
       - "-server"
-      - "-bootstrap"
-      - "-rejoin"
-    hostname: "registry"
+      - "-ui"
+      - "-node=server-1"
+      - "-bootstrap-expect=1"
+      - "-client=0.0.0.0"
+      - "-data-dir=/data"
+    volumes:
+      - "./consul-data:/data"
     ports:
       - "8300:8300"
       - "8400:8400"
@@ -14,27 +19,37 @@ services:
       - "8600:53/udp"
   
   api:
-    build: .
     image: 949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:latest
     command:
-      - "--registry_address=registry:8500"
+      - "--log_level=DEBUG"
+      # 如果使用 Logstash 格式日志，取消下一行注释
+      # - "--log_format=LOGSTASH"
+      - "--registry_address=consul:8500"
       - "--register_interval=5"
       - "--register_ttl=10"
+      - "--client_pool_size=10"
       - "--server_name=com.jinmuhealth.platform.api"
+      - "--config_consul_address=consul:8500"
       - "api"
+      - "--address=0.0.0.0:8080"
       - "--handler=rpc"
       - "--enable_rpc"
       - "--namespace=com.jinmuhealth.platform.srv"
+      - "--client_meta=X-Err-Style=MicroSimple"
+      - "--enable_jwt"
+      - "--jwt_max_exp_interval=600s"
     depends_on:
       - consul
     ports:
       - "8080:8080"
 
   web:
-    build: .
     image: 949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:latest
     command:
-      - "--registry_address=registry:8500"
+      - "--log_level=DEBUG"
+      # 如果使用 Logstash 格式日志，取消下一行注释
+      # - "--log_format=LOGSTASH"
+      - "--registry_address=consul:8500"
       - "--register_interval=5"
       - "--register_ttl=10"
       - "--server_name=com.jinmuhealth.platform.web"
@@ -43,5 +58,4 @@ services:
     depends_on:
       - consul
     ports:
-      - "8082:8082"
-
+      - "8082:8082" 
