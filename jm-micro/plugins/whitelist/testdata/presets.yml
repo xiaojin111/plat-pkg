@@ -1,0 +1,48 @@
+# RPC Call 白名单策略清单
+# -----------------------------------------------------------------------------------
+#
+# 规则格式：fqdn/API.Call
+#   例如：com.jinmuhealth.platform.srv.template-service/EchoAPI.Hello
+#
+# 模式匹配: 
+#   https://godoc.org/github.com/gobwas/glob#Compile
+#
+# pattern:
+#     { term }
+
+# term:
+#     `*`         matches any sequence of non-separator characters
+#     `**`        matches any sequence of characters
+#     `?`         matches any single non-separator character
+#     `[` [ `!` ] { character-range } `]`
+#                 character class (must be non-empty)
+#     `{` pattern-list `}`
+#                 pattern alternatives
+#     c           matches character c (c != `*`, `**`, `?`, `\`, `[`, `{`, `}`)
+#     `\` c       matches character c
+
+# character-range:
+#     c           matches character c (c != `\\`, `-`, `]`)
+#     `\` c       matches character c
+#     lo `-` hi   matches character c for lo <= c <= hi
+
+# pattern-list:
+#     pattern { `,` pattern }
+#                 comma-separated (without spaces) patterns
+#
+# -----------------------------------------------------------------------------------
+#
+#
+all:
+  - "*/*.*"
+all_platform:
+  - "com.jinmuhealth.platform.srv.*/*.*"
+#
+# TODO: 以下是示例，生产部署以真实需要为准
+#
+platform_template_service_all:
+  - "com.jinmuhealth.platform.srv.template-service/*.*"
+platform_template_service_echo_api:
+  - "com.jinmuhealth.platform.srv.template-service/EchoAPI.*"
+platform_developer_all":
+  - "com.jinmuhealth.platform.srv.developer/*.*"

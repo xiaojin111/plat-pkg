@@ -1,4 +1,4 @@
-package whitelist
+package matcher
 
 import "testing"
 
@@ -84,8 +84,18 @@ func TestMatch(t *testing.T) {
 			want: true,
 		},
 		{
-			name: "call-wildcard",
+			name: "call-wildcard-4",
 			args: args{pattern: "com.jinmuhealth.platform.srv.s1/EchoAPI.M*", service: "com.jinmuhealth.platform.srv.s1", method: "EchoAPI.M2"},
+			want: true,
+		},
+		{
+			name: "multiple-patterns-1",
+			args: args{pattern: "{com.jinmuhealth.platform.srv.s1/EchoAPI.M*,com.jinmuhealth.platform.srv.s2/*.*}", service: "com.jinmuhealth.platform.srv.s1", method: "EchoAPI.M2"},
+			want: true,
+		},
+		{
+			name: "multiple-patterns-2",
+			args: args{pattern: "{com.jinmuhealth.platform.srv.s1/EchoAPI.M*,com.jinmuhealth.platform.srv.s2/*.*}", service: "com.jinmuhealth.platform.srv.s2", method: "XxAPI.N2"},
 			want: true,
 		},
 	}

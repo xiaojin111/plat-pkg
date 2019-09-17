@@ -3,10 +3,11 @@ package main
 import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/cid"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/configloader"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/healthcheck"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/whitelist"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/healthcheck"
+
+	// "github.com/jinmukeji/plat-pkg/jm-micro/plugins/whitelist"
 	"github.com/micro/go-plugins/micro/cors"
 
 	// "github.com/micro/go-plugins/micro/gzip"
@@ -33,8 +34,9 @@ func init() {
 
 	// micro gzip 插件存在 bug，当 response 数据量过小的时候，压缩后的数据丢失
 	// err = api.Register(gzip.NewPlugin())
-    // die(err)
-    err = api.Register(healthcheck.NewPlugin())
+	// die(err)
+	err = api.Register(healthcheck.NewPlugin())
+	die(err)
 
 	err = api.Register(cid.NewPlugin())
 	die(err)
@@ -42,6 +44,7 @@ func init() {
 	err = api.Register(jwt.NewPlugin())
 	die(err)
 
-	err = api.Register(whitelist.NewRPCWhitelist("com.jinmuhealth.platform.srv.template-service1"))
-	die(err)
+	// TODO: 白名单插件
+	// err = api.Register(whitelist.NewRPCWhitelist("com.jinmuhealth.platform.srv.template-service1"))
+	// die(err)
 }

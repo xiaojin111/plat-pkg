@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   consul:
     image: consul:latest
@@ -6,7 +6,8 @@ services:
       - "agent"
       - "-server"
       - "-ui"
-      - "-node=server-1"
+      # example: load environment variable from .env file
+      - "-node=${NODE}"
       - "-bootstrap-expect=1"
       - "-client=0.0.0.0"
       - "-data-dir=/data"
