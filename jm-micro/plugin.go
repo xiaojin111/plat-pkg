@@ -6,7 +6,7 @@ import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
 	"github.com/micro/go-plugins/micro/cors"
-	"github.com/micro/go-plugins/micro/gzip"
+	// "github.com/micro/go-plugins/micro/gzip"
 	"github.com/micro/go-plugins/micro/metadata"
 	"github.com/micro/micro/api"
 	"github.com/micro/micro/plugin"
@@ -27,8 +27,8 @@ func init() {
 	die(err)
 
 	// api 服务插件
-	err = api.Register(gzip.NewPlugin())
-	die(err)
+	// err = api.Register(gzip.NewPlugin())
+	// die(err)
 
 	err = api.Register(cid.NewPlugin())
 	die(err)
