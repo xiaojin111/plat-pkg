@@ -87,3 +87,9 @@
   key: CustomizedExample
   msg: a customized example error
   comment: 一个示例自定义错误
+
+# com.jinmuhealth.manufactory.srv
+- code: 9001
+  key: InvokeAlgorithmServerFailure
+  msg: failed to invoke algorithm server
+  comment: 调用算法服务器失败
