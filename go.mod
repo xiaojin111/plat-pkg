@@ -7,6 +7,7 @@ replace github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.0
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/gobwas/glob v0.2.3
 	github.com/hashicorp/consul/api v1.1.0
 	github.com/jinmukeji/go-pkg v0.0.0-20190914100229-9bbbe1b3a1b2
 	github.com/jinmukeji/proto v0.0.0-20190914101010-394a4c90ecf1
