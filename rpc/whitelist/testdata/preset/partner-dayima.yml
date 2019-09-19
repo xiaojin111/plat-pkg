@@ -33,16 +33,8 @@
 # -----------------------------------------------------------------------------------
 #
 #
-all:
-  - "*/*.*"
-all_platform:
-  - "com.jinmuhealth.platform.srv.*/*.*"
-#
 # TODO: 以下是示例，生产部署以真实需要为准
 #
-platform_template_service_all:
-  - "com.jinmuhealth.platform.srv.template-service/*.*"
-platform_template_service_echo_api:
-  - "com.jinmuhealth.platform.srv.template-service/EchoAPI.*"
-platform_developer_all":
-  - "com.jinmuhealth.platform.srv.developer/*.*"
+dayima:
+  - "com.jinmuhealth.partner.srv.dayima/Xxxx"
+  - "com.jinmuhealth.partner.srv.dayima/Yyyy"

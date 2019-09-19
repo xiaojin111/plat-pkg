@@ -1,3 +1,4 @@
+id: app-test2
 whitelist:
   - platform_template_service_all
   - platform_developer_all
