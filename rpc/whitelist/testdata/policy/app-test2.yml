@@ -1,4 +1,4 @@
 id: app-test2
-whitelist:
+presets:
   - platform_template_service_all
   - platform_developer_all

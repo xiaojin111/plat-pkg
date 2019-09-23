@@ -71,11 +71,20 @@ func newService(opts *Options) micro.Service {
 
 func setupService(svc micro.Service, opts *Options) error {
 	// 设置启动参数
+	flags := defaultFlags()
+	if len(opts.Flags) > 0 {
+		flags = append(flags, opts.Flags...)
+	}
+
 	svc.Init(
 		// Setup runtime flags
-		micro.Flags(defaultFlags()...),
+		micro.Flags(flags...),
 
 		micro.Action(func(c *cli.Context) {
+			if opts.CliPreAction != nil {
+				opts.CliPreAction(c)
+			}
+
 			if c.Bool("version") {
 				printFullVersionInfo(opts)
 				os.Exit(0)
@@ -89,6 +98,10 @@ func setupService(svc micro.Service, opts *Options) error {
 			// 加载 config
 			err := loadServiceConfig()
 			die(err)
+
+			if opts.CliPostAction != nil {
+				opts.CliPostAction(c)
+			}
 		}),
 	)
 

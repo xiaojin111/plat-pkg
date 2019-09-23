@@ -5,6 +5,8 @@ import (
 
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/server"
+
+	"github.com/micro/cli"
 )
 
 type RegisterServerFunc func(srv server.Server) error
@@ -24,19 +26,28 @@ type Options struct {
 	// BuildTime is go build time
 	BuildTime string
 
-	// 自定义HandlerWrapper，在标准 HandlerWrapper 之前注册
+	// Flags are CLI flags
+	Flags []cli.Flag
+
+	// CliPreAction 在标准 Action 之前调用
+	CliPreAction func(c *cli.Context)
+
+	// CliPostAction 在标准 Action 之后调用
+	CliPostAction func(c *cli.Context)
+
+	// PreServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之前注册
 	PreServerHandlerWrappers []server.HandlerWrapper
 
-	// 自定义HandlerWrapper，在标准 HandlerWrapper 之后注册
+	// PostServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之后注册
 	PostServerHandlerWrappers []server.HandlerWrapper
 
-	// 注册 micro.Server
+	// RegisterServer 注册 micro.Server
 	RegisterServer RegisterServerFunc
 
-	// 自定义 Client Wrapper，在标准 Wrapper 之前注册
+	// PreClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
 	PreClientWrappers []client.Wrapper
 
-	// 自定义 Client Wrapper，在标准 Wrapper 之前注册
+	// PostClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
 	PostClientWrappers []client.Wrapper
 }
 

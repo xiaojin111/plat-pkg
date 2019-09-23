@@ -9,16 +9,14 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-type RulePattern string
+type Presets map[string][]string
 
-type Preset map[string][]RulePattern
-
-func (p Preset) GetRulePatterns(name string) []RulePattern {
+func (p Presets) GetRulePatterns(name string) []string {
 	return p[name]
 }
 
-func LoadPreset(data []byte) (Preset, error) {
-	p := Preset{}
+func LoadPreset(data []byte) (Presets, error) {
+	p := Presets{}
 	err := yaml.Unmarshal(data, &p)
 	if err != nil {
 		return nil, err
@@ -28,7 +26,7 @@ func LoadPreset(data []byte) (Preset, error) {
 }
 
 // LoadPresetFromYamlFile 从单个 yaml 配置文件加载
-func LoadPresetFromYamlFile(file string) (Preset, error) {
+func LoadPresetFromYamlFile(file string) (Presets, error) {
 	content, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
@@ -38,8 +36,8 @@ func LoadPresetFromYamlFile(file string) (Preset, error) {
 }
 
 // LoadPresetFormYamlDir 从文件目录中加载所有 yaml 文件定义的配置，重复定义将返回错误
-func LoadPresetFormYamlDir(dir string) (Preset, error) {
-	r := make(Preset)
+func LoadPresetFormYamlDir(dir string) (Presets, error) {
+	r := make(Presets)
 
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
@@ -68,12 +66,12 @@ func LoadPresetFormYamlDir(dir string) (Preset, error) {
 	return r, nil
 }
 
-func mergePreset(a, b Preset) (Preset, error) {
+func mergePreset(a, b Presets) (Presets, error) {
 	if a == nil || b == nil {
 		return nil, errors.New("empty preset can't be merged")
 	}
 
-	r := make(Preset)
+	r := make(Presets)
 
 	// deep copy a to r
 	for k, v := range a {

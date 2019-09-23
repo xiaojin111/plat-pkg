@@ -8,11 +8,51 @@ import (
 )
 
 type WhitelistPolicy struct {
-	ID        string   `json:"id" yaml:"id"`
-	Whitelist []string `json:"whitelist" yaml:"whitelist"`
+	ID      string   `json:"id" yaml:"id"`
+	Presets []string `json:"presets" yaml:"presets"`
 }
 
-type PolicySet map[string]*WhitelistPolicy
+type PolicySet struct {
+	set     map[string]*WhitelistPolicy
+	presets Presets
+}
+
+func NewPolicySet(policies []*WhitelistPolicy, presets Presets) *PolicySet {
+	set := make(map[string]*WhitelistPolicy)
+	for _, p := range policies {
+		set[p.ID] = p
+	}
+
+	return &PolicySet{
+		set:     set,
+		presets: presets,
+	}
+}
+
+func (ps PolicySet) GetWhitelistPolicy(id string) *WhitelistPolicy {
+	return ps.set[id]
+}
+
+func (ps PolicySet) GetAllPatterns() []string {
+	patternSet := make(map[string]bool)
+
+	for _, p := range ps.set {
+		if p != nil {
+			for _, presetName := range p.Presets {
+				for _, pattern := range ps.presets.GetRulePatterns(presetName) {
+					patternSet[pattern] = true
+				}
+			}
+		}
+	}
+
+	keys := make([]string, 0, len(patternSet))
+	for k := range patternSet {
+		keys = append(keys, k)
+	}
+
+	return keys
+}
 
 func LoadPolicy(data []byte) (*WhitelistPolicy, error) {
 	w := WhitelistPolicy{}
@@ -35,8 +75,8 @@ func LoadPolicyFromYamlFile(file string) (*WhitelistPolicy, error) {
 }
 
 // LoadPolicyFormYamlDir 从文件目录中加载所有 yaml 文件定义的配置，重复定义将返回错误
-func LoadPolicyFormYamlDir(dir string) (PolicySet, error) {
-	r := make(PolicySet)
+func LoadPolicyFormYamlDir(dir string) ([]*WhitelistPolicy, error) {
+	r := make([]*WhitelistPolicy, 0)
 
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
@@ -55,7 +95,7 @@ func LoadPolicyFormYamlDir(dir string) (PolicySet, error) {
 			if err != nil {
 				return nil, err
 			}
-			r[p.ID] = p
+			r = append(r, p)
 		}
 	}
 
