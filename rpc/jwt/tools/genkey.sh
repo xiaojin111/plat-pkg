@@ -14,6 +14,10 @@ PRIVATE_KEY_FILE=${OUT_DIR}/${APP_ID}.pem
 PUBLIC_KEY_FILE=${OUT_DIR}/${APP_ID}.pub
 FINGERPRINT_FILE=${OUT_DIR}/${APP_ID}.fp.txt
 
+# Check OpenSSL version
+# Do NOT use osx version LibreSSL
+openssl version | grep "OpenSSL"
+
 # Generate private key
 openssl genrsa -out ${PRIVATE_KEY_FILE} 2048
 
