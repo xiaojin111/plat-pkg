@@ -14,13 +14,15 @@ func FormatMetadataWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 	return func(ctx context.Context, req server.Request, rsp interface{}) error {
 
-		md, _ := metadata.FromContext(ctx)
-		nmd := metadata.Metadata{}
-		for k, v := range md {
-			nmd[http.CanonicalHeaderKey(k)] = v
-		}
+		md, ok := metadata.FromContext(ctx)
+		if ok && len(md) > 0 {
+			nmd := metadata.Metadata{}
+			for k, v := range md {
+				nmd[http.CanonicalHeaderKey(k)] = v
+			}
 
-		ctx = metadata.NewContext(ctx, nmd)
+			ctx = metadata.NewContext(ctx, nmd)
+		}
 
 		err := fn(ctx, req, rsp)
 		return err

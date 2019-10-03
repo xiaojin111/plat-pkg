@@ -13,6 +13,7 @@ import (
 	wsvc "github.com/micro/go-plugins/wrapper/service"
 
 	wcid "github.com/jinmukeji/plat-pkg/rpc/wrapper/cid"
+	wfm "github.com/jinmukeji/plat-pkg/rpc/wrapper/formatmeta"
 	wjwt "github.com/jinmukeji/plat-pkg/rpc/wrapper/jwt"
 	wlog "github.com/jinmukeji/plat-pkg/rpc/wrapper/log"
 	wme "github.com/jinmukeji/plat-pkg/rpc/wrapper/microerr"
@@ -177,6 +178,7 @@ func setupHandlerWrappers(svc micro.Service, opts *Options) {
 	srvWrappers = append(srvWrappers,
 		// 默认的的 wrappers
 		wsvc.NewHandlerWrapper(svc),
+		wfm.FormatMetadataWrapper,
 		wcid.CidWrapper,
 		wme.MicroErrWrapper,
 		wlog.LogWrapper,
