@@ -58,9 +58,6 @@
     ],
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-    "atlascode.jira.workingSite": {
-        "baseUrlSuffix": "atlassian.net"
-    },
     "todo-tree.tree.expanded": true,
     "todo-tree.tree.flat": true
 }
