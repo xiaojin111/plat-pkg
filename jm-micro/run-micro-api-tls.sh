@@ -18,6 +18,10 @@ go run . \
     --server_name=com.jinmuhealth.platform.api \
     --metadata=X-Err-Style=MicroDetailed \
     --config_consul_address=localhost:8500 \
+    --enable_tls \
+    --tls_cert_file=./cert/localhost.crt \
+    --tls_key_file=./cert/localhost.key \
+    --tls_client_ca_file=./cert/root_ca.crt \
     api \
     --address=${SERVER_IP}:${SERVER_PORT} \
     --handler=rpc \
