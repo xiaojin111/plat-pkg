@@ -19,6 +19,7 @@ go run . \
     --metadata=X-Err-Style=MicroDetailed \
     --config_consul_address=localhost:8500 \
     api \
+    --insecure \
     --address=${SERVER_IP}:${SERVER_PORT} \
     --handler=rpc \
     --enable_rpc \

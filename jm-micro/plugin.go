@@ -6,6 +6,7 @@ import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/healthcheck"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/tls"
 
 	// "github.com/jinmukeji/plat-pkg/jm-micro/plugins/whitelist"
 	"github.com/micro/go-plugins/micro/cors"
@@ -14,6 +15,7 @@ import (
 	"github.com/micro/go-plugins/micro/metadata"
 	"github.com/micro/micro/api"
 	"github.com/micro/micro/plugin"
+	"github.com/micro/micro/web"
 )
 
 func init() {
@@ -30,7 +32,14 @@ func init() {
 	err = plugin.Register(cors.NewPlugin())
 	die(err)
 
+	// web 服务插件
+	err = web.Register(tls.NewPlugin())
+	die(err)
+
 	// api 服务插件
+
+	err = api.Register(tls.NewPlugin())
+	die(err)
 
 	// micro gzip 插件存在 bug，当 response 数据量过小的时候，压缩后的数据丢失
 	// err = api.Register(gzip.NewPlugin())
