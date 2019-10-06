@@ -51,7 +51,7 @@ func newService(opts *Options) micro.Service {
 	versionMeta := opts.ServiceMetadata()
 
 	// Create a new service. Optionally include some options here.
-	svc := micro.NewService(
+	svcOpts := []micro.Option{
 		// Service Basic Info
 		micro.Name(opts.FQDN()),
 		micro.Version(opts.ProductVersion),
@@ -63,7 +63,12 @@ func newService(opts *Options) micro.Service {
 
 		// Setup metadata
 		micro.Metadata(versionMeta),
-	)
+	}
+	if len(opts.ServiceOptions) > 0 {
+		svcOpts = append(svcOpts, opts.ServiceOptions...)
+	}
+
+	svc := micro.NewService(svcOpts...)
 
 	svc.Options().Cmd.App().Description = fmt.Sprintf("fqdn: %s", opts.FQDN())
 

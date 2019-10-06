@@ -12,8 +12,8 @@ require (
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/gobwas/glob v0.2.3
 	github.com/hashicorp/consul/api v1.1.0
-	github.com/jinmukeji/go-pkg v0.0.0-20190928124936-14b53986a75b
-	github.com/jinmukeji/proto v0.0.0-20191001082746-01948d8ddd91
+	github.com/jinmukeji/go-pkg v0.0.0-20191004044456-0aded5c0032f
+	github.com/jinmukeji/proto v0.0.0-20191006061359-d74fb967d82b
 	github.com/jinzhu/gorm v1.9.11
 	github.com/lusis/go-slackbot v0.0.0-20180109053408-401027ccfef5 // indirect
 	github.com/lusis/slack-test v0.0.0-20190426140909-c40012f20018 // indirect
@@ -23,6 +23,5 @@ require (
 	github.com/micro/micro v1.11.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
-	google.golang.org/grpc v1.24.0
 	gopkg.in/yaml.v2 v2.2.4
 )

@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 
+	micro "github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/server"
 
@@ -49,6 +50,9 @@ type Options struct {
 
 	// PostClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
 	PostClientWrappers []client.Wrapper
+
+	// ServiceOptions 其它 Service Option
+	ServiceOptions []micro.Option
 }
 
 // ServiceFQDN 返回微服务的全名
