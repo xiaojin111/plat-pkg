@@ -45,11 +45,14 @@ func (p *tlsPlugin) Handler() plugin.Handler {
 
 func (p *tlsPlugin) Init(ctx *cli.Context) error {
 	if !p.insecure {
-		client.DefaultClient.Init(
+		err := client.DefaultClient.Init(
 			client.Transport(
 				transport.NewTransport(transport.Secure(true)),
 			),
 		)
+		if err != nil {
+			return err
+		}
 
 		log.Info("TLS is enabled.")
 	} else {
