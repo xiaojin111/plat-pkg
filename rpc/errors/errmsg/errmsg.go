@@ -11,6 +11,11 @@ func MissingField(field string) string {
 	return fmt.Sprintf("%q is required", field)
 }
 
+// ZeroField 用于 field 的内容为 0.
+func ZeroField(field string) string {
+	return fmt.Sprintf("%q shouldn't be 0", field)
+}
+
 // NilField 用于 field 传递了空值 nil
 func NilField(field string) string {
 	return fmt.Sprintf("%q shouldn't be nil", field)
