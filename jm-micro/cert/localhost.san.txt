@@ -1,0 +1,6 @@
+localhost
+127.0.0.1
+0.0.0.0
+*.cn-north-1.compute.internal
+*.jm-dev.internal
+jm-dev.internal
