@@ -110,10 +110,13 @@ func (p *jwt) Handler() plugin.Handler {
 }
 
 func (p *jwt) Init(ctx *cli.Context) error {
-	baseKeyPath := splitPath(p.microConfigPath)
+	// 启用 JWT 时才能读取 config
+	if p.enabled {
+		baseKeyPath := splitPath(p.microConfigPath)
 
-	store := mc.NewMicroConfigStore(baseKeyPath...)
-	p.store = store
+		store := mc.NewMicroConfigStore(baseKeyPath...)
+		p.store = store
+	}
 
 	return nil
 }
