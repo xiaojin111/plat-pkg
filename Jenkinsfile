@@ -11,8 +11,7 @@ pipeline{
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
         AWS_DEFAULT_REGION    = credentials('jenkins-aws-secret-region')
-        DATABASE_PASSWORD   = credentials('db_password')
-        PROJECT = "$WORKSPACE/plat-developer"
+        PROJECT = "$WORKSPACE/plat-pkg"
         DOCKER_HOST_IP ="${DOCKER_HOST_IP}"
         BUILD_NUMBER ="${env.BUILD_NUMBER}"
     }
@@ -20,7 +19,7 @@ pipeline{
     stages {    
         stage('代码拉取'){
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '${sha1}']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/jinmukeji/plat-developer'], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'plat-developer']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '6d1c5ad7-72c6-4b84-b406-eb875dfb8213',refspec: '+refs/pull/*:refs/remotes/origin/pr/*', url: 'https://github.com/jinmukeji/plat-developer.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '${sha1}']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/jinmukeji/plat-pkg'], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'plat-pkg']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '90bdcbdb-808a-40b6-b5db-efe3de9e317d',refspec: '+refs/pull/*:refs/remotes/origin/pr/*', url: 'https://github.com/jinmukeji/plat-pkg.git']]])
             }
         }
 
@@ -44,37 +43,14 @@ pipeline{
                 sh label: '', script: '$PROJECT/jenkins_ci/ci_build.sh'
             }
         }
-        stage('数据准备'){
-            steps{
-               sh label: '', script: '$PROJECT/jenkins_ci/ci_init_database.sh'
-            }
-        }
         stage('单元测试'){
             steps{
                 sh label: '', script: '$PROJECT/jenkins_ci/ci_unittest.sh'
             }
         }
-        stage('服务数据准备'){
-            steps{
-                sh label: '', script: '$PROJECT/jenkins_ci/ci_start_services.sh'
-            }
-        }
-        stage('接口测试'){
-            steps{
-                sh label: '', script: '$PROJECT/jenkins_ci/ci_interface_test.sh'
-            }
-        }
-        stage('关闭数据'){
-            steps{
-                sh label: '', script: '$PROJECT/jenkins_ci/ci_clean_database.sh'
-            }
-        }   
      }
 
     post {
-        always {
-            sh label: '', script: '$PROJECT/jenkins_ci/ci_stop_services.sh'
-  }
         success {
             emailext (
               subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
