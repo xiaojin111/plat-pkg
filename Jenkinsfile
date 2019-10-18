@@ -17,11 +17,11 @@ pipeline{
     }
 
     stages {    
-        stage('代码拉取'){
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '${sha1}']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/jinmukeji/plat-pkg'], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'plat-pkg']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '90bdcbdb-808a-40b6-b5db-efe3de9e317d',refspec: '+refs/pull/*:refs/remotes/origin/pr/*', url: 'https://github.com/jinmukeji/plat-pkg.git']]])
-            }
-        }
+        // stage('代码拉取'){
+        //     steps {
+        //         checkout([$class: 'GitSCM', branches: [[name: '${sha1}']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/jinmukeji/plat-pkg'], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'plat-pkg']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '90bdcbdb-808a-40b6-b5db-efe3de9e317d',refspec: '+refs/pull/*:refs/remotes/origin/pr/*', url: 'https://github.com/jinmukeji/plat-pkg.git']]])
+        //     }
+        // }
 
         stage('初始化环境'){
             steps {
