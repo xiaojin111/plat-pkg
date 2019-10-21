@@ -7,7 +7,9 @@ import (
 	echosvc "github.com/jinmukeji/plat-pkg/rpc/service/minimal-example/handler"
 	echopb "github.com/jinmukeji/proto/gen/micro/idl/examples/echo/v1"
 
+	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/server"
+	"github.com/micro/go-micro/transport"
 )
 
 const (
@@ -44,6 +46,17 @@ func main() {
 		RegisterServer:            register,
 		PreServerHandlerWrappers:  preHandlerWrappers(),
 		PostServerHandlerWrappers: postHandlerWrappers(),
+		ServiceOptions: []micro.Option{
+			// 设置启用 TLS
+			// micro 底层将同时设置 Sever 与 Client 启用 TLS
+			micro.Transport(
+				// create new transport
+				transport.NewTransport(
+					// set to automatically secure
+					transport.Secure(true),
+				),
+			),
+		},
 	}
 	svc := service.CreateService(opts)
 
