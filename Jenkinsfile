@@ -11,7 +11,7 @@ pipeline{
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
         AWS_DEFAULT_REGION    = credentials('jenkins-aws-secret-region')
-        PROJECT = "$WORKSPACE/plat-pkg"
+        PROJECT = "$WORKSPACE"
         DOCKER_HOST_IP ="${DOCKER_HOST_IP}"
         BUILD_NUMBER ="${env.BUILD_NUMBER}"
     }
