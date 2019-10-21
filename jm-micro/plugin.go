@@ -33,7 +33,6 @@ func init() {
 	err = plugin.Register(cors.NewPlugin())
 	die(err)
 
-	err = plugin.Register(tls.NewPlugin())
 	// proxy 服务插件
 	err = proxy.Register(tls.NewPlugin())
 	die(err)
