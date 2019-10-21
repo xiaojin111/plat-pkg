@@ -6,7 +6,7 @@ import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/healthcheck"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/tls"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/tls-client"
 
 	// "github.com/jinmukeji/plat-pkg/jm-micro/plugins/whitelist"
 	"github.com/micro/go-plugins/micro/cors"
@@ -15,6 +15,11 @@ import (
 	"github.com/micro/go-plugins/micro/metadata"
 	"github.com/micro/micro/api"
 	"github.com/micro/micro/plugin"
+<<<<<<< HEAD
+=======
+	"github.com/micro/micro/proxy"
+	"github.com/micro/micro/web"
+>>>>>>> b03958cda1234aad40c41a1df6dda12a2f38e4f9
 )
 
 func init() {
@@ -31,7 +36,16 @@ func init() {
 	err = plugin.Register(cors.NewPlugin())
 	die(err)
 
+<<<<<<< HEAD
 	err = plugin.Register(tls.NewPlugin())
+=======
+	// proxy 服务插件
+	err = proxy.Register(tls.NewPlugin())
+	die(err)
+
+	// web 服务插件
+	err = web.Register(tls.NewPlugin())
+>>>>>>> b03958cda1234aad40c41a1df6dda12a2f38e4f9
 	die(err)
 
 	// // Proxy

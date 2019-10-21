@@ -17,5 +17,5 @@ go run . \
     --register_ttl=10 \
     --server_address=${SERVER_ADDR} \
     --client_pool_size=100 \
-    --enable_jwt \
-    --config_consul_address=localhost:8500
+    --config_consul_address=localhost:8500 \
+    #  --enable_jwt \
