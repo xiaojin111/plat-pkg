@@ -90,7 +90,7 @@ func (p *configLoaderPlugin) Init(ctx *cli.Context) error {
 			// optionally specify prefix;
 			etcd.WithPrefix(p.cfgEtcdPrefix),
 			// optionally strip the provided prefix from the keys
-			etcd.StripPrefix(true),
+			// etcd.StripPrefix(true),
 			source.WithEncoder(encoder),
 		)
 
