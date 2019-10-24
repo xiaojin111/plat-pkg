@@ -11,5 +11,5 @@ cd ${CUR}
 for FILE in *.yml
 do
     CFG_KEY=${FILE%.*}
-    cat ${FILE} | consul kv put ${KEY_PREFIX}/${CFG_KEY} -
+    cat ${FILE} | etcdctl put ${KEY_PREFIX}/${CFG_KEY}
 done

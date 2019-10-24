@@ -10,8 +10,8 @@ import (
 	"github.com/micro/go-micro/config"
 	"github.com/micro/go-micro/config/encoder/yaml"
 	"github.com/micro/go-micro/config/source"
-	"github.com/micro/go-micro/config/source/consul"
 	"github.com/micro/go-micro/config/source/env"
+	"github.com/micro/go-micro/config/source/etcd"
 	"github.com/micro/go-micro/config/source/file"
 
 	mlog "github.com/jinmukeji/go-pkg/log"
@@ -19,13 +19,13 @@ import (
 
 // Config 相关常量
 const (
-	DefaultConfigEnvPrefix    = "JM"
-	DefaultConfigConsulPrefix = "/micro/config/jm"
+	DefaultConfigEnvPrefix  = "JM"
+	DefaultConfigEtcdPrefix = "micro/config/jm"
 )
 
 type configLoaderPlugin struct {
-	cfgFiles                                     cli.StringSlice
-	cfgEnvPrefix, cfgConsulAddr, cfgConsulPrefix string
+	cfgFiles                                 cli.StringSlice
+	cfgEnvPrefix, cfgEtcdAddr, cfgEtcdPrefix string
 }
 
 var (
@@ -49,16 +49,16 @@ func (p *configLoaderPlugin) Flags() []cli.Flag {
 		},
 
 		cli.StringFlag{
-			Name:        "config_consul_address",
-			Usage:       "Consul config source address",
-			Destination: &p.cfgConsulAddr,
+			Name:        "config_etcd_address",
+			Usage:       "Etcd config source address",
+			Destination: &p.cfgEtcdAddr,
 		},
 
 		cli.StringFlag{
-			Name:        "config_consul_prefix",
-			Usage:       "Consul config K/V prefix",
-			Value:       DefaultConfigConsulPrefix, // default value
-			Destination: &p.cfgConsulPrefix,
+			Name:        "config_etcd_prefix",
+			Usage:       "Etcd config K/V prefix",
+			Value:       DefaultConfigEtcdPrefix, // default value
+			Destination: &p.cfgEtcdPrefix,
 		},
 	}
 }
@@ -76,29 +76,31 @@ func (p *configLoaderPlugin) Handler() plugin.Handler {
 
 func (p *configLoaderPlugin) Init(ctx *cli.Context) error {
 	// 加载以下配置信息数据源，优先级依次从低到高：
-	// 1. Consul K/V 配置中心
+	// 1. Etcd K/V 配置中心
 	// 2. 配置文件，YAML格式
 	// 3. 环境变量
 
 	encoder := yaml.NewEncoder()
 
-	// Load config from consul
-	if p.cfgConsulAddr != "" {
-		consulSource := consul.NewSource(
-			// optionally specify consul address;
-			consul.WithAddress(p.cfgConsulAddr),
+	// Load config from etcd
+	if p.cfgEtcdAddr != "" {
+		etcdSource := etcd.NewSource(
+			// optionally specify etcd address;
+			etcd.WithAddress(p.cfgEtcdAddr),
 			// optionally specify prefix;
-			consul.WithPrefix(p.cfgConsulPrefix),
+			etcd.WithPrefix(p.cfgEtcdPrefix),
 			// optionally strip the provided prefix from the keys
-			consul.StripPrefix(true),
+			etcd.StripPrefix(true),
 			source.WithEncoder(encoder),
 		)
 
-		if err := config.Load(consulSource); err != nil {
-			return fmt.Errorf("failed to load config from consul at %s with prefix of [%s]: %w", p.cfgConsulAddr, p.cfgConsulPrefix, err)
+		if err := config.Load(etcdSource); err != nil {
+			werr := fmt.Errorf("failed to load config from etcd at %s with prefix of [%s]: %w", p.cfgEtcdAddr, p.cfgEtcdPrefix, err)
+			log.Error(werr)
+			return werr
 		}
 
-		log.Infof("Loaded config from consul at %s with prefix of [%s]", p.cfgConsulAddr, p.cfgConsulPrefix)
+		log.Infof("Loaded config from etcd at %s with prefix of [%s]", p.cfgEtcdAddr, p.cfgEtcdPrefix)
 	}
 
 	// Load config from files

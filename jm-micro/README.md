@@ -51,7 +51,7 @@ go run . \
     --register_ttl=10 \
     --client_pool_size=100 \
     --server_name=com.jinmuhealth.platform.api \
-    --config_consul_address=localhost:8500 \
+    --config_etcd_address=localhost:2379 \
     api \
     --address=0.0.0.0:8080 \
     --handler=rpc \
@@ -87,7 +87,7 @@ go run . \
     --client_pool_size=100 \
     --server_name=com.jinmuhealth.platform.api \
     --metadata=X-Err-Style=MicroDetailed \
-    --config_consul_address=localhost:8500 \
+    --config_etcd_address=localhost:2379 \
     --enable_tls \
     --tls_cert_file=./cert/localhost.crt \
     --tls_key_file=./cert/localhost.key \
