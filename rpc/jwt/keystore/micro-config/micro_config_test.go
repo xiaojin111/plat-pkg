@@ -101,7 +101,7 @@ public_key: |
 	}
 	defer cli.Close()
 
-	etcdKey := "micro/config/jm/platform/app-key/app-test2"
+	etcdKey := "/micro/config/jm/platform/app-key/app-test2"
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	_, err = cli.Put(ctx, etcdKey, pValue)
 	cancel()

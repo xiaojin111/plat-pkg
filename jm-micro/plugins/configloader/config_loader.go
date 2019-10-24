@@ -20,7 +20,7 @@ import (
 // Config 相关常量
 const (
 	DefaultConfigEnvPrefix  = "JM"
-	DefaultConfigEtcdPrefix = "micro/config/jm"
+	DefaultConfigEtcdPrefix = "/micro/config/jm/"
 )
 
 type configLoaderPlugin struct {
