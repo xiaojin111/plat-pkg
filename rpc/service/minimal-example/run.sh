@@ -18,5 +18,5 @@ go run . \
     --register_ttl=10 \
     --server_address=${SERVER_ADDR} \
     --client_pool_size=100 \
-    # --config_etcd_address=${ETCD_ADDR} \
+    --config_etcd_address=${ETCD_ADDR} \
     #  --enable_jwt \

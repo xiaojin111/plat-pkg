@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	mlog "github.com/jinmukeji/go-pkg/log"
 	"github.com/jinmukeji/plat-pkg/rpc/service"
 
@@ -10,6 +12,8 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/server"
 	"github.com/micro/go-micro/transport"
+
+	"github.com/micro/go-micro/config"
 )
 
 const (
@@ -59,6 +63,10 @@ func main() {
 		},
 	}
 	svc := service.CreateService(opts)
+
+	// 测试读取配置的值
+	cfg := config.Get("micro", "config", "com.jinmuhealth.platform.srv.@global", "mysql", "platform").Bytes()
+	fmt.Println("cfg:", string(cfg))
 
 	// Run the service
 	err := svc.Run()
