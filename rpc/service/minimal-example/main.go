@@ -65,7 +65,7 @@ func main() {
 	svc := service.CreateService(opts)
 
 	// 测试读取配置的值
-	cfg := config.Get("micro", "config", "com.jinmuhealth.platform.srv.@global", "mysql", "platform").Bytes()
+	cfg := config.Get("micro", "config", "jm", "com.jinmuhealth.platform.srv.@global", "mysql", "platform").Bytes()
 	fmt.Println("cfg:", string(cfg))
 
 	// Run the service

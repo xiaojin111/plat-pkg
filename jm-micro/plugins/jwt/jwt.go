@@ -30,7 +30,7 @@ type jwt struct {
 
 const (
 	defaultMaxExpInterval  = 10 * time.Minute // 10分钟
-	defaultMicroConfigPath = "platform/app-key"
+	defaultMicroConfigPath = "micro/config/jm/platform/app-key"
 )
 
 func (p *jwt) Flags() []cli.Flag {

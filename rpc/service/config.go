@@ -14,14 +14,14 @@ import (
 
 // Config 相关常量
 const (
-	DefaultConfigEnvPrefix = "JM"
-	// DefaultConfigEtcdPrefix = "/micro/config/"
+	DefaultConfigEnvPrefix  = "JM"
+	DefaultConfigEtcdPrefix = "/micro/config/jm/"
 )
 
 // config 相关变量
 var (
-	cfgFiles                  cli.StringSlice
-	cfgEnvPrefix, cfgEtcdAddr string
+	cfgFiles                                 cli.StringSlice
+	cfgEnvPrefix, cfgEtcdAddr, cfgEtcdPrefix string
 )
 
 func configCliFlags() []cli.Flag {
@@ -46,12 +46,12 @@ func configCliFlags() []cli.Flag {
 			Destination: &cfgEtcdAddr,
 		},
 
-		// cli.StringFlag{
-		// 	Name:        "config_etcd_prefix",
-		// 	Usage:       "Etcd config K/V prefix",
-		// 	Value:       DefaultConfigEtcdPrefix, // default value
-		// 	Destination: &cfgEtcdPrefix,
-		// },
+		cli.StringFlag{
+			Name:        "config_etcd_prefix",
+			Usage:       "Etcd config K/V prefix",
+			Value:       DefaultConfigEtcdPrefix, // default value
+			Destination: &cfgEtcdPrefix,
+		},
 	}
 }
 
@@ -69,18 +69,19 @@ func loadServiceConfig() error {
 			// optionally specify etcd address;
 			etcd.WithAddress(cfgEtcdAddr),
 			// optionally specify prefix;
-			// TODO: etcd source 有 bug，不能指定 prefix 与 StripPrefix
-			// etcd.WithPrefix("micro/config/"),
+
+			etcd.WithPrefix(cfgEtcdPrefix),
 			// optionally strip the provided prefix from the keys
+			// TODO: etcd source 有 bug，不能指定 StripPrefix
 			// etcd.StripPrefix(true),
 			source.WithEncoder(encoder),
 		)
 
 		if err := config.Load(etcdSource); err != nil {
-			return fmt.Errorf("failed to load config from etcd at %s with prefix of [%s]: %w", cfgEtcdAddr, etcd.DefaultPrefix, err)
+			return fmt.Errorf("failed to load config from etcd at %s with prefix of [%s]: %w", cfgEtcdAddr, cfgEtcdPrefix, err)
 		}
 
-		log.Infof("Loaded config from etcd at %s with prefix of [%s]", cfgEtcdAddr, etcd.DefaultPrefix)
+		log.Infof("Loaded config from etcd at %s with prefix of [%s]", cfgEtcdAddr, cfgEtcdPrefix)
 	}
 
 	// Load config from files

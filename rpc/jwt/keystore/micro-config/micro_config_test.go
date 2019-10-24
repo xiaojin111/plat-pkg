@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	cfgEtcdPrefix = "micro/config/jm"
+	cfgEtcdPrefix = "/micro/config/jm/"
 	cfgEtcdAddr   = "localhost:2379"
 )
 
@@ -35,7 +35,7 @@ func (suite *MicroConfigTestSuite) SetupSuite() {
 		// optionally specify prefix;
 		etcd.WithPrefix(cfgEtcdPrefix),
 		// optionally strip the provided prefix from the keys
-		etcd.StripPrefix(true),
+		// etcd.StripPrefix(true),
 		source.WithEncoder(encoder),
 	)
 
@@ -45,7 +45,7 @@ func (suite *MicroConfigTestSuite) SetupSuite() {
 }
 
 func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get() {
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test1")
 	suite.Assert().NotNil(key)
@@ -61,14 +61,14 @@ func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get() {
 }
 
 func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get_NotExists() {
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test-not-exists")
 	suite.Assert().Nil(key)
 }
 
 func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get_Disabled() {
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test4")
 	suite.Assert().Nil(key)
@@ -111,7 +111,7 @@ public_key: |
 
 	time.Sleep(500 * time.Millisecond)
 
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test2")
 	suite.Assert().NotNil(key)
