@@ -19,6 +19,6 @@ require (
 	github.com/micro/micro v1.13.2
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
-	go.etcd.io/etcd v3.3.13+incompatible
+	go.etcd.io/etcd v3.3.17+incompatible
 	gopkg.in/yaml.v2 v2.2.4
 )
