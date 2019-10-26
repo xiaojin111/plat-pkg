@@ -6,12 +6,10 @@ go 1.13
 replace github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.0
 
 require (
-	github.com/chzyer/logex v1.1.10 // indirect
-	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gobwas/glob v0.2.3
-	github.com/jinmukeji/go-pkg v0.0.0-20191004044456-0aded5c0032f
-	github.com/jinmukeji/proto v0.0.0-20191006061359-d74fb967d82b
+	github.com/jinmukeji/go-pkg v0.0.0-20191024130915-103b1687f33b
+	github.com/jinmukeji/proto v0.0.0-20191026015538-b49ce0ca4a94
 	github.com/jinzhu/gorm v1.9.11
 	github.com/micro/cli v0.2.0
 	github.com/micro/go-micro v1.14.0
