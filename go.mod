@@ -16,7 +16,7 @@ require (
 	github.com/micro/cli v0.2.0
 	github.com/micro/go-micro v1.13.2
 	github.com/micro/go-plugins v1.3.0
-	github.com/micro/micro v1.13.2
+	github.com/micro/micro v1.14.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
 	go.etcd.io/etcd v3.3.17+incompatible
