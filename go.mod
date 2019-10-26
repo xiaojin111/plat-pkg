@@ -14,7 +14,7 @@ require (
 	github.com/jinmukeji/proto v0.0.0-20191006061359-d74fb967d82b
 	github.com/jinzhu/gorm v1.9.11
 	github.com/micro/cli v0.2.0
-	github.com/micro/go-micro v1.13.2
+	github.com/micro/go-micro v1.14.0
 	github.com/micro/go-plugins v1.3.0
 	github.com/micro/micro v1.14.0
 	github.com/sirupsen/logrus v1.4.2
