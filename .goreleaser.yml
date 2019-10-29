@@ -3,7 +3,7 @@ project_name: plat-pkg
 # Make sure to check the documentation at http://goreleaser.com
 env:
   - GO111MODULE=on
-  - GOPROXY=https://goproxy.cn,direct
+  - GOPROXY=https://goproxy.io,direct
   - GOPRIVATE=github.com/jinmukeji/*
 before:
   hooks:
