@@ -8,22 +8,27 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/smallstep/cli/crypto/pemutil"
 )
 
 var (
-	ErrParseClaimsFailed = errors.New("failed to parse not standard claims")
-	ErrNoPublicKey       = errors.New("no public key to verify JWT")
-	ErrEmptyToken        = errors.New("token is empty")
+	ErrParseClaimsFailed     = errors.New("failed to parse not standard claims")
+	ErrNoPublicKey           = errors.New("no public key to verify JWT")
+	ErrEmptyToken            = errors.New("token is empty")
+	ErrInvalidPrivateKeyFile = errors.New("invalid private key file")
 )
 
 // LoadRSAPrivateKeyFromPEM 加载 RSA 私钥
-func LoadRSAPrivateKeyFromPEM(file string) (*rsa.PrivateKey, error) {
-	f, err := ioutil.ReadFile(file)
+func LoadRSAPrivateKeyFromPEM(keyFile, passFile string) (*rsa.PrivateKey, error) {
+	key, err := pemutil.Read(keyFile, pemutil.WithPasswordFile(passFile))
 	if err != nil {
 		return nil, err
 	}
+	if sk, ok := key.(*rsa.PrivateKey); ok {
+		return sk, nil
+	}
 
-	return LoadRASPrivateKey(f)
+	return nil, ErrInvalidPrivateKeyFile
 }
 
 // LoadRASPrivateKey 从字节序列中加载 RSA 私钥
