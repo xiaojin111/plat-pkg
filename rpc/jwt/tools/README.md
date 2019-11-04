@@ -145,6 +145,7 @@ go run sign/main.go \
 go run sign/main.go \
 	-key ${OUT_DIR}/${APP_ID}.pem \
 	-iss ${APP_ID} \
+	-pass ${PASSWORD_FILE} \
 	-inr 600s | \
 	pbcopy
 	
