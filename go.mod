@@ -12,7 +12,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gobwas/glob v0.2.3
 	github.com/jinmukeji/go-pkg v0.0.0-20191105023801-49bf3fa2962f
-	github.com/jinmukeji/proto v0.0.0-20191105022129-8d256966c978
+	github.com/jinmukeji/proto v0.0.0-20191106063829-0f6255fab313
 	github.com/jinzhu/gorm v1.9.11
 	github.com/manifoldco/promptui v0.3.2 // indirect
 	github.com/micro/cli v0.2.0
@@ -26,6 +26,6 @@ require (
 	github.com/smallstep/cli v0.13.3
 	github.com/stretchr/testify v1.4.0
 	go.etcd.io/etcd v3.3.17+incompatible
-	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
+	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20191105091915-95d230a53780 // indirect
 	gopkg.in/yaml.v2 v2.2.5
 )
