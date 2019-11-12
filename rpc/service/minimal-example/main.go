@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	mlog "github.com/jinmukeji/go-pkg/log"
 	"github.com/jinmukeji/plat-pkg/rpc/service"
@@ -40,6 +41,20 @@ var (
 )
 
 func main() {
+	// ServiceOptions
+	svcOpts := []micro.Option{}
+	if len(os.Getenv("INSECURE")) == 0 {
+		// 设置启用 TLS
+		// micro 底层将同时设置 Sever 与 Client 启用 TLS
+		svcOpts = append(svcOpts, micro.Transport(
+			// create new transport
+			transport.NewTransport(
+				// set to automatically secure
+				transport.Secure(true),
+			),
+		))
+	}
+
 	opts := &service.Options{
 		Name:                      ServiceName,
 		Namespace:                 ServiceNamespace,
@@ -50,17 +65,7 @@ func main() {
 		RegisterServer:            register,
 		PreServerHandlerWrappers:  preHandlerWrappers(),
 		PostServerHandlerWrappers: postHandlerWrappers(),
-		ServiceOptions: []micro.Option{
-			// 设置启用 TLS
-			// micro 底层将同时设置 Sever 与 Client 启用 TLS
-			micro.Transport(
-				// create new transport
-				transport.NewTransport(
-					// set to automatically secure
-					transport.Secure(true),
-				),
-			),
-		},
+		ServiceOptions:            svcOpts,
 	}
 	svc := service.CreateService(opts)
 
