@@ -3,7 +3,7 @@ project_name: plat-pkg
 # Make sure to check the documentation at http://goreleaser.com
 env:
   - GO111MODULE=on
-  - GOPROXY=https://goproxy.cn,direct
+  - GOPROXY=https://goproxy.io,direct
   - GOPRIVATE=github.com/jinmukeji/*
 before:
   hooks:
@@ -55,6 +55,16 @@ dockers:
       - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:{{ .Tag }}"
       - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:v{{ .Major }}.{{ .Minor }}"
     dockerfile: jm-micro/Dockerfile
+  - goos: linux
+    goarch: amd64
+    binaries:
+      - jm-micro
+    # Templates of the Docker image names.
+    image_templates:
+      - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:ci-latest"
+    dockerfile: jm-micro/Dockerfile.ci
+    extra_files:
+      - cert
 checksum:
   name_template: 'checksums.txt'
 snapshot:

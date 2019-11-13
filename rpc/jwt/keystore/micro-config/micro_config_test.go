@@ -1,6 +1,7 @@
 package microconfig_test
 
 import (
+	"context"
 	"testing"
 	"time"
 
@@ -8,15 +9,14 @@ import (
 	"github.com/micro/go-micro/config"
 	"github.com/micro/go-micro/config/encoder/yaml"
 	"github.com/micro/go-micro/config/source"
-	"github.com/micro/go-micro/config/source/consul"
+	"github.com/micro/go-micro/config/source/etcd"
 	"github.com/stretchr/testify/suite"
-
-	"github.com/hashicorp/consul/api"
+	"go.etcd.io/etcd/clientv3"
 )
 
 const (
-	cfgConsulPrefix = "/micro/config/jm"
-	cfgConsulAddr   = "localhost:8500"
+	cfgEtcdPrefix = "/micro/config/jm/"
+	cfgEtcdAddr   = "localhost:2379"
 )
 
 type MicroConfigTestSuite struct {
@@ -25,27 +25,27 @@ type MicroConfigTestSuite struct {
 
 // SetupSuite 设置测试环境
 func (suite *MicroConfigTestSuite) SetupSuite() {
-	// 连接 Consul 并读取配置信息
+	// 连接 Etcd 并读取配置信息
 
 	encoder := yaml.NewEncoder()
 
-	consulSource := consul.NewSource(
-		// optionally specify consul address;
-		consul.WithAddress(cfgConsulAddr),
+	etcdSource := etcd.NewSource(
+		// optionally specify etcd address;
+		etcd.WithAddress(cfgEtcdAddr),
 		// optionally specify prefix;
-		consul.WithPrefix(cfgConsulPrefix),
+		etcd.WithPrefix(cfgEtcdPrefix),
 		// optionally strip the provided prefix from the keys
-		consul.StripPrefix(true),
+		// etcd.StripPrefix(true),
 		source.WithEncoder(encoder),
 	)
 
-	if err := config.Load(consulSource); err != nil {
+	if err := config.Load(etcdSource); err != nil {
 		suite.FailNow(err.Error())
 	}
 }
 
 func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get() {
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test1")
 	suite.Assert().NotNil(key)
@@ -61,14 +61,14 @@ func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get() {
 }
 
 func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get_NotExists() {
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test-not-exists")
 	suite.Assert().Nil(key)
 }
 
 func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get_Disabled() {
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test4")
 	suite.Assert().Nil(key)
@@ -79,35 +79,39 @@ func (suite *MicroConfigTestSuite) TestMicroConfigStore_Get_ConfigChanged() {
 disabled: false
 fingerprint: "15:e7:c6:d3:b5:fe:30:12:d4:cb:65:e5:73:09:f5:e2:ac:68:e2:c2"
 public_key: |
-  -----BEGIN PUBLIC KEY-----
-  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gALJf5Nh/GexqVTm9sX
-  /Xr6kki6FAtbawvr8ZV2E6xP0DJN5RIPdXkAGlGI0Ob5iKUh7tbYw6c/6QzR1PqO
-  MkKHLGiRh8VweclP/LUSWQ8uTNbBvJ8KvmEt0KkeGSVNiaOcdKOPtoVxgYzMa53t
-  8w+J/5BE1ufDppUCuCMdqKjkqLCv6HelkT3E2dE5JVmKiayGMYQYAaotiP/aWpLR
-  drhVQ3QRckTM7rVVBTZoCual8ggRE5UtCHP6qOq1TBg/oBa6vg/u6EpkgqsQSjPh
-  +YrOKvx5N/qBike+q62musbepwjmQAfrwBACsUTo05nwX5m/b3wACG++A3ASPov6
-  bQIDAQAB
-  -----END PUBLIC KEY-----
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gALJf5Nh/GexqVTm9sX
+    /Xr6kki6FAtbawvr8ZV2E6xP0DJN5RIPdXkAGlGI0Ob5iKUh7tbYw6c/6QzR1PqO
+    MkKHLGiRh8VweclP/LUSWQ8uTNbBvJ8KvmEt0KkeGSVNiaOcdKOPtoVxgYzMa53t
+    8w+J/5BE1ufDppUCuCMdqKjkqLCv6HelkT3E2dE5JVmKiayGMYQYAaotiP/aWpLR
+    drhVQ3QRckTM7rVVBTZoCual8ggRE5UtCHP6qOq1TBg/oBa6vg/u6EpkgqsQSjPh
+    +YrOKvx5N/qBike+q62musbepwjmQAfrwBACsUTo05nwX5m/b3wACG++A3ASPov6
+    bQIDAQAB
+    -----END PUBLIC KEY-----
 `
 
-	// Get a new client
-	consulCfg := api.DefaultConfig()
-	consulCfg.Address = cfgConsulAddr
-	client, err := api.NewClient(consulCfg)
-	if err != nil {
-		suite.FailNow(err.Error())
-	}
-	kv := client.KV()
+	// FIXME: ETCD
 
-	consulKey := "micro/config/jm/platform/app-key/app-test2"
-	p := &api.KVPair{Key: consulKey, Value: []byte(pValue)}
-	_, err = kv.Put(p, nil)
+	cli, err := clientv3.New(clientv3.Config{
+		Endpoints:   []string{cfgEtcdAddr},
+		DialTimeout: 5 * time.Second,
+	})
 	if err != nil {
 		suite.FailNow(err.Error())
 	}
+	defer cli.Close()
+
+	etcdKey := "/micro/config/jm/platform/app-key/app-test2"
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	_, err = cli.Put(ctx, etcdKey, pValue)
+	cancel()
+	if err != nil {
+		suite.FailNow(err.Error())
+	}
+
 	time.Sleep(500 * time.Millisecond)
 
-	baseKeyPath := []string{"platform", "app-key"}
+	baseKeyPath := []string{"micro", "config", "jm", "platform", "app-key"}
 	store := m.NewMicroConfigStore(baseKeyPath...)
 	key := store.Get("app-test2")
 	suite.Assert().NotNil(key)
@@ -115,11 +119,13 @@ public_key: |
 
 	// 变更配置内容
 	newPValue := pValue + "testing: true"
-	newP := &api.KVPair{Key: consulKey, Value: []byte(newPValue)}
-	_, err = kv.Put(newP, nil)
+	ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
+	_, err = cli.Put(ctx, etcdKey, newPValue)
+	cancel()
 	if err != nil {
 		suite.FailNow(err.Error())
 	}
+
 	time.Sleep(500 * time.Millisecond)
 
 	key = store.Get("app-test2")

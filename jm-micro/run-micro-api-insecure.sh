@@ -9,15 +9,17 @@ cd ${CUR}
 
 SERVER_IP=0.0.0.0
 SERVER_PORT=8080
+ETCD_ADDR=localhost:2379
 
 go run . \
+    --registry=etcd \
     --log_level=DEBUG \
     --register_interval=5 \
     --register_ttl=10 \
     --client_pool_size=100 \
     --server_name=com.jinmuhealth.platform.api \
     --metadata=X-Err-Style=MicroDetailed \
-    --config_consul_address=localhost:8500 \
+    --config_etcd_address=${ETCD_ADDR} \
     api \
     --insecure \
     --address=${SERVER_IP}:${SERVER_PORT} \

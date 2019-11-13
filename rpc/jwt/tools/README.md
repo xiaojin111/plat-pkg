@@ -110,6 +110,7 @@ pbpaste | step crypto jwt verify \
 ```sh
 export APP_ID="app-test1"
 export OUT_DIR="testdata"
+export PASSWORD_FILE="${OUT_DIR}/PASSWORD"
 
 # 1. 生成私钥
 openssl genrsa -out ${OUT_DIR}/${APP_ID}.pem 2048
@@ -136,6 +137,7 @@ openssl rsa -in ${OUT_DIR}/${APP_ID}.pub -pubin -pubout -outform DER | \
 go run sign/main.go \
 	-key ${OUT_DIR}/${APP_ID}.pem \
 	-iss ${APP_ID} \
+	-pass ${PASSWORD_FILE} \
 	-inr 600s
 
 # 使用私钥进行 JWT 签名技巧 (仅 macOS)
@@ -143,6 +145,7 @@ go run sign/main.go \
 go run sign/main.go \
 	-key ${OUT_DIR}/${APP_ID}.pem \
 	-iss ${APP_ID} \
+	-pass ${PASSWORD_FILE} \
 	-inr 600s | \
 	pbcopy
 	

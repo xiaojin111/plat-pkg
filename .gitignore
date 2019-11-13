@@ -1,4 +1,5 @@
 .goreleaser.ci.yml
+default.etcd/
 
 bin/
 dist/
