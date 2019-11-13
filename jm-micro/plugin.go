@@ -41,18 +41,10 @@ func init() {
 	err = web.Register(tls.NewPlugin())
 	die(err)
 
-	// // Proxy
-	// err = proxy.Register(tls.NewPlugin())
-	// die(err)
+	// api 服务插件
 
-	// // web 服务插件
-	// err = web.Register(tls.NewPlugin())
-	// die(err)
-
-	// // api 服务插件
-
-	// err = api.Register(tls.NewPlugin())
-	// die(err)
+	err = api.Register(tls.NewPlugin())
+	die(err)
 
 	// micro gzip 插件存在 bug，当 response 数据量过小的时候，压缩后的数据丢失
 	// err = api.Register(gzip.NewPlugin())
