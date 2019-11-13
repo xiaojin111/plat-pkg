@@ -20,7 +20,7 @@ setup:
 	GO111MODULE=off go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 	[ -d "./bin" ] || mkdir -p ./bin
 	cp $(GOPATH)/bin/golangci-lint ./bin/
-	curl -L https://git.io/misspell | sh
+	#curl -L https://git.io/misspell | sh
 	go mod download
 .PHONY: setup
 
