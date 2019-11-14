@@ -6,10 +6,6 @@ aws --version
 $( aws ecr get-login --no-include-email)
 #关闭已开启的服务
 docker stop consul || echo "consul stop"
-docker stop api || echo "api stop"
-docker stop web || echo "web stop"
-docker stop proxy || echo "proxy stop"
-docker stop developer-svc || echo "developer-svc stop"
 docker network rm default_network || echo "default_network stop"
 CUR=`dirname $0`
 cd ${CUR}/
