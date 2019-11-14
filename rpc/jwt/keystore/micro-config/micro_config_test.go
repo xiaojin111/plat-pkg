@@ -2,6 +2,8 @@ package microconfig_test
 
 import (
 	"context"
+	"flag"
+	"os"
 	"testing"
 	"time"
 
@@ -19,6 +21,18 @@ const (
 	cfgEtcdAddr   = "localhost:2379"
 )
 
+var (
+	etcdAddresss = flag.String("etcd.server", cfgEtcdAddr, "etcd address")
+)
+
+func init() {
+	flag.Parse()
+
+	if len(os.Getenv("ETCD_ADDR")) > 0 {
+		*etcdAddresss = os.Getenv("ETCD_ADDR")
+	}
+}
+
 type MicroConfigTestSuite struct {
 	suite.Suite
 }
@@ -31,7 +45,7 @@ func (suite *MicroConfigTestSuite) SetupSuite() {
 
 	etcdSource := etcd.NewSource(
 		// optionally specify etcd address;
-		etcd.WithAddress(cfgEtcdAddr),
+		etcd.WithAddress(*etcdAddresss),
 		// optionally specify prefix;
 		etcd.WithPrefix(cfgEtcdPrefix),
 		// optionally strip the provided prefix from the keys
@@ -93,7 +107,7 @@ public_key: |
 	// FIXME: ETCD
 
 	cli, err := clientv3.New(clientv3.Config{
-		Endpoints:   []string{cfgEtcdAddr},
+		Endpoints:   []string{*etcdAddresss},
 		DialTimeout: 5 * time.Second,
 	})
 	if err != nil {
