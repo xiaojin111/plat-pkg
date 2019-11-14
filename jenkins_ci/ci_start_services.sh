@@ -5,7 +5,7 @@ aws --version
 #docker login
 $( aws ecr get-login --no-include-email)
 #关闭已开启的服务
-docker stop consul || echo "consul stop"
+docker stop etcd || echo "etcd stop"
 docker network rm default_network || echo "default_network stop"
 CUR=`dirname $0`
 cd ${CUR}/
