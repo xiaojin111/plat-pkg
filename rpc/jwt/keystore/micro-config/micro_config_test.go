@@ -22,14 +22,12 @@ const (
 )
 
 var (
-	etcdAddresss = flag.String("etcd.server", cfgEtcdAddr, "etcd address")
+	etcdAddress = flag.String("etcd.server", cfgEtcdAddr, "etcd address")
 )
 
 func init() {
-	flag.Parse()
-
 	if len(os.Getenv("ETCD_ADDR")) > 0 {
-		*etcdAddresss = os.Getenv("ETCD_ADDR")
+		*etcdAddress = os.Getenv("ETCD_ADDR")
 	}
 }
 
@@ -45,7 +43,7 @@ func (suite *MicroConfigTestSuite) SetupSuite() {
 
 	etcdSource := etcd.NewSource(
 		// optionally specify etcd address;
-		etcd.WithAddress(*etcdAddresss),
+		etcd.WithAddress(*etcdAddress),
 		// optionally specify prefix;
 		etcd.WithPrefix(cfgEtcdPrefix),
 		// optionally strip the provided prefix from the keys
@@ -107,7 +105,7 @@ public_key: |
 	// FIXME: ETCD
 
 	cli, err := clientv3.New(clientv3.Config{
-		Endpoints:   []string{*etcdAddresss},
+		Endpoints:   []string{*etcdAddress},
 		DialTimeout: 5 * time.Second,
 	})
 	if err != nil {
