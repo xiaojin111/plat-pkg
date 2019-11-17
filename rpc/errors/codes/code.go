@@ -5,6 +5,8 @@ import (
 	"strconv"
 )
 
+//go:generate ./gen.sh
+
 // A Code is an unsigned 32-bit error code as defined in the spec.
 type Code uint32
 

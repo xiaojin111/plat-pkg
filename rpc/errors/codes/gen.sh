@@ -10,5 +10,6 @@ PKG_NAME="codes"
 
 cd ${CUR}
 
+echo "Generating rpc/errors/codes.gen.go"
 go run ./gen/gen.go -c ${CONFIG_FILE} -o ${OUT_FILE} -p ${PKG_NAME}
 goimports -w ${OUT_FILE} 
