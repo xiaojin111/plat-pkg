@@ -27,5 +27,5 @@ require (
 	github.com/stretchr/testify v1.4.0
 	go.etcd.io/etcd v3.3.17+incompatible
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20191105091915-95d230a53780 // indirect
-	gopkg.in/yaml.v2 v2.2.5
+	gopkg.in/yaml.v2 v2.2.6
 )
