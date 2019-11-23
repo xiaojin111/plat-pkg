@@ -20,8 +20,8 @@ go run . \
     --server_name=com.jinmuhealth.platform.api \
     --metadata=X-Err-Style=MicroDetailed \
     --enable_tls \
-    --tls_cert_file=./cert/localhost.crt \
-    --tls_key_file=./cert/localhost.key \
+    --tls_cert_file=./cert/server/localhost/localhost.crt \
+    --tls_key_file=./cert/server/localhost/localhost.key \
     --tls_client_ca_file=./cert/root_ca.crt \
     --config_etcd_address=${ETCD_ADDR} \
     api \

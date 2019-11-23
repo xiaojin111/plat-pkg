@@ -16,8 +16,8 @@ go run . \
     --log_level=DEBUG \
     --server_name=com.jinmuhealth.platform.web \
     --enable_tls \
-    --tls_cert_file=./cert/localhost.crt \
-    --tls_key_file=./cert/localhost.key \
+    --tls_cert_file=./cert/server/localhost/localhost.crt \
+    --tls_key_file=./cert/server/localhost/localhost.key \
     web \
     --insecure \
     --address=${SERVER_IP}:${SERVER_PORT} \

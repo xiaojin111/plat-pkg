@@ -89,8 +89,8 @@ go run . \
     --metadata=X-Err-Style=MicroDetailed \
     --config_etcd_address=localhost:2379 \
     --enable_tls \
-    --tls_cert_file=./cert/localhost.crt \
-    --tls_key_file=./cert/localhost.key \
+    --tls_cert_file=./cert/server/localhost/localhost.crt \
+    --tls_key_file=./cert/server/localhost/localhost.key \
     --tls_client_ca_file=./cert/root_ca.crt \
     api \
     --address=${SERVER_IP}:${SERVER_PORT} \
@@ -106,6 +106,6 @@ go run . \
 1. 启用 **CA Certificates**，并设置根证书文件 `cert/root_ca.crt`。信任后，Postman请求时将不会再报告警告。
 2. 设置 **Client Certificates**，添加一个客户端证书配置：
    - **Host:** `127.0.0.1:8080`
-   - **CRT file:** `cert/jm-app.crt`
-   - **KEY file:** `cert/jm-app.key`
+   - **CRT file:** `cert/client/jm-app/jm-app.crt`
+   - **KEY file:** `cert/client/jm-app/jm-app.key`
 
