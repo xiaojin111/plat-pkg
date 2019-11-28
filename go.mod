@@ -25,7 +25,7 @@ require (
 	github.com/smallstep/assert v0.0.0-20180720014142-de77670473b5 // indirect
 	github.com/smallstep/cli v0.13.3
 	github.com/stretchr/testify v1.4.0
-	go.etcd.io/etcd v3.3.17+incompatible
+	go.etcd.io/etcd v3.3.18+incompatible
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20191105091915-95d230a53780 // indirect
 	gopkg.in/yaml.v2 v2.2.7
 )
