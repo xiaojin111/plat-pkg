@@ -27,7 +27,7 @@ setup:
 # Update go packages
 go-update:
 	@echo "Updating go packages..."
-	@go get -u all
+	@go get -u -t ./...
 	@echo "go mod tidy..."
 	@$(MAKE) go-mod-tidy
 .PHONY: go-update
