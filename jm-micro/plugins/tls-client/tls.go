@@ -24,9 +24,9 @@ func (p *tlsPlugin) Flags() []cli.Flag {
 	return []cli.Flag{
 		// 日志相关
 		cli.BoolFlag{
-			Name:        "insecure",
-			Usage:       "insecure without TLS client",
-			EnvVar:      "INSECURE",
+			Name:        "no_tls_client",
+			Usage:       "Disable TLS client",
+			EnvVar:      "NO_TLS_CLIENT",
 			Destination: &(p.insecure),
 		},
 	}
@@ -54,16 +54,16 @@ func (p *tlsPlugin) Init(ctx *cli.Context) error {
 			return err
 		}
 
-		log.Info("TLS is enabled.")
+		log.Info("TLS is enabled for default client.")
 	} else {
-		log.Warn("TLS is disabled. INSECURE")
+		log.Warn("TLS is disabled for default client. INSECURE")
 	}
 
 	return nil
 }
 
 func (p *tlsPlugin) String() string {
-	return "tls"
+	return "tls-client"
 }
 
 func NewPlugin() plugin.Plugin {

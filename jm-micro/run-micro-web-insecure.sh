@@ -19,7 +19,7 @@ go run . \
     --tls_cert_file=./cert/server/localhost/localhost.crt \
     --tls_key_file=./cert/server/localhost/localhost.key \
     web \
-    --insecure \
+    --no_tls_client \
     --address=${SERVER_IP}:${SERVER_PORT} \
     --namespace=com.jinmuhealth.platform.srv \
 

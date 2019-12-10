@@ -14,14 +14,8 @@ import (
 
 // Config 相关常量
 const (
-	DefaultConfigEnvPrefix  = "JM"
+	// DefaultConfigEnvPrefix  = "JM"
 	DefaultConfigEtcdPrefix = "/micro/config/jm/"
-)
-
-// config 相关变量
-var (
-	cfgFiles                                 cli.StringSlice
-	cfgEnvPrefix, cfgEtcdAddr, cfgEtcdPrefix string
 )
 
 func configCliFlags() []cli.Flag {
@@ -30,38 +24,37 @@ func configCliFlags() []cli.Flag {
 		cli.StringSliceFlag{
 			Name:  "config_file",
 			Usage: "Config file path",
-			Value: &cfgFiles,
+		},
+
+		// cli.StringFlag{
+		// 	Name:  "config_env_prefix",
+		// 	Usage: "Config environment variables prefix",
+		// 	Value: DefaultConfigEnvPrefix, // default value
+		// },
+
+		cli.StringFlag{
+			Name:  "config_etcd_address",
+			Usage: "Etcd config source address",
 		},
 
 		cli.StringFlag{
-			Name:        "config_env_prefix",
-			Usage:       "Config environment variables prefix",
-			Value:       DefaultConfigEnvPrefix, // default value
-			Destination: &cfgEnvPrefix,
-		},
-
-		cli.StringFlag{
-			Name:        "config_etcd_address",
-			Usage:       "Etcd config source address",
-			Destination: &cfgEtcdAddr,
-		},
-
-		cli.StringFlag{
-			Name:        "config_etcd_prefix",
-			Usage:       "Etcd config K/V prefix",
-			Value:       DefaultConfigEtcdPrefix, // default value
-			Destination: &cfgEtcdPrefix,
+			Name:  "config_etcd_prefix",
+			Usage: "Etcd config K/V prefix",
+			Value: DefaultConfigEtcdPrefix, // default value
 		},
 	}
 }
 
-func loadServiceConfig() error {
+func loadServiceConfig(c *cli.Context) error {
 	// 加载以下配置信息数据源，优先级依次从低到高：
 	// 1. Etcd K/V 配置中心
 	// 2. 配置文件，YAML格式
-	// 3. 环境变量
+	// 3. 环境变量 （暂不实现）
 
 	encoder := yaml.NewEncoder()
+
+	cfgEtcdAddr := c.String("config_etcd_address")
+	cfgEtcdPrefix := c.String("config_etcd_prefix")
 
 	// Load config from etcd
 	if cfgEtcdAddr != "" {
@@ -85,7 +78,8 @@ func loadServiceConfig() error {
 	}
 
 	// Load config from files
-	for _, f := range cfgFiles.Value() {
+	cfgFiles := c.StringSlice("config_file")
+	for _, f := range cfgFiles {
 		fileSource := file.NewSource(
 			file.WithPath(f),
 			source.WithEncoder(encoder),

@@ -14,11 +14,8 @@ import (
 
 	wcid "github.com/jinmukeji/plat-pkg/rpc/wrapper/cid"
 	wfm "github.com/jinmukeji/plat-pkg/rpc/wrapper/formatmeta"
-	wjwt "github.com/jinmukeji/plat-pkg/rpc/wrapper/jwt"
 	wlog "github.com/jinmukeji/plat-pkg/rpc/wrapper/log"
 	wme "github.com/jinmukeji/plat-pkg/rpc/wrapper/microerr"
-
-	cm "github.com/jinmukeji/plat-pkg/rpc/ctxmeta"
 )
 
 func CreateService(opts *Options) micro.Service {
@@ -96,13 +93,17 @@ func setupService(svc micro.Service, opts *Options) error {
 				os.Exit(0)
 			}
 
-			setupLogger(log, opts.Name)
+			setupLogger(c, log, opts.Name)
 			// 启动阶段打印版本号
 			// 由于内部使用到了 logger，需要在 logger 被设置后调用
 			logVersionInfo(opts)
 
+			// 设置 TLS
+			err := setupTLS(c)
+			die(err)
+
 			// 加载 config
-			err := loadServiceConfig()
+			err = loadServiceConfig(c)
 			die(err)
 
 			if opts.CliPostAction != nil {
@@ -126,50 +127,51 @@ func defaultFlags() []cli.Flag {
 	}
 
 	flags = append(flags, logCliFlags()...)
+	flags = append(flags, tlsCliFlags()...)
 	flags = append(flags, configCliFlags()...)
-	flags = append(flags, jwtFlags()...)
+	// flags = append(flags, jwtFlags()...)
 
 	return flags
 }
 
 // JWT 相关
-var (
-	jwtOption = wjwt.DefaultOptions()
-	enableJwt = false
-)
+// var (
+// 	jwtOption = wjwt.DefaultOptions()
+// 	enableJwt = false
+// )
 
-func jwtFlags() []cli.Flag {
-	return []cli.Flag{
-		// JWT 相关
-		cli.BoolFlag{
-			Name:        "enable_jwt",
-			Usage:       "Enable JWT validation",
-			EnvVar:      "ENABLE_JWT",
-			Destination: &enableJwt,
-		},
-		cli.StringFlag{
-			Name:        "jwt_key",
-			Usage:       "JWT HTTP header key",
-			EnvVar:      "JWT_KEY",
-			Value:       cm.MetaJwtKey,
-			Destination: &(jwtOption.HeaderKey),
-		},
-		cli.StringFlag{
-			Name:        "jwt_config_path",
-			Usage:       "Micro config path for JWT",
-			EnvVar:      "JWT_CONFIG_PATH",
-			Value:       wjwt.DefaultMicroConfigPath,
-			Destination: &(jwtOption.MicroConfigPath),
-		},
-		cli.DurationFlag{
-			Name:        "jwt_max_exp_interval",
-			Usage:       "JWT max expiration interval",
-			EnvVar:      "JWT_MAX_EXP_INTERVAL",
-			Value:       wjwt.DefaultMaxExpInterval,
-			Destination: &(jwtOption.MaxExpInterval),
-		},
-	}
-}
+// func jwtFlags() []cli.Flag {
+// 	return []cli.Flag{
+// 		// JWT 相关
+// 		cli.BoolFlag{
+// 			Name:        "enable_jwt",
+// 			Usage:       "Enable JWT validation",
+// 			EnvVar:      "ENABLE_JWT",
+// 			Destination: &enableJwt,
+// 		},
+// 		cli.StringFlag{
+// 			Name:        "jwt_key",
+// 			Usage:       "JWT HTTP header key",
+// 			EnvVar:      "JWT_KEY",
+// 			Value:       cm.MetaJwtKey,
+// 			Destination: &(jwtOption.HeaderKey),
+// 		},
+// 		cli.StringFlag{
+// 			Name:        "jwt_config_path",
+// 			Usage:       "Micro config path for JWT",
+// 			EnvVar:      "JWT_CONFIG_PATH",
+// 			Value:       wjwt.DefaultMicroConfigPath,
+// 			Destination: &(jwtOption.MicroConfigPath),
+// 		},
+// 		cli.DurationFlag{
+// 			Name:        "jwt_max_exp_interval",
+// 			Usage:       "JWT max expiration interval",
+// 			EnvVar:      "JWT_MAX_EXP_INTERVAL",
+// 			Value:       wjwt.DefaultMaxExpInterval,
+// 			Destination: &(jwtOption.MaxExpInterval),
+// 		},
+// 	}
+// }
 
 func setupHandlerWrappers(svc micro.Service, opts *Options) {
 	// 设置 Server Handler Wrappers
@@ -189,9 +191,9 @@ func setupHandlerWrappers(svc micro.Service, opts *Options) {
 		wlog.LogWrapper,
 	)
 
-	if enableJwt {
-		srvWrappers = append(srvWrappers, wjwt.NewHandlerWrapper(jwtOption))
-	}
+	// if enableJwt {
+	// 	srvWrappers = append(srvWrappers, wjwt.NewHandlerWrapper(jwtOption))
+	// }
 
 	// 自定义 post
 	if len(opts.PostServerHandlerWrappers) > 0 {
@@ -214,7 +216,9 @@ func setupHandlerWrappers(svc micro.Service, opts *Options) {
 		clientWrappers = append(clientWrappers, opts.PostClientWrappers...)
 	}
 
-	svc.Init(micro.WrapClient(clientWrappers...))
+	svc.Init(
+		micro.WrapClient(clientWrappers...),
+	)
 }
 
 func setupServer(srv server.Server, opts *Options) error {

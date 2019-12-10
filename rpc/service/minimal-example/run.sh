@@ -19,4 +19,5 @@ go run . \
     --server_address=${SERVER_ADDR} \
     --client_pool_size=100 \
     --config_etcd_address=${ETCD_ADDR} \
-    #  --enable_jwt \
+    # --no_tls_client \
+    # --no_tls_server \
