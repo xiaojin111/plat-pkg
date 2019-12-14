@@ -11,7 +11,7 @@ before:
     - make generate
     - make format
     - make lint
-    - make test
+    # - make test
 builds:
   - id: "jm-micro"
     binary: jm-micro
