@@ -6,6 +6,7 @@ import (
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/healthcheck"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
+	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/tcphealthcheck"
 	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/tls-client"
 
 	// "github.com/jinmukeji/plat-pkg/jm-micro/plugins/whitelist"
@@ -50,6 +51,9 @@ func init() {
 	// err = api.Register(gzip.NewPlugin())
 	// die(err)
 	err = api.Register(healthcheck.NewPlugin())
+	die(err)
+
+	err = api.Register(tcphealthcheck.NewPlugin())
 	die(err)
 
 	err = api.Register(cid.NewPlugin())
