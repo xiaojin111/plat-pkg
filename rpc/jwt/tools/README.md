@@ -42,8 +42,8 @@ step crypto hash digest ${PUB_FILE} --alg=SHA1
 JWT_ALG="RS256"
 JWT_AUD="com.jinmuhealth.partner.dayima.api.sys-intg"		# 端点 SRV 名称
 JWT_SUB="DaYiMa"									# 客户名称
-JWT_ISS="app-test5"								# APP ID
-JWT_PRIVATE_KEY="app-test5.pem" 	# Private Key
+JWT_ISS="dayima"								# APP ID
+JWT_PRIVATE_KEY="dayima.pem" 	# Private Key
 PASS_FILE="PASSWORD"
 
 # UNIX time: NOW

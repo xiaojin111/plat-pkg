@@ -11,7 +11,7 @@ SERVER_ADDR=0.0.0.0:9090
 ETCD_ADDR=localhost:2379
 
 # 启动服务
-go run . \
+go run -tags=grpc . \
     --registry=etcd \
     --log_level=DEBUG \
     --register_interval=5 \
