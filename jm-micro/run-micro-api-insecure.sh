@@ -26,6 +26,8 @@ go run . \
     --handler=rpc \
     --enable_rpc \
     --namespace=com.jinmuhealth.platform.srv \
+    --enable_tcp_healthcheck
+    --tcp_healthcheck_addr=:9901
     # --enable_jwt \
     # --jwt_max_exp_interval=600s \
     # --rpc_whitelist=com.jinmuhealth.platform.srv.template-service
