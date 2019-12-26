@@ -47,12 +47,18 @@ func MicroErrWrapper(fn server.HandlerFunc) server.HandlerFunc {
 				// 使用简化版信息输出，不输出内部错误信息
 				if e, ok := err.(*errors.RpcError); ok {
 					rErr = wrapError(svcName, e.Error())
+				} else {
+					// fallback，转为原始的
+					rErr = err
 				}
 
 			case ErrStyleDetailed:
 				// 使用详细版信息输出，输出内部错误信息
 				if e, ok := err.(*errors.RpcError); ok {
 					rErr = wrapError(svcName, e.DetailedError())
+				} else {
+					// fallback，转为原始的
+					rErr = err
 				}
 			case ErrStyleRaw:
 				// 不做处理，直接输出原始的
