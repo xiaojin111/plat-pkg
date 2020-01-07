@@ -2,6 +2,7 @@ package store
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/jinmukeji/go-pkg/mysqldb"
 	tx "github.com/jinmukeji/plat-pkg/transaction"
@@ -63,4 +64,30 @@ func (s *MySqlStore) RollbackTx(ctx context.Context) {
 func (s *MySqlStore) GetError(ctx context.Context) error {
 	db := s.DB(ctx)
 	return db.Error
+}
+
+// Transaction start a transaction as a block,
+// return error will rollback, otherwise to commit.
+func (s *MySqlStore) Transaction(ctx context.Context, fc func(txs *MySqlStore) error) (err error) {
+	tx := s.BeginTx(ctx)
+	defer func() {
+		if r := recover(); r != nil {
+			err = fmt.Errorf("%s", r)
+			s.RollbackTx(tx)
+			return
+		}
+	}()
+
+	err = fc(s)
+	if err == nil {
+		s.CommitTx(tx)
+		err = s.GetError(tx)
+	}
+
+	// Makesure rollback when Block error or Commit error
+	if err != nil {
+		s.RollbackTx(tx)
+	}
+
+	return
 }
