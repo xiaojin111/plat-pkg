@@ -39,6 +39,15 @@ go-mod-tidy:
 	# @git --no-pager diff-index --quiet HEAD
 .PHONY: go-mod-tidy
 
+# Reset go.mod
+go-mod-reset:
+	@rm -f go.sum
+	@sed -i '' -e '/^require/,/^)/d' go.mod
+	@go mod tidy -v
+	# @git --no-pager diff HEAD
+	# @git --no-pager diff-index --quiet HEAD
+.PHONY: go-mod-tidy
+
 generate:
 	@go generate ./...
 .PHONY: generate

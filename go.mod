@@ -2,16 +2,6 @@ module github.com/jinmukeji/plat-pkg
 
 go 1.13
 
-// replace (
-// 	github.com/lucas-clemente/quic-go => github.com/lucas-clemente/quic-go v0.13.1
-// 	// TODO: fix micro/go-plugins@v1.5.1 bad dependencies
-// 	github.com/micro/go-micro => github.com/micro/go-micro v1.18.0
-// 	github.com/micro/micro v1.18.0 => github.com/micro/micro v1.18.0
-
-// 	// TODO: fix micro/go-micro@v1.18.0 incompatible with latest version of go-i18n
-// 	github.com/nicksnyder/go-i18n => github.com/nicksnyder/go-i18n v1.10.1
-// )
-
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gobwas/glob v0.2.3
