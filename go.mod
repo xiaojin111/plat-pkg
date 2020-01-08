@@ -18,7 +18,7 @@ require (
 	github.com/gordonklaus/ineffassign v0.0.0-20190601041439-ed7b1b5ee0f8 // indirect
 	github.com/jinmukeji/go-pkg v0.0.0-20191214022251-476a251653a5
 	github.com/jinmukeji/proto v0.0.0-20191220062128-ceb7d3ca7dae
-	github.com/jinzhu/gorm v1.9.11
+	github.com/jinzhu/gorm v1.9.12
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/klauspost/cpuid v1.2.2 // indirect
 	github.com/lucas-clemente/quic-go v0.14.1 // indirect
