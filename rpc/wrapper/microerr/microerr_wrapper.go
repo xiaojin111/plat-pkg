@@ -32,40 +32,30 @@ const (
 func MicroErrWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 	return func(ctx context.Context, req server.Request, rsp interface{}) error {
-		var svcName string
-		if svc, ok := micro.FromContext(ctx); ok {
-			svcName = svc.Server().Options().Name
-		}
 
 		err := fn(ctx, req, rsp)
 		if err != nil {
 			var rErr error
+
 			style := errorStyleFromContext(ctx)
+			rErr = err // init default
 
 			switch style {
 			case ErrStyleSimple:
 				// 使用简化版信息输出，不输出内部错误信息
 				if e, ok := err.(*errors.RpcError); ok {
-					rErr = wrapError(svcName, e.Error())
-				} else {
-					// fallback，转为原始的
-					rErr = err
+					rErr = wrapError(ctx, e.Error())
 				}
 
 			case ErrStyleDetailed:
 				// 使用详细版信息输出，输出内部错误信息
 				if e, ok := err.(*errors.RpcError); ok {
-					rErr = wrapError(svcName, e.DetailedError())
-				} else {
-					// fallback，转为原始的
-					rErr = err
+					rErr = wrapError(ctx, e.DetailedError())
 				}
 			case ErrStyleRaw:
 				// 不做处理，直接输出原始的
-				rErr = err
 			default:
 				// 其它未知的，直接输出原始的
-				rErr = err
 			}
 
 			return rErr
@@ -75,9 +65,14 @@ func MicroErrWrapper(fn server.HandlerFunc) server.HandlerFunc {
 	}
 }
 
-func wrapError(id, detail string) error {
+func wrapError(ctx context.Context, detail string) error {
+	var svcName string
+	if svc, ok := micro.FromContext(ctx); ok {
+		svcName = svc.Server().Options().Name
+	}
+
 	err := &me.Error{
-		Id:     id,
+		Id:     svcName,
 		Code:   ApplicationErrorCode,
 		Detail: detail,
 		Status: ApplicationErrorStatus,
