@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gobwas/glob v0.2.3
-	github.com/jinmukeji/go-pkg v0.0.0-20200109064936-2888306e17d1
+	github.com/jinmukeji/go-pkg v0.0.0-20200109071711-af403d43c4c3
 	github.com/jinzhu/gorm v1.9.12
 	github.com/manifoldco/promptui v0.6.0 // indirect
 	github.com/micro/cli v0.2.0
