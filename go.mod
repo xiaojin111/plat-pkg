@@ -18,5 +18,5 @@ require (
 	github.com/smallstep/cli v0.13.3
 	github.com/stretchr/testify v1.4.0
 	go.etcd.io/etcd v3.3.18+incompatible
-	gopkg.in/yaml.v2 v2.2.7
+	gopkg.in/yaml.v2 v2.2.8
 )
