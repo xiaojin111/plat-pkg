@@ -24,13 +24,14 @@ docker run  \
 cd ${CUR}/../jenkins_ci
 sleep 2s
 # 将etcd配置信息注入
-# wget https://s3.cn-north-1.amazonaws.com.cn/res.jinmuhealth.com/download/tools/etcddump/etcddump_0.1.3_Linux_x86_64.tar.gz
-# tar -zxvf etcddump_0.1.3_Linux_x86_64.tar.gz
+wget https://s3.cn-north-1.amazonaws.com.cn/res.jinmuhealth.com/download/tools/etcddump/etcddump_0.1.3_Linux_x86_64.tar.gz
+tar -zxvf etcddump_0.1.3_Linux_x86_64.tar.gz
 # 在本地Deployment-config-kv下local ，执行put-etcd-all.sh ，通过
-    # etcddump dump \
-	# --address=127.0.0.1:2379 \
-	# --prefix="/micro/config/jm" \
-	# --output=test.out  这个命令将配置dump到test.out文件
+    etcddump dump \
+	--address=127.0.0.1:2379 \
+	--prefix="/micro/config/jm" \
+	--output=test.out  
+#这个命令将配置dump到test.out文件
 #通过restore导入配置信息
 etcddump restore \
 	--address=${DOCKER_HOST_IP}:2379 \
