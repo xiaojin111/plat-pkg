@@ -33,6 +33,6 @@ tar -zxvf etcddump_0.1.3_Linux_x86_64.tar.gz
 # 	--output=test.out  
 # #这个命令将配置dump到test.out文件
 #通过restore导入配置信息
-etcddump restore \
+./etcddump restore \
 	--address=${DOCKER_HOST_IP}:2379 \
 	--file=test.out
