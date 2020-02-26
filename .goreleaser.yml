@@ -7,7 +7,7 @@ env:
   - GOPRIVATE=github.com/jinmukeji/*
 before:
   hooks:
-    - go mod download
+    # - go mod download
     - make generate
     - make format
     - make lint
