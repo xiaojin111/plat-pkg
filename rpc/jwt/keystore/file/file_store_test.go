@@ -1,7 +1,7 @@
 package file_test
 
 import (
-	"github.com/jinmukeji/plat-pkg/rpc/jwt/keystore/file"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore/file"
 
 	"testing"
 

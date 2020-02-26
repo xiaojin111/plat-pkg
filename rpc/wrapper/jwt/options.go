@@ -3,7 +3,7 @@ package jwt
 import (
 	"time"
 
-	cm "github.com/jinmukeji/plat-pkg/rpc/ctxmeta"
+	cm "github.com/jinmukeji/plat-pkg/v2/rpc/ctxmeta"
 )
 
 type Options struct {

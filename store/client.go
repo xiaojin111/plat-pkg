@@ -1,9 +1,9 @@
 package store
 
 import (
-	"github.com/jinmukeji/go-pkg/mysqldb"
-	"github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/config/reader"
+	"github.com/jinmukeji/plat-pkg/v2/mysqldb"
+	"github.com/micro/go-micro/v2/config"
+	"github.com/micro/go-micro/v2/config/reader"
 )
 
 // NewDbClientFromConfig 通过 Micro Config 的配置创建 DbClient

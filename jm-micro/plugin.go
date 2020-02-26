@@ -1,23 +1,24 @@
 package main
 
 import (
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/cid"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/configloader"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/healthcheck"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/jwt"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/log"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/tcphealthcheck"
-	"github.com/jinmukeji/plat-pkg/jm-micro/plugins/tls-client"
+	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/cid"
+	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/configloader"
+	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/healthcheck"
+	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/jwt"
+	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/log"
+	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/tcphealthcheck"
+	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/tls-client"
 
-	// "github.com/jinmukeji/plat-pkg/jm-micro/plugins/whitelist"
-	"github.com/micro/go-plugins/micro/cors"
+	// "github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/whitelist"
 
+	"github.com/micro/go-plugins/micro/cors/v2"
 	// "github.com/micro/go-plugins/micro/gzip"
-	"github.com/micro/go-plugins/micro/metadata"
-	"github.com/micro/micro/api"
-	"github.com/micro/micro/plugin"
-	"github.com/micro/micro/proxy"
-	"github.com/micro/micro/web"
+	"github.com/micro/go-plugins/micro/metadata/v2"
+
+	"github.com/micro/micro/v2/api"
+	"github.com/micro/micro/v2/plugin"
+	"github.com/micro/micro/v2/proxy"
+	"github.com/micro/micro/v2/web"
 )
 
 func init() {
@@ -28,9 +29,11 @@ func init() {
 	err = plugin.Register(configloader.NewPlugin())
 	die(err)
 
+	// FIXME: metadata 插件不兼容 micro/cli/v2，等待 micro/go-plugins 修复
 	err = plugin.Register(metadata.NewPlugin())
 	die(err)
 
+	// FIXME: cors 插件不兼容 micro/cli/v2，等待 micro/go-plugins 修复
 	err = plugin.Register(cors.NewPlugin())
 	die(err)
 

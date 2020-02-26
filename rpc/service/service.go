@@ -5,17 +5,17 @@ import (
 	"os"
 	"time"
 
-	"github.com/micro/cli"
-	micro "github.com/micro/go-micro"
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/server"
+	"github.com/micro/cli/v2"
+	micro "github.com/micro/go-micro/v2"
+	"github.com/micro/go-micro/v2/client"
+	"github.com/micro/go-micro/v2/server"
 
-	wsvc "github.com/micro/go-plugins/wrapper/service"
+	wsvc "github.com/micro/go-plugins/wrapper/service/v2"
 
-	wcid "github.com/jinmukeji/plat-pkg/rpc/wrapper/cid"
-	wfm "github.com/jinmukeji/plat-pkg/rpc/wrapper/formatmeta"
-	wlog "github.com/jinmukeji/plat-pkg/rpc/wrapper/log"
-	wme "github.com/jinmukeji/plat-pkg/rpc/wrapper/microerr"
+	wcid "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/cid"
+	wfm "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/formatmeta"
+	wlog "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/log"
+	wme "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/microerr"
 )
 
 func CreateService(opts *Options) micro.Service {
@@ -83,7 +83,7 @@ func setupService(svc micro.Service, opts *Options) error {
 		// Setup runtime flags
 		micro.Flags(flags...),
 
-		micro.Action(func(c *cli.Context) {
+		micro.Action(func(c *cli.Context) error {
 			if opts.CliPreAction != nil {
 				opts.CliPreAction(c)
 			}
@@ -100,15 +100,21 @@ func setupService(svc micro.Service, opts *Options) error {
 
 			// 设置 TLS
 			err := setupTLS(c)
-			die(err)
+			if err != nil {
+				return err
+			}
 
 			// 加载 config
 			err = loadServiceConfig(c)
-			die(err)
+			if err != nil {
+				return err
+			}
 
 			if opts.CliPostAction != nil {
 				opts.CliPostAction(c)
 			}
+
+			return nil
 		}),
 	)
 
@@ -120,7 +126,7 @@ func setupService(svc micro.Service, opts *Options) error {
 
 func defaultFlags() []cli.Flag {
 	flags := []cli.Flag{
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "version",
 			Usage: "Show version information",
 		},

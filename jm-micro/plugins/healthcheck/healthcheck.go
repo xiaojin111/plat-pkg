@@ -3,8 +3,8 @@ package healthcheck
 import (
 	"net/http"
 
-	"github.com/micro/cli"
-	"github.com/micro/micro/plugin"
+	"github.com/micro/cli/v2"
+	"github.com/micro/micro/v2/plugin"
 )
 
 type healthCheck struct {
@@ -13,17 +13,17 @@ type healthCheck struct {
 
 func (p *healthCheck) Flags() []cli.Flag {
 	return []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "healthcheck_path",
 			Usage:       "Health check URL path. Specified with leading slash e.g /_health",
-			EnvVar:      "HEALTHCHECK_PATH",
+			EnvVars:     []string{"HEALTHCHECK_PATH"},
 			Value:       "/_health", // default path
 			Destination: &(p.path),
 		},
 	}
 }
 
-func (p *healthCheck) Commands() []cli.Command {
+func (p *healthCheck) Commands() []*cli.Command {
 	return nil
 }
 

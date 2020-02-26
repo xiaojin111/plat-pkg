@@ -7,7 +7,7 @@
 安装 **jm-micro** 命令行工具:
 
 ```sh
-go get -u github.com/jinmukeji/plat-pkg/jm-micro
+go get -u github.com/jinmukeji/plat-pkg/v2/jm-micro
 ```
 
 使用：

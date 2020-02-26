@@ -3,12 +3,12 @@ package log
 import (
 	"net/http"
 
-	"github.com/micro/cli"
-	"github.com/micro/micro/plugin"
+	"github.com/micro/cli/v2"
+	"github.com/micro/micro/v2/plugin"
 
 	"strings"
 
-	mlog "github.com/jinmukeji/go-pkg/log"
+	mlog "github.com/jinmukeji/go-pkg/v2/log"
 	"github.com/sirupsen/logrus"
 )
 
@@ -28,25 +28,25 @@ func init() {
 func (p *logPlugin) Flags() []cli.Flag {
 	return []cli.Flag{
 		// 日志相关
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "log_format",
 			Usage:       "Log format. Empty string or LOGSTASH.",
-			EnvVar:      "LOG_FORMAT",
+			EnvVars:     []string{"LOG_FORMAT"},
 			Value:       "",
 			Destination: &(p.logFormat),
 		},
 
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "log_level",
 			Usage:       "Log level. [TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC]",
-			EnvVar:      "LOG_LEVEL",
+			EnvVars:     []string{"LOG_LEVEL"},
 			Value:       "INFO",
 			Destination: &(p.logLevel),
 		},
 	}
 }
 
-func (p *logPlugin) Commands() []cli.Command {
+func (p *logPlugin) Commands() []*cli.Command {
 	return nil
 }
 

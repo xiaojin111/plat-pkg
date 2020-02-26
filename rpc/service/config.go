@@ -3,13 +3,13 @@ package service
 import (
 	"fmt"
 
-	"github.com/micro/cli"
+	"github.com/micro/cli/v2"
 
-	"github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/config/encoder/yaml"
-	"github.com/micro/go-micro/config/source"
-	"github.com/micro/go-micro/config/source/etcd"
-	"github.com/micro/go-micro/config/source/file"
+	"github.com/micro/go-micro/v2/config"
+	"github.com/micro/go-micro/v2/config/encoder/yaml"
+	"github.com/micro/go-micro/v2/config/source"
+	"github.com/micro/go-micro/v2/config/source/etcd"
+	"github.com/micro/go-micro/v2/config/source/file"
 )
 
 // Config 相关常量
@@ -21,7 +21,7 @@ const (
 func configCliFlags() []cli.Flag {
 	return []cli.Flag{
 		// Config 相关
-		cli.StringSliceFlag{
+		&cli.StringSliceFlag{
 			Name:  "config_file",
 			Usage: "Config file path",
 		},
@@ -32,12 +32,12 @@ func configCliFlags() []cli.Flag {
 		// 	Value: DefaultConfigEnvPrefix, // default value
 		// },
 
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "config_etcd_address",
 			Usage: "Etcd config source address",
 		},
 
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "config_etcd_prefix",
 			Usage: "Etcd config K/V prefix",
 			Value: DefaultConfigEtcdPrefix, // default value

@@ -1,8 +1,8 @@
 package main
 
 import (
-	icmd "github.com/micro/go-micro/config/cmd"
-	"github.com/micro/micro/cmd"
+	icmd "github.com/micro/go-micro/v2/config/cmd"
+	"github.com/micro/micro/v2/cmd"
 )
 
 const (

@@ -6,8 +6,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/jinmukeji/plat-pkg/rpc/jwt"
-	"github.com/jinmukeji/plat-pkg/rpc/jwt/keystore"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore"
 )
 
 type fileKeyItem struct {

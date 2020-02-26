@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	rc "github.com/jinmukeji/plat-pkg/rpc/cid"
-	"github.com/jinmukeji/plat-pkg/rpc/errors"
+	rc "github.com/jinmukeji/plat-pkg/v2/rpc/cid"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/errors"
 
-	mlog "github.com/jinmukeji/go-pkg/log"
-	"github.com/micro/go-micro/server"
+	mlog "github.com/jinmukeji/go-pkg/v2/log"
+	"github.com/micro/go-micro/v2/server"
 )
 
 var (

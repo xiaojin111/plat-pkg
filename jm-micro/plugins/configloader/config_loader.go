@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/micro/cli"
-	"github.com/micro/micro/plugin"
+	"github.com/micro/cli/v2"
+	"github.com/micro/micro/v2/plugin"
 
-	"github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/config/encoder/yaml"
-	"github.com/micro/go-micro/config/source"
-	"github.com/micro/go-micro/config/source/env"
-	"github.com/micro/go-micro/config/source/etcd"
-	"github.com/micro/go-micro/config/source/file"
+	"github.com/micro/go-micro/v2/config"
+	"github.com/micro/go-micro/v2/config/encoder/yaml"
+	"github.com/micro/go-micro/v2/config/source"
+	"github.com/micro/go-micro/v2/config/source/env"
+	"github.com/micro/go-micro/v2/config/source/etcd"
+	"github.com/micro/go-micro/v2/config/source/file"
 
-	mlog "github.com/jinmukeji/go-pkg/log"
+	mlog "github.com/jinmukeji/go-pkg/v2/log"
 )
 
 // Config 相关常量
@@ -35,26 +35,26 @@ var (
 func (p *configLoaderPlugin) Flags() []cli.Flag {
 	return []cli.Flag{
 		// Config 相关
-		cli.StringSliceFlag{
+		&cli.StringSliceFlag{
 			Name:  "config_file",
 			Usage: "Config file path",
 			Value: &p.cfgFiles,
 		},
 
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "config_env_prefix",
 			Usage:       "Config environment variables prefix",
 			Value:       DefaultConfigEnvPrefix, // default value
 			Destination: &p.cfgEnvPrefix,
 		},
 
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "config_etcd_address",
 			Usage:       "Etcd config source address",
 			Destination: &p.cfgEtcdAddr,
 		},
 
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "config_etcd_prefix",
 			Usage:       "Etcd config K/V prefix",
 			Value:       DefaultConfigEtcdPrefix, // default value
@@ -63,7 +63,7 @@ func (p *configLoaderPlugin) Flags() []cli.Flag {
 	}
 }
 
-func (p *configLoaderPlugin) Commands() []cli.Command {
+func (p *configLoaderPlugin) Commands() []*cli.Command {
 	return nil
 }
 

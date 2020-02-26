@@ -3,8 +3,8 @@ package tcphealthcheck
 import (
 	"net/http"
 
-	"github.com/micro/cli"
-	"github.com/micro/micro/plugin"
+	"github.com/micro/cli/v2"
+	"github.com/micro/micro/v2/plugin"
 
 	"bufio"
 	"errors"
@@ -12,7 +12,7 @@ import (
 	"net"
 	"strings"
 
-	mlog "github.com/jinmukeji/go-pkg/log"
+	mlog "github.com/jinmukeji/go-pkg/v2/log"
 )
 
 var slog = mlog.StandardLogger()
@@ -24,23 +24,23 @@ type tcpHealthCheck struct {
 
 func (p *tcpHealthCheck) Flags() []cli.Flag {
 	return []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "tcp_healthcheck_addr",
 			Usage:       "TCP healthcheck listen address e.g :9901",
-			EnvVar:      "TCP_HEALTHCHECK_ADDR",
+			EnvVars:     []string{"TCP_HEALTHCHECK_ADDR"},
 			Value:       ":9901", // default address
 			Destination: &(p.addr),
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:        "enable_tcp_healthcheck",
 			Usage:       "Enable TCP healthcheck",
-			EnvVar:      "ENABLE_TCP_HEALTHCHECK",
+			EnvVars:     []string{"ENABLE_TCP_HEALTHCHECK"},
 			Destination: &(p.enabled),
 		},
 	}
 }
 
-func (p *tcpHealthCheck) Commands() []cli.Command {
+func (p *tcpHealthCheck) Commands() []*cli.Command {
 	return nil
 }
 

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jinmukeji/go-pkg/mysqldb"
-	tx "github.com/jinmukeji/plat-pkg/transaction"
+	tx "github.com/jinmukeji/plat-pkg/v2/transaction"
+	"github.com/jinmukeji/plat-pkg/v2/mysqldb"
 	"github.com/jinzhu/gorm"
 )
 

@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/jinmukeji/plat-pkg/rpc/jwt"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
 )
 
 const (

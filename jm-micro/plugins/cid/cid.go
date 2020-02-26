@@ -3,10 +3,10 @@ package cid
 import (
 	"net/http"
 
-	"github.com/micro/cli"
-	"github.com/micro/micro/plugin"
+	"github.com/micro/cli/v2"
+	"github.com/micro/micro/v2/plugin"
 
-	rc "github.com/jinmukeji/plat-pkg/rpc/cid"
+	rc "github.com/jinmukeji/plat-pkg/v2/rpc/cid"
 )
 
 type cidPlugin struct {
@@ -16,24 +16,24 @@ type cidPlugin struct {
 
 func (p *cidPlugin) Flags() []cli.Flag {
 	return []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:        "cid_header_key",
 			Usage:       "cid HTTP header key",
-			EnvVar:      "CID_HEADER_KEY",
+			EnvVars:     []string{"CID_HEADER_KEY"},
 			Value:       rc.MetaCidKey,
 			Destination: &(p.headerKey),
 		},
 
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:        "cid_ignore_origin",
 			Usage:       "whether or not to ignore cid from origin request and generate new one to overwrite",
-			EnvVar:      "CID_IGNORE_ORIGIN",
+			EnvVars:     []string{"CID_IGNORE_ORIGIN"},
 			Destination: &(p.ignoreOriginCid),
 		},
 	}
 }
 
-func (p *cidPlugin) Commands() []cli.Command {
+func (p *cidPlugin) Commands() []*cli.Command {
 	return nil
 }
 

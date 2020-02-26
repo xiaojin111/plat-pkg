@@ -1,25 +1,25 @@
 package service
 
 import (
-	"github.com/micro/cli"
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/server"
-	"github.com/micro/go-micro/transport"
+	"github.com/micro/cli/v2"
+	"github.com/micro/go-micro/v2/client"
+	"github.com/micro/go-micro/v2/server"
+	"github.com/micro/go-micro/v2/transport"
 )
 
 func tlsCliFlags() []cli.Flag {
 	return []cli.Flag{
 		// TLS 相关
-		cli.BoolFlag{
-			Name:   "no_tls_client",
-			Usage:  "Disable TLS client",
-			EnvVar: "NO_TLS_CLIENT",
+		&cli.BoolFlag{
+			Name:    "no_tls_client",
+			Usage:   "Disable TLS client",
+			EnvVars: []string{"NO_TLS_CLIENT"},
 		},
 
-		cli.BoolFlag{
-			Name:   "no_tls_server",
-			Usage:  "Disable TLS server",
-			EnvVar: "NO_TLS_SERVER",
+		&cli.BoolFlag{
+			Name:    "no_tls_server",
+			Usage:   "Disable TLS server",
+			EnvVars: []string{"NO_TLS_SERVER"},
 		},
 	}
 }

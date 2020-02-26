@@ -1,7 +1,7 @@
 package errors_test
 
 import (
-	"github.com/jinmukeji/plat-pkg/rpc/errors"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/errors"
 
 	goerr "errors"
 	"testing"

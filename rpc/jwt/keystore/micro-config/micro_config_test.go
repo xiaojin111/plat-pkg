@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	m "github.com/jinmukeji/plat-pkg/rpc/jwt/keystore/micro-config"
-	"github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/config/encoder/yaml"
-	"github.com/micro/go-micro/config/source"
-	"github.com/micro/go-micro/config/source/etcd"
+	m "github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore/micro-config"
+	"github.com/micro/go-micro/v2/config"
+	"github.com/micro/go-micro/v2/config/encoder/yaml"
+	"github.com/micro/go-micro/v2/config/source"
+	"github.com/micro/go-micro/v2/config/source/etcd"
 	"github.com/stretchr/testify/suite"
 	"go.etcd.io/etcd/clientv3"
 )

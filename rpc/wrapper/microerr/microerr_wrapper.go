@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/micro/go-micro"
-	me "github.com/micro/go-micro/errors"
-	"github.com/micro/go-micro/metadata"
-	"github.com/micro/go-micro/server"
+	"github.com/micro/go-micro/v2"
+	me "github.com/micro/go-micro/v2/errors"
+	"github.com/micro/go-micro/v2/metadata"
+	"github.com/micro/go-micro/v2/server"
 
-	"github.com/jinmukeji/plat-pkg/rpc/errors"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/errors"
 )
 
 // 错误样式

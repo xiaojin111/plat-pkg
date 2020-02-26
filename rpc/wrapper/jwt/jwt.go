@@ -6,13 +6,13 @@ import (
 	"errors"
 	"strings"
 
-	mlog "github.com/jinmukeji/go-pkg/log"
-	cm "github.com/jinmukeji/plat-pkg/rpc/ctxmeta"
-	"github.com/jinmukeji/plat-pkg/rpc/jwt"
-	"github.com/jinmukeji/plat-pkg/rpc/jwt/keystore"
-	mc "github.com/jinmukeji/plat-pkg/rpc/jwt/keystore/micro-config"
+	mlog "github.com/jinmukeji/go-pkg/v2/log"
+	cm "github.com/jinmukeji/plat-pkg/v2/rpc/ctxmeta"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
+	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore"
+	mc "github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore/micro-config"
 
-	"github.com/micro/go-micro/server"
+	"github.com/micro/go-micro/v2/server"
 )
 
 var (

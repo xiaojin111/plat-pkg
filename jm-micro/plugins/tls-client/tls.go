@@ -3,13 +3,13 @@ package tls
 import (
 	"net/http"
 
-	"github.com/micro/cli"
-	"github.com/micro/micro/plugin"
+	"github.com/micro/cli/v2"
+	"github.com/micro/micro/v2/plugin"
 
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/transport"
+	"github.com/micro/go-micro/v2/client"
+	"github.com/micro/go-micro/v2/transport"
 
-	mlog "github.com/jinmukeji/go-pkg/log"
+	mlog "github.com/jinmukeji/go-pkg/v2/log"
 )
 
 var (
@@ -23,16 +23,16 @@ type tlsPlugin struct {
 func (p *tlsPlugin) Flags() []cli.Flag {
 	return []cli.Flag{
 		// 日志相关
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:        "no_tls_client",
 			Usage:       "Disable TLS client",
-			EnvVar:      "NO_TLS_CLIENT",
+			EnvVars:     []string{"NO_TLS_CLIENT"},
 			Destination: &(p.insecure),
 		},
 	}
 }
 
-func (p *tlsPlugin) Commands() []cli.Command {
+func (p *tlsPlugin) Commands() []*cli.Command {
 	return nil
 }
 
