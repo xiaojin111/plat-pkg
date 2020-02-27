@@ -360,7 +360,7 @@ github.com/micro/go-plugins/wrapper/service/v2 v2.0.3 h1:g1TzfQmGOWBki4TrpF5uu+A
 github.com/micro/go-plugins/wrapper/service/v2 v2.0.3/go.mod h1:Xaohnw4yyqwRD9DUKh5kkD2aPOgm48GwNi4y7BL22is=
 github.com/micro/mdns v0.3.0 h1:bYycYe+98AXR3s8Nq5qvt6C573uFTDPIYzJemWON0QE=
 github.com/micro/mdns v0.3.0/go.mod h1:KJ0dW7KmicXU2BV++qkLlmHYcVv7/hHnbtguSWt9Aoc=
-github.com/micro/micro/v2 v2.0.0 h1:EFaeupiEpJyUGkRlDSojY2JOpCH72u3p0Wi00RJx5i8=
+github.com/micro/micro v1.18.0 h1:v+xiQOXbT9xxotLwu1nJM81t4FbruBxZSSyIdhUfujM=
 github.com/micro/micro/v2 v2.0.0/go.mod h1:nGOtvMDWPNHLuet1Urf1y40IDghEuCP1gnT97FVVKFc=
 github.com/micro/micro/v2 v2.1.1 h1:l1Baojd3azbhAQMiGlQwKb8IOUVHgNl7tiYvckDIvhE=
 github.com/micro/micro/v2 v2.1.1/go.mod h1:PXel1+zqJxCaOJ5ECiXUWwT4D0Zb8xMz/TOPK1nJUxE=
