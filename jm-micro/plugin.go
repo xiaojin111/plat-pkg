@@ -29,11 +29,9 @@ func init() {
 	err = plugin.Register(configloader.NewPlugin())
 	die(err)
 
-	// FIXME: metadata 插件不兼容 micro/cli/v2，等待 micro/go-plugins 修复
 	err = plugin.Register(metadata.NewPlugin())
 	die(err)
 
-	// FIXME: cors 插件不兼容 micro/cli/v2，等待 micro/go-plugins 修复
 	err = plugin.Register(cors.NewPlugin())
 	die(err)
 
