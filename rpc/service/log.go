@@ -49,6 +49,8 @@ func setupLogger(c *cli.Context, svc string) {
 			log.Fatal(err.Error())
 		} else {
 			lv = level
+			// setup standard logger
+			mlog.StandardLogger().SetLevel(loggerToLogrusLevel(lv))
 			log.Debugf("Log Level: %s", level)
 		}
 	}
@@ -61,10 +63,35 @@ func setupLogger(c *cli.Context, svc string) {
 			"svc": svc,
 		})
 		fmtOpt = mll.WithJSONFormatter(f)
+
+		// setup standard logger
+		mlog.StandardLogger().SetFormatter(f)
 	}
 
+	// Hijack micro's logger
 	ml.DefaultLogger = mll.NewLogger(
 		ml.WithLevel(lv),
 		fmtOpt,
 	)
+}
+
+func loggerToLogrusLevel(level ml.Level) logrus.Level {
+	switch level {
+	case ml.TraceLevel:
+		return logrus.TraceLevel
+	case ml.DebugLevel:
+		return logrus.DebugLevel
+	case ml.InfoLevel:
+		return logrus.InfoLevel
+	case ml.WarnLevel:
+		return logrus.WarnLevel
+	case ml.ErrorLevel:
+		return logrus.ErrorLevel
+	case ml.PanicLevel:
+		return logrus.PanicLevel
+	case ml.FatalLevel:
+		return logrus.FatalLevel
+	default:
+		return logrus.InfoLevel
+	}
 }
