@@ -32,7 +32,7 @@ func logCliFlags() []cli.Flag {
 
 		&cli.StringFlag{
 			Name:    "log_level",
-			Usage:   "Log level. [TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC]",
+			Usage:   "Log level. [TRACE, DEBUG, INFO, WARN, ERROR, PANIC, FATAL]",
 			EnvVars: []string{"LOG_LEVEL"},
 			Value:   DefaultLogLevel,
 		},
@@ -45,7 +45,7 @@ func setupLogger(c *cli.Context, svc string) {
 	lv := ml.InfoLevel
 	logLevel := c.String("log_level")
 	if logLevel != "" {
-		if level, err := ml.GetLevel(logLevel); err != nil {
+		if level, err := ml.GetLevel(strings.ToLower(logLevel)); err != nil {
 			log.Fatal(err.Error())
 		} else {
 			lv = level
