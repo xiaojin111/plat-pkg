@@ -15,11 +15,7 @@ go run . \
     --registry=etcd \
     --log_level=DEBUG \
     --server_name=com.jinmuhealth.platform.web \
-    --enable_tls \
-    --tls_cert_file=./cert/server/localhost/localhost.crt \
-    --tls_key_file=./cert/server/localhost/localhost.key \
     web \
-    --no_tls_client \
     --address=${SERVER_IP}:${SERVER_PORT} \
     --namespace=com.jinmuhealth.platform.srv \
 

@@ -21,7 +21,6 @@ go run . \
     --metadata=X-Err-Style=MicroDetailed \
     --config_etcd_address=${ETCD_ADDR} \
     api \
-    --no_tls_client \
     --address=${SERVER_IP}:${SERVER_PORT} \
     --handler=rpc \
     --enable_rpc \

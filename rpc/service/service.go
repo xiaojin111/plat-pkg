@@ -99,13 +99,13 @@ func setupService(svc micro.Service, opts *Options) error {
 			logVersionInfo(opts)
 
 			// 设置 TLS
-			err := setupTLS(c)
-			if err != nil {
-				return err
-			}
+			// err := setupTLS(c)
+			// if err != nil {
+			// 	return err
+			// }
 
 			// 加载 config
-			err = loadServiceConfig(c)
+			err := loadServiceConfig(c)
 			if err != nil {
 				return err
 			}
@@ -133,7 +133,7 @@ func defaultFlags() []cli.Flag {
 	}
 
 	flags = append(flags, logCliFlags()...)
-	flags = append(flags, tlsCliFlags()...)
+	// flags = append(flags, tlsCliFlags()...)
 	flags = append(flags, configCliFlags()...)
 	// flags = append(flags, jwtFlags()...)
 

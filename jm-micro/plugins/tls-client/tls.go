@@ -1,5 +1,7 @@
 package tls
 
+// FIXME: go-micro/v2 默认采用 gRPC 方式，TLS设定方式此处不再适用，考虑后续移除掉。
+
 import (
 	"net/http"
 

@@ -7,7 +7,9 @@ import (
 	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/jwt"
 	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/log"
 	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/tcphealthcheck"
-	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/tls-client"
+
+	// NOTE: go-micro/v2 标准框架已经默认采用 gRPC，TLS 设定方式发生变化，本插件不适用于 gRPC.
+	// "github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/tls-client"
 
 	// "github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/whitelist"
 
@@ -17,11 +19,25 @@ import (
 
 	"github.com/micro/micro/v2/api"
 	"github.com/micro/micro/v2/plugin"
-	"github.com/micro/micro/v2/proxy"
-	"github.com/micro/micro/v2/web"
 )
 
 func init() {
+	// 初始化 micro 插件
+
+	// 全局插件，针对全部子命令
+	initGlobalPlugins()
+
+	// proxy 服务插件
+	initProxyPlugins()
+
+	// web 服务插件
+	initWebPlugins()
+
+	// api 服务插件
+	initAPIPlugins()
+}
+
+func initGlobalPlugins() {
 	// 全局插件
 	err := plugin.Register(log.NewPlugin(Name))
 	die(err)
@@ -34,24 +50,30 @@ func init() {
 
 	err = plugin.Register(cors.NewPlugin())
 	die(err)
+}
 
+func initProxyPlugins() {
 	// proxy 服务插件
-	err = proxy.Register(tls.NewPlugin())
-	die(err)
+	// err := proxy.Register(tls.NewPlugin())
+	// die(err)
+}
 
+func initWebPlugins() {
 	// web 服务插件
-	err = web.Register(tls.NewPlugin())
-	die(err)
+	// err := web.Register(tls.NewPlugin())
+	// die(err)
+}
 
+func initAPIPlugins() {
 	// api 服务插件
 
-	err = api.Register(tls.NewPlugin())
-	die(err)
+	// err = api.Register(tls.NewPlugin())
+	// die(err)
 
 	// micro gzip 插件存在 bug，当 response 数据量过小的时候，压缩后的数据丢失
 	// err = api.Register(gzip.NewPlugin())
 	// die(err)
-	err = api.Register(healthcheck.NewPlugin())
+	err := api.Register(healthcheck.NewPlugin())
 	die(err)
 
 	err = api.Register(tcphealthcheck.NewPlugin())
