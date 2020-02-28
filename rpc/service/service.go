@@ -93,7 +93,7 @@ func setupService(svc micro.Service, opts *Options) error {
 				os.Exit(0)
 			}
 
-			setupLogger(c, log, opts.Name)
+			setupLogger(c, opts.Name)
 			// 启动阶段打印版本号
 			// 由于内部使用到了 logger，需要在 logger 被设置后调用
 			logVersionInfo(opts)
