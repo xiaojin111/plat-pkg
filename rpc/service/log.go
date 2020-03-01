@@ -87,8 +87,6 @@ func loggerToLogrusLevel(level ml.Level) logrus.Level {
 		return logrus.WarnLevel
 	case ml.ErrorLevel:
 		return logrus.ErrorLevel
-	case ml.PanicLevel:
-		return logrus.PanicLevel
 	case ml.FatalLevel:
 		return logrus.FatalLevel
 	default:
