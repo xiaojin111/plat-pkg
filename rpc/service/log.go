@@ -31,9 +31,10 @@ func logCliFlags() []cli.Flag {
 		},
 
 		&cli.StringFlag{
-			Name:    "log_level",
-			Usage:   "Log level. [TRACE, DEBUG, INFO, WARN, ERROR, PANIC, FATAL]",
-			EnvVars: []string{"LOG_LEVEL"},
+			Name:  "log_level",
+			Usage: "Log level. [TRACE, DEBUG, INFO, WARN, ERROR, PANIC, FATAL]",
+			// the first environment variable that resolves is used as the default
+			EnvVars: []string{"LOG_LEVEL", "MICRO_LOG_LEVEL"},
 			Value:   DefaultLogLevel,
 		},
 	}
