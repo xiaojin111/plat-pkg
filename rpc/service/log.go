@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	DefaultLogLevel = "INFO"
+	defaultLogLevel = "INFO"
 )
 
 var (
@@ -35,7 +35,7 @@ func logCliFlags() []cli.Flag {
 			Usage: "Log level. [TRACE, DEBUG, INFO, WARN, ERROR, PANIC, FATAL]",
 			// the first environment variable that resolves is used as the default
 			EnvVars: []string{"LOG_LEVEL", "MICRO_LOG_LEVEL"},
-			Value:   DefaultLogLevel,
+			Value:   defaultLogLevel,
 		},
 	}
 }

@@ -7,13 +7,8 @@ import (
 	rc "github.com/jinmukeji/plat-pkg/v2/rpc/cid"
 	"github.com/jinmukeji/plat-pkg/v2/rpc/errors"
 
-	mlog "github.com/jinmukeji/go-pkg/v2/log"
+	"github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/server"
-)
-
-var (
-	// log is the package global logger
-	logger = mlog.StandardLogger()
 )
 
 const (
@@ -29,6 +24,15 @@ const (
 	errorCodeField = "errcode"
 )
 
+func helperLogger() *logger.Helper {
+	dl, ok := logger.DefaultLogger.(*logger.Helper)
+	if !ok {
+		return logger.NewHelper(logger.DefaultLogger)
+	}
+
+	return dl
+}
+
 // LogWrapper is a handler wrapper that logs server request.
 func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
@@ -37,8 +41,9 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		cid := rc.CidFromContext(ctx)
 
 		// 注入一个包含 cid Field 的 logger.Entry
-		cl := logger.WithField(logCidKey, cid)
-		c := contextWithLogger(ctx, cl)
+		hl := helperLogger()
+		cl := hl.WithFields(map[string]interface{}{logCidKey: cid})
+		c := logger.NewContext(ctx, cl)
 
 		err := fn(c, req, rsp)
 		// RPC 计算经历的时间长度
@@ -48,20 +53,23 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 		// l.Infof("%s %s", rpcMetadata, flatMetadata(md))
 
-		l := cl.
-			WithField(logRpcCallKey, req.Method()).
-			WithField(logLatencyKey, latency.String())
+		l := cl.WithFields(map[string]interface{}{
+			logRpcCallKey: req.Method(),
+			logLatencyKey: latency.String(),
+		})
 
 		// Log rpc call execution result
 		switch v := err.(type) {
 		case nil:
 			l.Info(rpcOk)
 		case *errors.RpcError:
-			l.WithField(errorField, v.DetailedError()).
-				WithField(errorCodeField, v.Code).
+			l.WithFields(map[string]interface{}{
+				errorField:     v.DetailedError(),
+				errorCodeField: v.Code,
+			}).
 				Warn(rpcFailed)
 		case error:
-			l.WithField(errorField, err.Error()).
+			l.WithFields(map[string]interface{}{errorField: err.Error()}).
 				Warn(rpcFailed)
 		default:
 			l.Errorf("unknown error type: %v", v)
