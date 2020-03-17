@@ -17,23 +17,23 @@ import (
 type GormLogger struct {
 	DBName string
 	DBHost string
-	logger *log.Logger
-	level  logrus.Level
+	logger logrus.FieldLogger
+	level  log.Level
 }
 
 // New Create new logger with custom database name and host
 // Defaults to use logrus.INFO level.
 func New(host, name string) *GormLogger {
-	return NewWithLevel(host, name, logrus.InfoLevel)
+	return NewWithLevel(host, name, log.GetLevel())
 }
 
 // NewWithLevel Create new logger with custom database name, host and logurs.Level
-func NewWithLevel(host, name string, level logrus.Level) *GormLogger {
+func NewWithLevel(host, name string, level log.Level) *GormLogger {
 	return NewWithLogger(host, name, log.StandardLogger(), level)
 }
 
 // NewWithLogger Create new logger with custom database name, host and logger
-func NewWithLogger(host, name string, logger *log.Logger, level logrus.Level) *GormLogger {
+func NewWithLogger(host, name string, logger *log.Logger, level log.Level) *GormLogger {
 	return &GormLogger{
 		DBHost: host,
 		DBName: name,

@@ -42,12 +42,12 @@ func (s *MySqlStore) DB(ctx context.Context) *gorm.DB {
 	if v := ctx.Value(txDbCtxKey); v != nil {
 		return v.(*gorm.DB)
 	} else {
-		return s.client.DB
+		return s.client
 	}
 }
 
 func (s *MySqlStore) BeginTx(ctx context.Context) context.Context {
-	db := s.client.DB.Begin() // 从原始的 DB 开启事务
+	db := s.client.Begin() // 从原始的 DB 开启事务
 	return context.WithValue(ctx, txDbCtxKey, db)
 }
 

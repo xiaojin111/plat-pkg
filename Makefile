@@ -15,13 +15,8 @@ all: release
 
 # Install all the build and lint dependencies
 setup:
-	# TODO: 官方 golangci-lint 发行包不兼容 go 1.13，需要使用手动编译的版本
-	#curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
-	GO111MODULE=off go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
-	[ -d "./bin" ] || mkdir -p ./bin
-	cp $(GOPATH)/bin/golangci-lint ./bin/
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s
 	#curl -L https://git.io/misspell | sh
-	go mod download
 .PHONY: setup
 
 # Update go packages
