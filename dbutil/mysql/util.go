@@ -1,15 +1,11 @@
-package mysqldb
+package mysql
 
 import (
-	"crypto/tls"
-	"crypto/x509"
-	"errors"
-	"io/ioutil"
 	"time"
 
 	// import mysql driver fo gorm
 	"github.com/go-sql-driver/mysql"
-	"github.com/jinmukeji/plat-pkg/v2/mysqldb/gormlogger"
+	"github.com/jinmukeji/plat-pkg/v2/dbutil/gormlogger"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -38,22 +34,11 @@ func NewStandardConfig() *mysql.Config {
 	return cfg
 }
 
-func NewTLSConfig(rootCert string) (*tls.Config, error) {
-	rootCertPool := x509.NewCertPool()
-	pem, err := ioutil.ReadFile(rootCert)
-	if err != nil {
-		return nil, err
-	}
-	if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-		return nil, errors.New("Failed to append PEM.")
-	}
+type DbClient = gorm.DB
 
-	return &tls.Config{
-		RootCAs: rootCertPool,
-	}, nil
-}
-
-type DbClient  = gorm.DB
+const (
+	tlsKey = "custom"
+)
 
 func OpenDB(opt ...Option) (*gorm.DB, error) {
 	options := NewOptions(opt...)

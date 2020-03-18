@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jinmukeji/go-pkg/v2/log"
-	"github.com/jinmukeji/plat-pkg/v2/mysqldb"
+	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
 )
 
 type DBUser struct {
@@ -23,9 +22,7 @@ func (u DBUser) TableName() string {
 }
 
 func main() {
-	log.SetLevel(log.DebugLevel)
-
-	cfg := mysqldb.NewStandardConfig()
+	cfg := mysql.NewStandardConfig()
 	cfg.User = "root"
 	cfg.Passwd = "p@ssw0rd"
 	cfg.Net = "tcp"
@@ -33,12 +30,11 @@ func main() {
 	cfg.DBName = "platform"
 	cfg.Timeout = 10 * time.Second // Dial timeout
 
-	db, err := mysqldb.OpenDB(
-		mysqldb.WithMySQLConfig(cfg),
-		mysqldb.WithLogLevel(log.DebugLevel),
+	db, err := mysql.OpenDB(
+		mysql.WithMySQLConfig(cfg),
 	)
 	if err != nil {
-		log.Fatalln(err)
+		panic(err)
 	}
 
 	defer db.Close()
@@ -46,9 +42,8 @@ func main() {
 	// Read
 	var u DBUser
 	// find user with id 1
-	log.Infoln("reading data")
 	if err := db.First(&u, 1).Error; err != nil {
-		log.Fatalln(err)
+		panic(err)
 	}
 
 	fmt.Printf("User: %v", u)

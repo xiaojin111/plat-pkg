@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jinmukeji/plat-pkg/v2/mysqldb"
+	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
 	tx "github.com/jinmukeji/plat-pkg/v2/transaction"
 	"github.com/jinzhu/gorm"
 )
@@ -14,10 +14,10 @@ var _ tx.Tx = (*MySqlStore)(nil)
 var _ Closer = (*MySqlStore)(nil)
 
 type MySqlStore struct {
-	client *mysqldb.DbClient
+	client *mysql.DbClient
 }
 
-func NewMySqlStore(client *mysqldb.DbClient) *MySqlStore {
+func NewMySqlStore(client *mysql.DbClient) *MySqlStore {
 	return &MySqlStore{
 		client: client,
 	}

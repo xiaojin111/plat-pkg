@@ -1,14 +1,10 @@
-package mysqldb
+package mysql
 
 import (
 	"crypto/tls"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/jinmukeji/go-pkg/v2/log"
-)
-
-const (
-	tlsKey = "custom"
 )
 
 type Options struct {

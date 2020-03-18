@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/jinmukeji/plat-pkg/v2/mysqldb"
+	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
 )
 
 type DBDeveloper struct {
@@ -22,8 +22,12 @@ func (d DBDeveloper) TableName() string {
 	return "developer"
 }
 
+const (
+	certFile = "../../../../cert/aws/rds/cn-north-1/rds-cn-ca-2019-root.pem"
+)
+
 func main() {
-	cfg := mysqldb.NewStandardConfig()
+	cfg := mysql.NewStandardConfig()
 	cfg.User = "jmtest"
 	cfg.Passwd = "Qg34xCl9vc1F"
 	cfg.Net = "tcp"
@@ -31,14 +35,14 @@ func main() {
 	cfg.DBName = "platform"
 	cfg.Timeout = 10 * time.Second // Dial timeout
 
-	tlsCfg, err := mysqldb.NewTLSConfig("rds-cn-ca-2019-root.pem")
+	tlsCfg, err := mysql.NewTLSConfig(certFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	db, err := mysqldb.OpenDB(
-		mysqldb.WithMySQLConfig(cfg),
-		mysqldb.WithTLS(tlsCfg),
+	db, err := mysql.OpenDB(
+		mysql.WithMySQLConfig(cfg),
+		mysql.WithTLS(tlsCfg),
 	)
 	if err != nil {
 		panic(err)
