@@ -41,56 +41,33 @@ func logCliFlags() []cli.Flag {
 }
 
 func setupLogger(c *cli.Context, svc string) {
+	std := mlog.StandardLogger()
 
 	// Setup Log level
-	lv := ml.InfoLevel
-	logLevel := c.String("log_level")
-	if logLevel != "" {
-		if level, err := ml.GetLevel(strings.ToLower(logLevel)); err != nil {
+	lv := mlog.GetLevel()
+	if logLevel := c.String("log_level"); logLevel != "" {
+		if level, err := logrus.ParseLevel(logLevel); err != nil {
 			log.Fatal(err.Error())
 		} else {
 			lv = level
 			// setup standard logger
-			mlog.StandardLogger().SetLevel(loggerToLogrusLevel(lv))
-			log.Debugf("Log Level: %s", level)
+			std.SetLevel(lv)
 		}
 	}
+	log.Infof("Log Level: %s", lv)
 
 	// Setup formatter
-	logFormat := c.String("log_format")
-	fmtOpt := mll.WithTextTextFormatter(mlog.DefaultTextFormatter())
-	if strings.ToLower(logFormat) == "logstash" {
+	if logFormat := c.String("log_format"); strings.ToLower(logFormat) == "logstash" {
+		// logstash 日式形式下注入 svc 字段，用来输出当前 service 的名称
 		f := mlog.NewLogstashFormatter(logrus.Fields{
 			"svc": svc,
 		})
-		fmtOpt = mll.WithJSONFormatter(f)
 
-		// setup standard logger
-		mlog.StandardLogger().SetFormatter(f)
+		std.SetFormatter(f)
 	}
 
 	// Hijack micro's logger
 	ml.DefaultLogger = mll.NewLogger(
-		ml.WithLevel(lv),
-		fmtOpt,
+		mll.WithLogger(std),
 	)
-}
-
-func loggerToLogrusLevel(level ml.Level) logrus.Level {
-	switch level {
-	case ml.TraceLevel:
-		return logrus.TraceLevel
-	case ml.DebugLevel:
-		return logrus.DebugLevel
-	case ml.InfoLevel:
-		return logrus.InfoLevel
-	case ml.WarnLevel:
-		return logrus.WarnLevel
-	case ml.ErrorLevel:
-		return logrus.ErrorLevel
-	case ml.FatalLevel:
-		return logrus.FatalLevel
-	default:
-		return logrus.InfoLevel
-	}
 }
