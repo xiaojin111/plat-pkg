@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
-	tx "github.com/jinmukeji/plat-pkg/v2/transaction"
+	tx "github.com/jinmukeji/plat-pkg/v2/dbutil/transaction"
 	"github.com/jinzhu/gorm"
 )
 
