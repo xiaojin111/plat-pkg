@@ -12,7 +12,6 @@ SERVER_PORT=8082
 ETCD_ADDR=localhost:2379
 
 go run . \
-    --registry=etcd \
     --log_level=DEBUG \
     --server_name=com.jinmuhealth.platform.web \
     --enable_tls \

@@ -12,7 +12,6 @@ SERVER_PORT=8080
 ETCD_ADDR=localhost:2379
 
 go run . \
-    --registry=etcd \
     --log_level=DEBUG \
     --register_interval=5 \
     --register_ttl=10 \
