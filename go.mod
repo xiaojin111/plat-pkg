@@ -19,7 +19,7 @@ require (
 	github.com/micro/go-plugins/wrapper/service/v2 v2.3.0
 	github.com/micro/micro/v2 v2.3.1
 	github.com/samfoo/ansi v0.0.0-20160124022901-b6bd2ded7189 // indirect
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.5.0
 	github.com/smallstep/assert v0.0.0-20200103212524-b99dc1097b15 // indirect
 	github.com/smallstep/cli v0.13.3
 	github.com/stretchr/testify v1.5.1
