@@ -253,8 +253,11 @@ github.com/inconshreveable/mousetrap v1.0.0 h1:Z8tu5sraLXCXIcARxBp/8cbvlwVa7Z1NH
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99/go.mod h1:1lJo3i6rXxKeerYnT8Nvf0QmHCRC1n8sfWVwXF2Frvo=
 github.com/jessevdk/go-flags v1.4.0/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
+github.com/jinmukeji/go-pkg v1.1.1 h1:hboLQQRd8XFZpKSy84pPDfB9rqQkgic7JhAp3bRGexE=
 github.com/jinmukeji/go-pkg/v2 v2.2.6 h1:JA9Wd3RLLhGqdB7qwMWo0OXV5r8HYq4lwh4l0VCEhWU=
 github.com/jinmukeji/go-pkg/v2 v2.2.6/go.mod h1:IEgvlF0PC9GbkG9DmRgRqQEkd+AktPO6Wrs/+7KFbPQ=
+github.com/jinmukeji/go-pkg/v2 v2.2.7 h1:/xIHPcaaxMvxL7lPqiMVNbPY0bx5L2p/52mqjyHiljs=
+github.com/jinmukeji/go-pkg/v2 v2.2.7/go.mod h1:fJSnia2Z1h8h+ZZOR5959XwDfFvzR9AqcxLXv/MIjEg=
 github.com/jinzhu/gorm v1.9.12 h1:Drgk1clyWT9t9ERbzHza6Mj/8FY/CqMyVzOiHviMo6Q=
 github.com/jinzhu/gorm v1.9.12/go.mod h1:vhTjlKSJUTWNtcbQtrMBFCxy7eXTzeCAzfL5fBZT/Qs=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=

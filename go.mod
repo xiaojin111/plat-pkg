@@ -8,7 +8,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gobwas/glob v0.2.3
-	github.com/jinmukeji/go-pkg/v2 v2.2.6
+	github.com/jinmukeji/go-pkg/v2 v2.2.7
 	github.com/jinzhu/gorm v1.9.12
 	github.com/manifoldco/promptui v0.7.0 // indirect
 	github.com/micro/cli/v2 v2.1.2
