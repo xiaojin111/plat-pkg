@@ -27,7 +27,7 @@ const (
 )
 
 func main() {
-	cfg := mysql.NewStandardConfig()
+	cfg := mysql.NewConfig()
 	cfg.User = "jmtest"
 	cfg.Passwd = "Qg34xCl9vc1F"
 	cfg.Net = "tcp"
@@ -40,7 +40,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db, err := mysql.OpenDB(
+	db, err := mysql.OpenGormDB(
 		mysql.WithMySQLConfig(cfg),
 		mysql.WithTLS(tlsCfg),
 	)

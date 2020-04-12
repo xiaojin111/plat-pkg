@@ -1,68 +1,68 @@
-package store
+package mysql
 
 import (
 	"context"
 	"fmt"
 
 	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
-	tx "github.com/jinmukeji/plat-pkg/v2/dbutil/transaction"
-	"github.com/jinzhu/gorm"
+	"github.com/jinmukeji/plat-pkg/v2/store"
 )
 
 // complains compiling error if MySqlStore doesn't implement interfaces.
-var _ tx.Tx = (*MySqlStore)(nil)
-var _ Closer = (*MySqlStore)(nil)
+var _ store.Store = (*MySqlStore)(nil)
 
 type MySqlStore struct {
-	client *mysql.DbClient
+	*mysql.DB
 }
 
-func NewMySqlStore(client *mysql.DbClient) *MySqlStore {
+func NewMySqlStore(db *mysql.DB) *MySqlStore {
 	return &MySqlStore{
-		client: client,
+		DB: db,
 	}
 }
 
-// 实现 Closer 接口
+func NewStore(db *mysql.DB) *MySqlStore {
+    return NewMySqlStore(db)
+}
+
+// 实现 store.Closer 接口
 
 func (s *MySqlStore) Close() error {
-	if s.client != nil {
-		return s.client.Close()
+	if s.DB != nil {
+		return s.DB.Close()
 	}
 	return nil
 }
 
-// 实现事务控制接口 tx.Tx
+// 实现事务控制接口 store.Tx
 
-type txDbKey string
+type txDbCtxKey struct{}
 
-const txDbCtxKey txDbKey = "txDb"
-
-func (s *MySqlStore) DB(ctx context.Context) *gorm.DB {
-	if v := ctx.Value(txDbCtxKey); v != nil {
-		return v.(*gorm.DB)
+func (s *MySqlStore) GetDB(ctx context.Context) *mysql.DB {
+	if v := ctx.Value(txDbCtxKey{}); v != nil {
+		return v.(*mysql.DB)
 	} else {
-		return s.client
+		return s.DB
 	}
 }
 
 func (s *MySqlStore) BeginTx(ctx context.Context) context.Context {
-	db := s.client.Begin() // 从原始的 DB 开启事务
-	return context.WithValue(ctx, txDbCtxKey, db)
+	db := s.Begin() // 从原始的 DB 开启事务
+	return context.WithValue(ctx, txDbCtxKey{}, db)
 }
 
 func (s *MySqlStore) CommitTx(ctx context.Context) {
-	db := s.DB(ctx)
+	db := s.GetDB(ctx)
 	db.Commit()
 }
 
 func (s *MySqlStore) RollbackTx(ctx context.Context) {
-	db := s.DB(ctx)
+	db := s.GetDB(ctx)
 	db.Rollback()
 }
 
 func (s *MySqlStore) GetError(ctx context.Context) error {
-	db := s.DB(ctx)
+	db := s.GetDB(ctx)
 	return db.Error
 }
 

@@ -10,43 +10,25 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// DbClient 是数据访问管理器
-// type DbClient struct {
-// 	*gorm.DB
-// 	opts Options
-// }
-
-// StandardConfig 创建一个标准的 *mysql.Config
-func NewStandardConfig() *mysql.Config {
-	cfg := mysql.NewConfig()
-
-	// 显式设定以下关键参数
-
-	// https://github.com/go-sql-driver/mysql#timetime-support
-	cfg.ParseTime = true
-
-	// https://github.com/go-sql-driver/mysql#unicode-support
-	cfg.Collation = "utf8mb4_general_ci"
-
-	// https://github.com/go-sql-driver/mysql#loc
-	cfg.Loc = time.UTC
-
-	return cfg
-}
-
-type DbClient = gorm.DB
+type DB = gorm.DB
 
 const (
 	tlsKey = "custom"
 )
 
-func OpenDB(opt ...Option) (*gorm.DB, error) {
+// OpenDB is alias of OpenGormDB.
+func OpenDB(opt ...Option) (*DB, error) {
+	return OpenGormDB(opt...)
+}
+
+// OpenGormDB 打开一个 *gorm.DB 的连接.
+func OpenGormDB(opt ...Option) (*DB, error) {
 	options := NewOptions(opt...)
 
-	mysqlCfg := options.mysqlCfg
+	mysqlCfg := options.MySqlCfg
 
-	if options.tlsCfg != nil {
-		err := mysql.RegisterTLSConfig(tlsKey, options.tlsCfg)
+	if options.TLSCfg != nil {
+		err := mysql.RegisterTLSConfig(tlsKey, options.TLSCfg)
 		if err != nil {
 			return nil, err
 		}
@@ -64,7 +46,7 @@ func OpenDB(opt ...Option) (*gorm.DB, error) {
 	// gorm setting
 	db.SingularTable(true)
 	// db.DB().SetMaxOpenConns(options.MaxConnections)
-	db.SetLogger(gormlogger.NewWithLevel(mysqlCfg.Addr, mysqlCfg.DBName, options.logLevel))
+	db.SetLogger(gormlogger.NewWithLevel(mysqlCfg.Addr, mysqlCfg.DBName, options.LogLevel))
 	db = db.LogMode(true)
 	// 禁止没有 WHERE 语句的 DELETE 或 UPDATE 操作执行，否则抛出 error
 	db = db.BlockGlobalUpdate(true)

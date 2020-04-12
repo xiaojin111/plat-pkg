@@ -1,4 +1,4 @@
-package store
+package mysql
 
 // FIXME: 以下两个方法需要兼容
 

@@ -8,10 +8,9 @@ import (
 )
 
 type Options struct {
-	mysqlCfg *mysql.Config
-	tlsCfg   *tls.Config
-
-	logLevel log.Level
+	MySqlCfg *mysql.Config
+	TLSCfg   *tls.Config
+	LogLevel log.Level
 }
 
 // TODO: 删除无用代码
@@ -62,117 +61,32 @@ type Option func(*Options)
 
 func WithMySQLConfig(cfg *mysql.Config) Option {
 	return func(o *Options) {
-		o.mysqlCfg = cfg
+		o.MySqlCfg = cfg
 	}
 }
 
 func WithTLS(cfg *tls.Config) Option {
 	return func(o *Options) {
-		o.tlsCfg = cfg
+		o.TLSCfg = cfg
 	}
 }
 
 func WithLogLevel(lv log.Level) Option {
 	return func(o *Options) {
-		o.logLevel = lv
+		o.LogLevel = lv
 	}
 }
 
-// // DialTimeout 设置连接超时时间
-// // The value must be a decimal number with a unit suffix ("ms", "s", "m", "h"), such as "30s", "0.5m" or "1m30s".
-// func DialTimeout(timeout string) Option {
-// 	return func(o *Options) {
-// 		o.DialTimeout = timeout
-// 	}
-// }
-
-// // Address 设置服务器地址 - host:port
-// func Address(addr string) Option {
-// 	return func(o *Options) {
-// 		o.Address = addr
-// 	}
-// }
-
-// // Username 设置用户名
-// func Username(username string) Option {
-// 	return func(o *Options) {
-// 		o.Username = username
-// 	}
-// }
-
-// // Password 设置密码
-// func Password(pwd string) Option {
-// 	return func(o *Options) {
-// 		o.Password = pwd
-// 	}
-// }
-
-// // Database 设置数据库名
-// func Database(db string) Option {
-// 	return func(o *Options) {
-// 		o.Database = db
-// 	}
-// }
-
-// // EnableLog 设置是否启用日志
-// func EnableLog(enable bool) Option {
-// 	return func(o *Options) {
-// 		o.EnableLog = enable
-// 	}
-// }
-
-// // MaxConnections 设置最大连接数
-// func MaxConnections(maxConns int) Option {
-// 	return func(o *Options) {
-// 		o.MaxConnections = maxConns
-// 	}
-// }
-
-// // Charset 设置字符集
-// func Charset(charset string) Option {
-// 	return func(o *Options) {
-// 		o.Charset = charset
-// 	}
-// }
-
-// // Collation 设置字符集排序
-// func Collation(collation string) Option {
-// 	return func(o *Options) {
-// 		o.Collation = collation
-// 	}
-// }
-
-// // ParseTime 设置转换时间
-// func ParseTime(parseTime bool) Option {
-// 	return func(o *Options) {
-// 		o.ParseTime = parseTime
-// 	}
-// }
-
-// // Locale 设置区域设置
-// func Locale(locale string) Option {
-// 	return func(o *Options) {
-// 		o.Locale = locale
-// 	}
-// }
-
-// // BlockGlobalUpdate 设置是否阻止全局更新
-// func BlockGlobalUpdate(block bool) Option {
-// 	return func(o *Options) {
-// 		o.BlockGlobalUpdate = block
-// 	}
-// }
-
-// newDefaultOptions 返回默认配置的 Options
-func newDefaultOptions() *Options {
+// defaultOptions 返回默认配置的 Options
+func defaultOptions() *Options {
 	return &Options{
-		logLevel: log.GetLevel(),
+		LogLevel: log.GetLevel(),
 	}
 }
 
 // NewOptions 设置 Options
 func NewOptions(opt ...Option) *Options {
-	opts := newDefaultOptions()
+	opts := defaultOptions()
 
 	for _, o := range opt {
 		o(opts)
