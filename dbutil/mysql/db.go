@@ -57,25 +57,3 @@ func OpenGormDB(opt ...Option) (*DB, error) {
 
 	return db, nil
 }
-
-// TODO: 删除无用代码
-
-// // NewDbClient 根据传入的 options 返回一个新的 DbClient
-// func NewDbClient(opts ...Option) (*DbClient, error) {
-// 	options := NewOptions(opts...)
-// 	return NewDbClientFromOptions(options)
-// }
-
-// func NewDbClientFromOptions(options Options) (*DbClient, error) {
-// 	db, err := Open(options)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-
-// 	return &DbClient{db, options}, nil
-// }
-
-// // Options 返回 DbClient 的 Options.
-// func (c *DbClient) Options() Options {
-// 	return c.opts
-// }
