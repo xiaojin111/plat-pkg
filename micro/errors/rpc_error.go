@@ -3,7 +3,7 @@ package errors
 import (
 	"fmt"
 
-	"github.com/jinmukeji/plat-pkg/v2/rpc/errors/codes"
+	"github.com/jinmukeji/plat-pkg/v2/micro/errors/codes"
 )
 
 type RpcError struct {

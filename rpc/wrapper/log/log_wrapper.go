@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
-	"github.com/jinmukeji/plat-pkg/v2/rpc/errors"
+	"github.com/jinmukeji/plat-pkg/v2/micro/errors"
 
 	"github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/server"
