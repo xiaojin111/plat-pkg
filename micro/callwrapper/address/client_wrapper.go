@@ -6,12 +6,12 @@ import (
 	"github.com/micro/go-micro/v2/client"
 )
 
-type ClientAddressWrapper struct {
+type addressWrapper struct {
 	client.Client
 	address string
 }
 
-func (w *ClientAddressWrapper) Call(ctx context.Context, req client.Request, rsp interface{}, opts ...client.CallOption) error {
+func (w *addressWrapper) Call(ctx context.Context, req client.Request, rsp interface{}, opts ...client.CallOption) error {
 	if len(w.address) > 0 {
 		o := []client.CallOption{}
 		if len(opts) > 0 {
@@ -26,6 +26,6 @@ func (w *ClientAddressWrapper) Call(ctx context.Context, req client.Request, rsp
 }
 func NewClientAddressWrapper(address string) client.Wrapper {
 	return func(c client.Client) client.Client {
-		return &ClientAddressWrapper{c, address}
+		return &addressWrapper{c, address}
 	}
 }

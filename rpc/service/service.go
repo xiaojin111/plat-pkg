@@ -12,7 +12,7 @@ import (
 
 	wsvc "github.com/micro/go-plugins/wrapper/service/v2"
 
-	wcid "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/cid"
+	wcid "github.com/jinmukeji/plat-pkg/v2/micro/handler/cid"
 	wfm "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/formatmeta"
 	wlog "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/log"
 	wme "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/microerr"
