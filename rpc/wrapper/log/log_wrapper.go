@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	rc "github.com/jinmukeji/plat-pkg/v2/rpc/cid"
+	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
 	"github.com/jinmukeji/plat-pkg/v2/rpc/errors"
 
 	"github.com/micro/go-micro/v2/logger"
@@ -38,7 +38,7 @@ func LogWrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 	return func(ctx context.Context, req server.Request, rsp interface{}) error {
 		start := time.Now()
-		cid := rc.CidFromContext(ctx)
+		cid := meta.CidFromContext(ctx)
 
 		// 注入一个包含 cid Field 的 logger.Entry
 		hl := helperLogger()

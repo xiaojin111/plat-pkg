@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	mlog "github.com/jinmukeji/go-pkg/v2/log"
-	cm "github.com/jinmukeji/plat-pkg/v2/rpc/ctxmeta"
+	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
 	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
 	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore"
 	mc "github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore/micro-config"
@@ -52,7 +52,7 @@ func NewHandlerWrapper(opt Options) server.HandlerWrapper {
 	return func(fn server.HandlerFunc) server.HandlerFunc {
 		return func(ctx context.Context, req server.Request, rsp interface{}) error {
 
-			token := cm.JwtFromContext(ctx)
+			token := meta.JwtFromContext(ctx)
 			log.Debugf("Received JWT Token: %s", token)
 
 			opt := jwt.VerifyOption{
@@ -72,7 +72,7 @@ func NewHandlerWrapper(opt Options) server.HandlerWrapper {
 				return ErrInvalidJWT
 			}
 
-			ctx = cm.ContextWithAppId(ctx, claims.Issuer)
+			ctx = meta.ContextWithAppId(ctx, claims.Issuer)
 
 			err = fn(ctx, req, rsp)
 			return err

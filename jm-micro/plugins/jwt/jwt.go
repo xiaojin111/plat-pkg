@@ -10,7 +10,7 @@ import (
 	"github.com/micro/micro/v2/plugin"
 
 	mlog "github.com/jinmukeji/go-pkg/v2/log"
-	cm "github.com/jinmukeji/plat-pkg/v2/rpc/ctxmeta"
+	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
 	j "github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
 	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore"
 	mc "github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore/micro-config"
@@ -45,7 +45,7 @@ func (p *jwt) Flags() []cli.Flag {
 			Name:        "jwt_key",
 			Usage:       "JWT HTTP header key",
 			EnvVars:     []string{"JWT_KEY"},
-			Value:       cm.MetaJwtKey,
+			Value:       meta.MetaKeyJwt,
 			Destination: &(p.headerKey),
 		},
 		&cli.StringFlag{

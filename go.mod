@@ -3,14 +3,14 @@ module github.com/jinmukeji/plat-pkg/v2
 go 1.14
 
 replace (
-	// TODO: 修复 go-micro v2.4.0 相关包引用的 bug
+	// FIXME: 修复 go-micro v2.4.0 相关包引用的 bug
 	github.com/micro/go-micro/v2 => github.com/micro/go-micro/v2 v2.4.0
 	github.com/micro/micro/v2 => github.com/micro/micro/v2 v2.4.0
 
-	// TODO: smallstep/cli v0.14.2 的 GOSUM 校验失败
+	// FIXME: smallstep/cli v0.14.2 的 GOSUM 校验失败
 	github.com/smallstep/cli => github.com/smallstep/cli v0.13.3
 
-	// 由于 etcd 与 gRPC 的兼容问题，得降级 grpc 版本
+	// FIXME: 由于 etcd 与 gRPC 的兼容问题，得降级 grpc 版本
 	// https://github.com/etcd-io/etcd/issues/11721
 	google.golang.org/grpc => google.golang.org/grpc v1.26.0
 )
