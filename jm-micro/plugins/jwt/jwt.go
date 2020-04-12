@@ -11,9 +11,9 @@ import (
 
 	mlog "github.com/jinmukeji/go-pkg/v2/log"
 	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
-	j "github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
-	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore"
-	mc "github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore/micro-config"
+	j "github.com/jinmukeji/plat-pkg/v2/auth/jwt"
+	"github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore"
+	mc "github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore/micro-config"
 )
 
 var (

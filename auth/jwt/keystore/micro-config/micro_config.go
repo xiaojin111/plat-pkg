@@ -5,10 +5,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore"
+	"github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore"
 	"github.com/micro/go-micro/v2/config"
 
-	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
+	"github.com/jinmukeji/plat-pkg/v2/auth/jwt"
 )
 
 type keyItem struct {

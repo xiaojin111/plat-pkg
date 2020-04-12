@@ -8,9 +8,9 @@ import (
 
 	mlog "github.com/jinmukeji/go-pkg/v2/log"
 	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
-	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt"
-	"github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore"
-	mc "github.com/jinmukeji/plat-pkg/v2/rpc/jwt/keystore/micro-config"
+	"github.com/jinmukeji/plat-pkg/v2/auth/jwt"
+	"github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore"
+	mc "github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore/micro-config"
 
 	"github.com/micro/go-micro/v2/server"
 )
