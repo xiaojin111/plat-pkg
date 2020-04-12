@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/jinmukeji/plat-pkg/v2/rpc/whitelist"
+	"github.com/jinmukeji/plat-pkg/v2/experiments/whitelist"
 )
 
 func main() {
