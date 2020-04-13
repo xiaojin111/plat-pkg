@@ -10,10 +10,11 @@ type loggerContextKey string
 
 var defaultLoggerContextKey = loggerContextKey("ctx-logger")
 
-func contextWithLogger(ctx context.Context, hl *logger.Helper) context.Context {
-	c := context.WithValue(ctx, defaultLoggerContextKey, hl)
-	return c
-}
+// TODO: not used, remove or refactor it in the future
+// func contextWithLogger(ctx context.Context, hl *logger.Helper) context.Context {
+// 	c := context.WithValue(ctx, defaultLoggerContextKey, hl)
+// 	return c
+// }
 
 func LoggerFromContext(ctx context.Context) *logger.Helper {
 	if hl, ok := ctx.Value(defaultLoggerContextKey).(*logger.Helper); ok {
