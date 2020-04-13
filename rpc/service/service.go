@@ -13,9 +13,9 @@ import (
 	wsvc "github.com/micro/go-plugins/wrapper/service/v2"
 
 	wcid "github.com/jinmukeji/plat-pkg/v2/micro/handler/cid"
-	wfm "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/formatmeta"
-	wlog "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/log"
-	wme "github.com/jinmukeji/plat-pkg/v2/rpc/wrapper/microerr"
+	wfm "github.com/jinmukeji/plat-pkg/v2/micro/handler/formatmeta"
+	wlog "github.com/jinmukeji/plat-pkg/v2/micro/handler/log"
+	wme "github.com/jinmukeji/plat-pkg/v2/micro/handler/microerr"
 )
 
 func CreateService(opts *Options) micro.Service {
