@@ -1,2 +1,1 @@
-consul-data/*
-!consul-data/.gitkeep
+default.etcd/
