@@ -2,7 +2,6 @@ package microerr
 
 import (
 	"context"
-	"net/http"
 	"strings"
 
 	"github.com/micro/go-micro/v2"
@@ -89,7 +88,7 @@ func errorStyleFromContext(ctx context.Context) string {
 		//  - RpcError
 		//  - MicroSimple
 		//  - MicroDetailed
-		style = md[http.CanonicalHeaderKey(ErrorStyleMetaKey)]
+		style = md[ErrorStyleMetaKey]
 		style = strings.ToLower(style)
 	}
 
