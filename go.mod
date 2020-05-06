@@ -6,6 +6,12 @@ go 1.14
 // https://github.com/etcd-io/etcd/issues/11721
 // replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 
+replace (
+	github.com/coreos/etcd => github.com/coreos/etcd v3.3.20+incompatible
+	github.com/micro/go-micro/v2 => github.com/micro/go-micro/v2 v2.6.0
+	github.com/micro/micro/v2 => github.com/micro/micro/v2 v2.6.0
+)
+
 require (
 	github.com/coreos/etcd v3.3.20+incompatible
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
