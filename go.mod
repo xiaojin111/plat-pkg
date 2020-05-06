@@ -2,12 +2,9 @@ module github.com/jinmukeji/plat-pkg/v2
 
 go 1.14
 
-// FIXME: smallstep/cli v0.14.2 的 GOSUM 校验失败
-// github.com/smallstep/cli => github.com/smallstep/cli v0.13.3
-
 // FIXME: 由于 etcd 与 gRPC 的兼容问题，得降级 grpc 版本
 // https://github.com/etcd-io/etcd/issues/11721
-replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
+// replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 
 require (
 	github.com/coreos/etcd v3.3.20+incompatible
