@@ -7,14 +7,31 @@ CUR=`dirname $0`
 
 cd ${CUR}
 
-SERVER_IP=0.0.0.0
-SERVER_PORT=8082
-ETCD_ADDR=localhost:2379
+NAMESPACE="com.jinmuhealth.examples"
+SERVER_ADDR="0.0.0.0:8082"
+SERVER_NAME="${NAMESPACE}.web.jm_micro"
+ETCD_ADDR="localhost:2379"
 
 go run . \
     --log_level=DEBUG \
-    --server_name=com.jinmuhealth.platform.web \
+    --server_name=${SERVER_NAME} \
     web \
-    --address=${SERVER_IP}:${SERVER_PORT} \
-    --namespace=com.jinmuhealth.platform.srv \
+    --address=${SERVER_ADDR} \
+    --namespace=${NAMESPACE} \
 
+
+# go run . \
+#     --log_level=DEBUG \
+#     --server_name=com.jinmuhealth.platform.api.jm_micro \
+#     api \
+#     --namespace="com.jinmuhealth.platform" \
+#     --handler=rpc \
+#     --enable_rpc
+
+# go run . \
+#     --log_level=DEBUG \
+#     --server_name=com.jinmuhealth.platform.api.jm_micro \
+#     --api_namespace="com.jinmuhealth.platform" \
+#     api \
+#     --namespace="com.jinmuhealth.platform" \
+#     --handler=api
