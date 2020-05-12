@@ -27,7 +27,7 @@ go run . \
     --metadata=X-Err-Style=MicroDetailed \
     api \
     --address=${SERVER_ADDR} \
-    --handler=api \
+    --handler=rpc \
     --enable_rpc \
     --namespace=${NAMESPACE} \
     --enable_tcp_healthcheck
