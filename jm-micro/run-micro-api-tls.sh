@@ -11,6 +11,9 @@ SERVER_IP=0.0.0.0
 SERVER_PORT=8080
 ETCD_ADDR=localhost:2379
 
+echo "TLS is not ready by now."
+exit 1
+
 go run . \
     --log_level=DEBUG \
     --register_interval=5 \
