@@ -79,7 +79,7 @@ func mapConfig(opts *microDbOptions) (*mysql.Config, error) {
 	}
 
 	if opts.ParseTime != nil {
-		cfg.ParseTime = opts.ParseTime
+		cfg.ParseTime = *opts.ParseTime
 	}
 
 	if len(opts.Collation) > 0 {
