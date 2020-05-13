@@ -10,12 +10,13 @@ cd ${CUR}
 NAMESPACE="com.jinmuhealth.examples"
 SERVER_ADDR="0.0.0.0:8080"
 SERVER_NAME="${NAMESPACE}.api.jm_micro"
+TYPE="api"
 ETCD_ADDR="localhost:2379"
 
 # =============================================
 # 启用 micro api 的仅 rpc handler + api handler 方式
 # 本方式下可以访问 /rpc 调用API
-# 也可以同时访问 /<micro_api_service_name>//[rpc_service]/[rpc_method]
+# 也可以同时访问 /<micro_api_service_name>/[rpc_service]/[rpc_method]
 # 参考：
 #	https://micro.mu/docs/api.html#api-handler
 #	https://micro.mu/docs/api.html#rpc-handler
@@ -29,6 +30,7 @@ go run . \
     --address=${SERVER_ADDR} \
     --handler=rpc \
     --enable_rpc \
+    --type=${TYPE} \
     --namespace=${NAMESPACE} \
     --enable_tcp_healthcheck
     --tcp_healthcheck_addr=:9901

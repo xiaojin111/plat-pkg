@@ -30,7 +30,7 @@ type microDbOptions struct {
 	DialTimeout string `json:"dial_timeout" yaml:"dial_timeout"`
 
 	// 是否转换时间
-	ParseTime bool `json:"parse_time" yaml:"parse_time"`
+	ParseTime *bool `json:"parse_time,omitempty" yaml:"parse_time,omitempty"`
 
 	// 字符排序
 	Collation string `json:"collation" yaml:"collation"`
@@ -78,7 +78,9 @@ func mapConfig(opts *microDbOptions) (*mysql.Config, error) {
 		cfg.Timeout = timeout
 	}
 
-	cfg.ParseTime = opts.ParseTime
+	if opts.ParseTime != nil {
+		cfg.ParseTime = opts.ParseTime
+	}
 
 	if len(opts.Collation) > 0 {
 		cfg.Collation = opts.Collation
