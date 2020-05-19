@@ -10,10 +10,10 @@ import (
 	"github.com/micro/micro/v2/plugin"
 
 	mlog "github.com/jinmukeji/go-pkg/v2/log"
-	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
 	j "github.com/jinmukeji/plat-pkg/v2/auth/jwt"
 	"github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore"
 	mc "github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore/micro-config"
+	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
 )
 
 var (

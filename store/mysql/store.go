@@ -22,7 +22,7 @@ func NewMySqlStore(db *mysql.DB) *MySqlStore {
 }
 
 func NewStore(db *mysql.DB) *MySqlStore {
-    return NewMySqlStore(db)
+	return NewMySqlStore(db)
 }
 
 // 实现 store.Closer 接口

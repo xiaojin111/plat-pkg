@@ -1,0 +1,135 @@
+{
+    "folders": [
+        {
+            "path": "../plat-doc"
+        },
+        {
+            "path": "../arch-guide"
+        },
+        {
+            "path": "../plat-pkg"
+        },
+
+        {
+            "path": "../go-pkg"
+        },
+        {
+            "path": "../proto"
+        },
+        {
+            "path": "../proto2"
+        },
+        {
+            "path": "../plat-examples"
+        },
+        {
+            "path": "../template-svc"
+        },
+        {
+            "path": "../deployment-config-kv"
+        },
+        {
+            "path": "../security"
+        },
+        {
+            "path": "../docker-jm-app-base"
+        },
+        {
+            "path": "../ae"
+        },
+        {
+            "path": "../cert"
+        },
+        {
+            "path": "../ptcodec"
+        },
+        {
+            "path": "../web-go"
+        }
+    ],
+    "settings": {
+        "editor.formatOnSave": true,
+        "[proto3]": {
+            "editor.defaultFormatter": "zxh404.vscode-proto3"
+        },
+        "[markdown]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "todo-tree.tree.expanded": true,
+        "todo-tree.tree.flat": true,
+        "go.lintTool": "golangci-lint",
+        "go.lintFlags": ["--fast"],
+        "go.lintOnSave": "package",
+        "go.formatTool": "goimports",
+        "go.autocompleteUnimportedPackages": true,
+        "git.ignoreLimitWarning": true,
+        "cSpell.enabled": true,
+        "cSpell.words": [
+            "Debugf",
+            "Infof",
+            "Jinmu",
+            "deckarep",
+            "godotenv",
+            "gorm",
+            "jinmuhealth",
+            "jinmukeji",
+            "jinzhu",
+            "joho",
+            "kataras",
+            "mysqldb",
+            "nolint",
+            "protobuf",
+            "ptypes",
+            "stretchr",
+            "uuid",
+            "wechat",
+            "deregisters",
+            "fqdn"
+        ],
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "hediet.vscode-drawio.theme": "Kennedy"
+    },
+    "extensions": {
+        "recommendations": [
+            "hediet.vscode-drawio",
+            "shd101wyy.markdown-preview-enhanced",
+            "jebbs.plantuml",
+            "yzhang.markdown-all-in-one",
+            "davidanson.vscode-markdownlint",
+            "hookyqr.beautify",
+            "aaron-bond.better-comments",
+            "alefragnani.bookmarks",
+            "coenraads.bracket-pair-colorizer",
+            "wmaurer.change-case",
+            "xaver.clang-format",
+            "formulahendry.code-runner",
+            "streetsidesoftware.code-spell-checker",
+            "ms-azuretools.vscode-docker",
+            "editorconfig.editorconfig",
+            "ria.elastic",
+            "sleistner.vscode-fileutils",
+            "donjayamanne.githistory",
+            "codezombiech.gitignore",
+            "eamodio.gitlens",
+            "ms-vscode.go",
+            "atlassian.atlascode",
+            "eriklynd.json-tools",
+            "tuxtina.json2yaml",
+            "ms-vsliveshare.vsliveshare",
+            "emilast.logfilehighlighter",
+            "quicktype.quicktype",
+            "christian-kohler.path-intellisense",
+            "esbenp.prettier-vscode",
+            "ms-python.python",
+            "foxundermoon.shell-format",
+            "timonwong.shellcheck",
+            "wayou.vscode-todo-highlight",
+            "gruntfuggly.todo-tree",
+            "knisterpeter.vscode-commitizen",
+            "deerawan.vscode-faker",
+            "zxh404.vscode-proto3",
+            "redhat.vscode-yaml"
+        ]
+    }
+}

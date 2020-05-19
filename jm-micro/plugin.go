@@ -17,7 +17,7 @@ import (
 	// "github.com/micro/go-plugins/micro/gzip"
 	"github.com/micro/go-plugins/micro/metadata/v2"
 
-	"github.com/micro/micro/v2/api"
+	"github.com/micro/micro/v2/client/api"
 	"github.com/micro/micro/v2/plugin"
 )
 
