@@ -387,8 +387,8 @@ github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANyt
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 h1:BQSFePA1RWJOlocH6Fxy8MmwDt+yVQYULKfN0RoTN8A=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99/go.mod h1:1lJo3i6rXxKeerYnT8Nvf0QmHCRC1n8sfWVwXF2Frvo=
 github.com/jessevdk/go-flags v1.4.0/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
-github.com/jinmukeji/go-pkg/v2 v2.2.7 h1:/xIHPcaaxMvxL7lPqiMVNbPY0bx5L2p/52mqjyHiljs=
-github.com/jinmukeji/go-pkg/v2 v2.2.7/go.mod h1:fJSnia2Z1h8h+ZZOR5959XwDfFvzR9AqcxLXv/MIjEg=
+github.com/jinmukeji/go-pkg/v2 v2.2.8 h1:Y5/lJQDd/UoTd1YGcCuMGEF0ZyQbOmBrSdlohILmcRM=
+github.com/jinmukeji/go-pkg/v2 v2.2.8/go.mod h1:klqK4NNzVOimtYDTtY5w5o96H/iRiHEv/J7UrZSBmuI=
 github.com/jinzhu/gorm v1.9.12 h1:Drgk1clyWT9t9ERbzHza6Mj/8FY/CqMyVzOiHviMo6Q=
 github.com/jinzhu/gorm v1.9.12/go.mod h1:vhTjlKSJUTWNtcbQtrMBFCxy7eXTzeCAzfL5fBZT/Qs=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
@@ -693,12 +693,11 @@ github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPx
 github.com/sirupsen/logrus v1.3.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/sirupsen/logrus v1.4.1/go.mod h1:ni0Sbl8bgC9z8RoU9G6nDWqqs/fq4eDPysMBDgk/93Q=
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
-github.com/sirupsen/logrus v1.5.0/go.mod h1:+F7Ogzej0PZc/94MaYx/nvG9jOFMD2osvC3s+Squfpo=
 github.com/sirupsen/logrus v1.6.0 h1:UBcNElsrwanuuMsnGSlYmtmgbb23qDR5dG+6X6Oo89I=
 github.com/sirupsen/logrus v1.6.0/go.mod h1:7uNnSEd1DgxDLC74fIahvMZmmYsHGZGEOFrfsX/uA88=
 github.com/skratchdot/open-golang v0.0.0-20160302144031-75fb7ed4208c/go.mod h1:sUM3LWHvSMaG192sy56D9F7CNvL7jUJVXoqM1QKLnog=
-github.com/skyjia/etcd v3.3.20-grpc1.27-origmodule+incompatible h1:HIoRlqPzi21Pw6hInWFD6HgqMTN7rgykSzxyv8C4sxo=
-github.com/skyjia/etcd v3.3.20-grpc1.27-origmodule+incompatible/go.mod h1:ZQzHYhwDpkJHQUxlWSLHIYGWg6toCEJcb/EMye1K7YM=
+github.com/skyjia/etcd v3.3.21-grpc1.27-origmodule+incompatible h1:+uNeg+2hEBppfaXeK/nuWzDHno73QmR7o77ra90LZo0=
+github.com/skyjia/etcd v3.3.21-grpc1.27-origmodule+incompatible/go.mod h1:ZQzHYhwDpkJHQUxlWSLHIYGWg6toCEJcb/EMye1K7YM=
 github.com/smallstep/assert v0.0.0-20180720014142-de77670473b5/go.mod h1:TC9A4+RjIOS+HyTH7wG17/gSqVv95uDw2J64dQZx7RE=
 github.com/smallstep/assert v0.0.0-20200103212524-b99dc1097b15 h1:kSImCuenAkXtCaBeQ1UhmzzJGRhSm8sVH7I3sHE2Qdg=
 github.com/smallstep/assert v0.0.0-20200103212524-b99dc1097b15/go.mod h1:MyOHs9Po2fbM1LHej6sBUT8ozbxmMOFG+E+rx/GSGuc=
