@@ -9,7 +9,6 @@
         {
             "path": "../plat-pkg"
         },
-
         {
             "path": "../go-pkg"
         },
@@ -45,6 +44,9 @@
         },
         {
             "path": "../web-go"
+        },
+        {
+            "path": "../pulsetest"
         }
     ],
     "settings": {
