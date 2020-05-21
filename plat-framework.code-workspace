@@ -47,6 +47,27 @@
         },
         {
             "path": "../pulsetest"
+        },
+        {
+            "path": "../plat-calc-simulator"
+        },
+        {
+            "path": "../plat-config-admin"
+        },
+        {
+            "path": "../plat-developer"
+        },
+        {
+            "path": "../plat-report"
+        },
+        {
+            "path": "../plat-token"
+        },
+        {
+            "path": "../plat-user"
+        },
+        {
+            "path": "../plat-audit"
         }
     ],
     "settings": {

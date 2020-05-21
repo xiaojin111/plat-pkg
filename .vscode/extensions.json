@@ -40,7 +40,8 @@
     "knisterpeter.vscode-commitizen",
     "deerawan.vscode-faker",
     "zxh404.vscode-proto3",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "hediet.vscode-drawio"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []
