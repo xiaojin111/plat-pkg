@@ -85,6 +85,7 @@
         "go.lintOnSave": "package",
         "go.formatTool": "goimports",
         "go.autocompleteUnimportedPackages": true,
+        "go.useLanguageServer": true,
         "git.ignoreLimitWarning": true,
         "cSpell.enabled": true,
         "cSpell.words": [
@@ -154,5 +155,6 @@
             "zxh404.vscode-proto3",
             "redhat.vscode-yaml"
         ]
-    }
+    },
+    "go.testEnvFile": ""
 }

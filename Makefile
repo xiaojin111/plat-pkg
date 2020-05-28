@@ -54,7 +54,7 @@ format:
 
 # Run all the linters
 lint:
-	@./bin/golangci-lint run
+	@golangci-lint run --allow-parallel-runners
 .PHONY: lint
 
 # Go build all

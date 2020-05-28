@@ -1,9 +1,11 @@
 {
+  "editor.formatOnSave": true,
   "go.lintTool": "golangci-lint",
   "go.lintFlags": ["--fast"],
   "go.lintOnSave": "package",
   "go.formatTool": "goimports",
   "go.autocompleteUnimportedPackages": true,
+  "go.useLanguageServer": true,
   "git.ignoreLimitWarning": true,
   "cSpell.enabled": true,
   "cSpell.words": [
