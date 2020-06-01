@@ -7,24 +7,24 @@ replace (
 	// https://github.com/etcd-io/etcd/issues/11721
 	github.com/coreos/etcd => github.com/skyjia/etcd v3.3.21-grpc1.27-origmodule+incompatible
 
-	github.com/micro/go-micro/v2 => github.com/micro/go-micro/v2 v2.7.0
-	github.com/micro/micro/v2 => github.com/micro/micro/v2 v2.7.0
+	github.com/micro/go-micro/v2 => github.com/micro/go-micro/v2 v2.8.0
+	github.com/micro/micro/v2 => github.com/micro/micro/v2 v2.8.0
 )
 
 require (
-	github.com/coreos/etcd v3.3.22+incompatible
+	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gobwas/glob v0.2.3
-	github.com/jinmukeji/go-pkg/v2 v2.2.8
+	github.com/jinmukeji/go-pkg/v2 v2.4.1
 	github.com/jinzhu/gorm v1.9.12
 	github.com/micro/cli/v2 v2.1.2
-	github.com/micro/go-micro/v2 v2.7.0
+	github.com/micro/go-micro/v2 v2.8.0
 	github.com/micro/go-plugins/logger/logrus/v2 v2.5.0
 	github.com/micro/go-plugins/micro/cors/v2 v2.5.0
 	github.com/micro/go-plugins/micro/metadata/v2 v2.5.0
 	github.com/micro/go-plugins/wrapper/service/v2 v2.5.0
-	github.com/micro/micro/v2 v2.7.0
+	github.com/micro/micro/v2 v2.8.0
 	github.com/rs/xid v1.2.1
 	github.com/sirupsen/logrus v1.6.0
 	github.com/smallstep/cli v0.14.4
