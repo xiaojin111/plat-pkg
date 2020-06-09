@@ -49,9 +49,6 @@
             "path": "../pulsetest"
         },
         {
-            "path": "../plat-calc-simulator"
-        },
-        {
             "path": "../plat-config-admin"
         },
         {
