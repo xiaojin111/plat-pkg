@@ -3,15 +3,18 @@ module github.com/jinmukeji/plat-pkg/v2
 go 1.14
 
 replace (
-	// FIXME: 由于 etcd 与 gRPC 的兼容问题，暂时使用定制的 etcd 版本
-	// https://github.com/etcd-io/etcd/issues/11721
-	github.com/coreos/etcd => github.com/skyjia/etcd v3.3.22-grpc1.27-origmodule+incompatible
+	// github.com/coreos/etcd => github.com/skyjia/etcd v3.3.22-grpc1.27-origmodule+incompatible
 
 	github.com/micro/go-micro/v2 => github.com/micro/go-micro/v2 v2.9.0
+	// FIXME: 由于 etcd 与 gRPC 的兼容问题，暂时使用定制的 etcd 版本
+	//  https://github.com/etcd-io/etcd/issues/11721
+	//  https://github.com/etcd-io/etcd/issues/11154
+	//  https://github.com/etcd-io/etcd/pull/11823
+	//  等待 etcd 更新到 v3.5.0
+	go.etcd.io/etcd/v3 => go.etcd.io/etcd/v3 v3.3.0-rc.0.0.20200622175313-8f19fecb8231
 )
 
 require (
-	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gobwas/glob v0.2.3
@@ -28,5 +31,6 @@ require (
 	github.com/sirupsen/logrus v1.6.0
 	github.com/smallstep/cli v0.14.4
 	github.com/stretchr/testify v1.6.1
+	go.etcd.io/etcd/v3 v3.0.0-00010101000000-000000000000
 	gopkg.in/yaml.v2 v2.3.0
 )

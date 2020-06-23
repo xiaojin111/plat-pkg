@@ -7,13 +7,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/coreos/etcd/clientv3"
 	m "github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore/micro-config"
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/encoder/yaml"
 	"github.com/micro/go-micro/v2/config/source"
 	"github.com/micro/go-micro/v2/config/source/etcd"
 	"github.com/stretchr/testify/suite"
+	"go.etcd.io/etcd/v3/clientv3"
 )
 
 const (
