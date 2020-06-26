@@ -3,7 +3,7 @@ set -e
 set -u
 set -o pipefail
 
-CUR=`dirname $0`
+CUR=$(dirname $0)
 
 cd ${CUR}
 
@@ -15,9 +15,10 @@ export PUBLIC_KEY_FILE="${OUT_DIR}/${APP_ID}.pub"
 OUT_FILE=${OUT_DIR}/${APP_ID}.yml
 
 rm -f temp.yml
-( echo "cat <<EOF > ${OUT_FILE}";
-  cat template.yml;
-  echo "EOF";
+(
+    echo "cat <<EOF > ${OUT_FILE}"
+    cat template.yml
+    echo "EOF"
 ) >temp.yml
 . temp.yml
 rm -f temp.yml

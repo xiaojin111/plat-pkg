@@ -1,15 +1,81 @@
 {
+  // Editor
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.markdownlint": true
+
+  // ---------------------------------------------
+  // Go
+  "go.useLanguageServer": true,
+  "[go]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   },
+  "go.autocompleteUnimportedPackages": true,
   "go.lintTool": "golangci-lint",
   "go.lintFlags": ["--fast"],
   "go.lintOnSave": "package",
   "go.formatTool": "goimports",
-  "go.autocompleteUnimportedPackages": true,
-  "go.useLanguageServer": true,
-  "git.ignoreLimitWarning": true,
+  "go.editorContextMenuCommands": {
+    "toggleTestFile": true,
+    "addTags": true,
+    "removeTags": true,
+    "testAtCursor": true,
+    "testFile": true,
+    "testPackage": true,
+    "generateTestForFunction": true,
+    "generateTestForFile": true,
+    "generateTestForPackage": true,
+    "addImport": true,
+    "testCoverage": true,
+    "playground": true
+  },
+
+  // Language / file types
+  "[proto3]": {
+    "editor.defaultFormatter": "zxh404.vscode-proto3"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "liwangqian.luacoderassist"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+
+  "python.languageServer": "Microsoft",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+
+  // ext:todo
+  "todo-tree.tree.expanded": true,
+  "todo-tree.tree.flat": true,
+
+  // draw.io
+  "hediet.vscode-drawio.theme": "Kennedy",
+
   "cSpell.enabled": true,
   "cSpell.words": [
     "Debugf",
@@ -32,10 +98,5 @@
     "wechat",
     "deregisters",
     "fqdn"
-  ],
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "todo-tree.tree.expanded": true,
-  "todo-tree.tree.flat": true,
-  "hediet.vscode-drawio.theme": "Kennedy"
+  ]
 }
