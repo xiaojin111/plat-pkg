@@ -75,21 +75,21 @@
   key: InvalidOperation
   msg: invalid operation
   comment: 非法的操作
-# 
+#
 # --------------------------------------------------
 #
 #
 # 以下是各个微服务自定义错误码：
-# 
+#
 # 平台-模板服务
 # com.jinmuhealth.srv.template-svc
-- code: 9000
-  key: CustomizedExample
-  msg: a customized example error
-  comment: 一个示例自定义错误
+# - code: 9000
+#   key: CustomizedExample
+#   msg: a customized example error
+#   comment: 一个示例自定义错误
 
-# com.jinmuhealth.manufactory.srv
-- code: 9001
-  key: InvokeAlgorithmServerFailure
-  msg: failed to invoke algorithm server
-  comment: 调用算法服务器失败
+# # com.jinmuhealth.manufactory.srv
+# - code: 9001
+#   key: InvokeAlgorithmServerFailure
+#   msg: failed to invoke algorithm server
+#   comment: 调用算法服务器失败

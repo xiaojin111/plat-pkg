@@ -41,7 +41,11 @@
     "deerawan.vscode-faker",
     "zxh404.vscode-proto3",
     "redhat.vscode-yaml",
-    "hediet.vscode-drawio"
+    "hediet.vscode-drawio",
+    "koihik.vscode-lua-format",
+    "sumneko.lua",
+    "actboy168.lua-debug",
+    "trixnz.vscode-lua"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []

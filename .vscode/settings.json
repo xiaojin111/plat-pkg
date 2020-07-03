@@ -38,7 +38,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[lua]": {
-    "editor.defaultFormatter": "liwangqian.luacoderassist"
+    "editor.defaultFormatter": "Koihik.vscode-lua-format"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

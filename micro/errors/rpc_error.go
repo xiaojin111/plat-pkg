@@ -6,6 +6,8 @@ import (
 	"github.com/jinmukeji/plat-pkg/v2/micro/errors/codes"
 )
 
+// TODO: 将这个结构体重构为接口
+
 type RpcError struct {
 	Code    codes.Code `json:"code"`    // 错误码
 	Message string     `json:"message"` // 额外的错误提示消息
@@ -15,12 +17,11 @@ type RpcError struct {
 // Code returns the Code of the error if it is a RpcError error, codes.OK if err
 // is nil, or codes.Unknown otherwise.
 func Code(err error) codes.Code {
-	// Don't use FromError to avoid allocation of OK status.
 	if err == nil {
 		return codes.OK
 	}
 	if re, ok := err.(*RpcError); ok {
-		return re.Code
+		return re.GetCode()
 	}
 	return codes.Unknown
 }
@@ -107,4 +108,28 @@ func (e *RpcError) DetailedError() string {
 	}
 
 	return e.Error()
+}
+
+func (e *RpcError) GetCode() codes.Code {
+	if e == nil {
+		return codes.OK // nil 时表示 OK
+	}
+
+	return e.Code
+}
+
+func (e *RpcError) GetMessage() string {
+	if e == nil {
+		return ""
+	}
+
+	return e.Message
+}
+
+func (e *RpcError) GetCause() error {
+	if e == nil {
+		return nil
+	}
+
+	return e.Cause
 }

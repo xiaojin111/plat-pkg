@@ -15,6 +15,8 @@ import (
 	wcid "github.com/jinmukeji/plat-pkg/v2/micro/handler/cid"
 	wlog "github.com/jinmukeji/plat-pkg/v2/micro/handler/log"
 	wme "github.com/jinmukeji/plat-pkg/v2/micro/handler/microerr"
+
+	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/version"
 )
 
 func CreateService(opts *Options) micro.Service {
@@ -88,14 +90,15 @@ func setupService(svc micro.Service, opts *Options) error {
 			}
 
 			if c.Bool("version") {
-				printFullVersionInfo(opts)
+				version.PrintFullVersionInfo(opts)
 				os.Exit(0)
 			}
 
 			setupLogger(c, opts.Name)
+
 			// 启动阶段打印版本号
 			// 由于内部使用到了 logger，需要在 logger 被设置后调用
-			logVersionInfo(opts)
+			version.LogVersionInfo(opts)
 
 			// 设置 TLS
 			// err := setupTLS(c)

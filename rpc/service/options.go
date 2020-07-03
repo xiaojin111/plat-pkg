@@ -12,12 +12,7 @@ import (
 
 type RegisterServerFunc func(srv server.Server) error
 
-type Options struct {
-	// 微服务的名称
-	Name string
-	// 微服务的命名空间
-	Namespace string
-
+type Version struct {
 	// ProductVersion is current product version.
 	ProductVersion string
 	// GitCommit is the git commit short hash
@@ -26,6 +21,15 @@ type Options struct {
 	GoVersion string
 	// BuildTime is go build time
 	BuildTime string
+}
+
+type Options struct {
+	// 微服务的名称
+	Name string
+	// 微服务的命名空间
+	Namespace string
+
+	Version
 
 	// Flags are CLI flags
 	Flags []cli.Flag
@@ -55,17 +59,61 @@ type Options struct {
 	ServiceOptions []micro.Option
 }
 
-// ServiceFQDN 返回微服务的全名
+// FQDN 返回微服务的全名
 func (opts *Options) FQDN() string {
+	if opts == nil {
+		return ""
+	}
+
 	return fmt.Sprintf("%s.%s", opts.Namespace, opts.Name)
 }
 
 // ServiceMetadata 返回微服务的 metadata
 func (opts *Options) ServiceMetadata() map[string]string {
+	if opts == nil {
+		return nil
+	}
+
 	return map[string]string{
 		"ProductVersion": opts.ProductVersion,
 		"GitCommit":      opts.GitCommit,
 		"GoVersion":      opts.GoVersion,
 		"BuildTime":      opts.BuildTime,
 	}
+}
+
+func (opts *Options) GetProductName() string {
+	return opts.FQDN()
+}
+
+func (opts *Options) GetProductVersion() string {
+	if opts == nil {
+		return ""
+	}
+
+	return opts.ProductVersion
+}
+
+func (opts *Options) GetGitCommit() string {
+	if opts == nil {
+		return ""
+	}
+
+	return opts.GitCommit
+}
+
+func (opts *Options) GetBuildTime() string {
+	if opts == nil {
+		return ""
+	}
+
+	return opts.GetBuildTime()
+}
+
+func (opts *Options) GetGoVersion() string {
+	if opts == nil {
+		return ""
+	}
+
+	return opts.GoVersion
 }
