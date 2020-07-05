@@ -3,7 +3,6 @@ package service
 import (
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/micro/cli/v2"
 	micro "github.com/micro/go-micro/v2"
@@ -21,7 +20,26 @@ import (
 	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/version"
 )
 
-func CreateService(opts *Options) micro.Service {
+type ServiceOptions struct {
+	Options
+
+	// PreServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之前注册
+	PreServerHandlerWrappers []server.HandlerWrapper
+
+	// PostServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之后注册
+	PostServerHandlerWrappers []server.HandlerWrapper
+
+	// PreClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
+	PreClientWrappers []client.Wrapper
+
+	// PostClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
+	PostClientWrappers []client.Wrapper
+
+	// ServiceOptions 其它 Service Option
+	ServiceOptions []micro.Option
+}
+
+func CreateService(opts *ServiceOptions) micro.Service {
 	// jmSvc:= newJMService(opts)
 
 	// 设置 service，并且加载配置信息
@@ -37,17 +55,7 @@ func CreateService(opts *Options) micro.Service {
 	return svc
 }
 
-const (
-	// defaultRegisterTTL specifies how long a registration should exist in
-	// discovery after which it expires and is removed
-	defaultRegisterTTL = 30 * time.Second
-
-	// defaultRegisterInterval is the time at which a service should re-register
-	// to preserve it’s registration in service discovery.
-	defaultRegisterInterval = 15 * time.Second
-)
-
-func newService(opts *Options) micro.Service {
+func newService(opts *ServiceOptions) micro.Service {
 	versionMeta := opts.ServiceMetadata()
 
 	// Create a new service. Optionally include some options here.
@@ -75,7 +83,7 @@ func newService(opts *Options) micro.Service {
 	return svc
 }
 
-func setupService(svc micro.Service, opts *Options) error {
+func setupService(svc micro.Service, opts *ServiceOptions) error {
 	// 设置启动参数
 	flags := defaultFlags()
 	if len(opts.Flags) > 0 {
@@ -183,7 +191,7 @@ func defaultFlags() []cli.Flag {
 // 	}
 // }
 
-func setupHandlerWrappers(svc micro.Service, opts *Options) {
+func setupHandlerWrappers(svc micro.Service, opts *ServiceOptions) {
 	// 设置 Server Handler Wrappers
 	srvWrappers := []server.HandlerWrapper{}
 
@@ -229,10 +237,4 @@ func setupHandlerWrappers(svc micro.Service, opts *Options) {
 	svc.Init(
 		micro.WrapClient(clientWrappers...),
 	)
-}
-
-func die(err error) {
-	if err != nil {
-		log.Fatalln(err)
-	}
 }

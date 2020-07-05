@@ -3,10 +3,6 @@ package service
 import (
 	"fmt"
 
-	micro "github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/client"
-	"github.com/micro/go-micro/v2/server"
-
 	"github.com/micro/cli/v2"
 )
 
@@ -33,21 +29,6 @@ type Options struct {
 
 	// CliPostAction 在标准 Action 之后调用
 	CliPostAction func(c *cli.Context)
-
-	// PreServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之前注册
-	PreServerHandlerWrappers []server.HandlerWrapper
-
-	// PostServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之后注册
-	PostServerHandlerWrappers []server.HandlerWrapper
-
-	// PreClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
-	PreClientWrappers []client.Wrapper
-
-	// PostClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
-	PostClientWrappers []client.Wrapper
-
-	// ServiceOptions 其它 Service Option
-	ServiceOptions []micro.Option
 }
 
 // FQDN 返回微服务的全名
