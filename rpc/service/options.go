@@ -40,9 +40,6 @@ type Options struct {
 	// PostServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之后注册
 	PostServerHandlerWrappers []server.HandlerWrapper
 
-	// RegisterServer 注册 micro.Server
-	RegisterServer RegisterServerFunc
-
 	// PreClientWrappers 自定义 Client Wrapper，在标准 Wrapper 之前注册
 	PreClientWrappers []client.Wrapper
 
