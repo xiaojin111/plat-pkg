@@ -10,9 +10,12 @@ import (
 	"github.com/micro/cli/v2"
 )
 
-type RegisterServerFunc func(srv server.Server) error
+type Options struct {
+	// 微服务的名称
+	Name string
+	// 微服务的命名空间
+	Namespace string
 
-type Version struct {
 	// ProductVersion is current product version.
 	ProductVersion string
 	// GitCommit is the git commit short hash
@@ -21,15 +24,6 @@ type Version struct {
 	GoVersion string
 	// BuildTime is go build time
 	BuildTime string
-}
-
-type Options struct {
-	// 微服务的名称
-	Name string
-	// 微服务的命名空间
-	Namespace string
-
-	Version
 
 	// Flags are CLI flags
 	Flags []cli.Flag

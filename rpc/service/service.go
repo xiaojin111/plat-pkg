@@ -16,6 +16,8 @@ import (
 	wlog "github.com/jinmukeji/plat-pkg/v2/micro/handler/log"
 	wme "github.com/jinmukeji/plat-pkg/v2/micro/handler/microerr"
 
+	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/config"
+	ilog "github.com/jinmukeji/plat-pkg/v2/rpc/internal/log"
 	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/version"
 )
 
@@ -28,21 +30,21 @@ func CreateService(opts *Options) micro.Service {
 	die(err)
 
 	// 设置 server
-	srv := svc.Server()
-	err = setupServer(srv, opts)
-	die(err)
+	// srv := svc.Server()
+	// err = setupServer(srv, opts)
+	// die(err)
 
 	return svc
 }
 
 const (
-	// DefaultRegisterTTL specifies how long a registration should exist in
+	// defaultRegisterTTL specifies how long a registration should exist in
 	// discovery after which it expires and is removed
-	DefaultRegisterTTL = 30 * time.Second
+	defaultRegisterTTL = 30 * time.Second
 
-	// DefaultRegisterInterval is the time at which a service should re-register
+	// defaultRegisterInterval is the time at which a service should re-register
 	// to preserve it’s registration in service discovery.
-	DefaultRegisterInterval = 15 * time.Second
+	defaultRegisterInterval = 15 * time.Second
 )
 
 func newService(opts *Options) micro.Service {
@@ -56,8 +58,8 @@ func newService(opts *Options) micro.Service {
 
 		// Fault Tolerance - Heartbeating
 		// 	 See also: https://micro.mu/docs/fault-tolerance.html#heartbeating
-		micro.RegisterTTL(DefaultRegisterTTL),
-		micro.RegisterInterval(DefaultRegisterInterval),
+		micro.RegisterTTL(defaultRegisterTTL),
+		micro.RegisterInterval(defaultRegisterInterval),
 
 		// Setup metadata
 		micro.Metadata(versionMeta),
@@ -94,7 +96,7 @@ func setupService(svc micro.Service, opts *Options) error {
 				os.Exit(0)
 			}
 
-			setupLogger(c, opts.Name)
+			ilog.SetupLogger(c, opts.Name)
 
 			// 启动阶段打印版本号
 			// 由于内部使用到了 logger，需要在 logger 被设置后调用
@@ -107,7 +109,7 @@ func setupService(svc micro.Service, opts *Options) error {
 			// }
 
 			// 加载 config
-			err := loadServiceConfig(c)
+			err := config.SetupConfig(c)
 			if err != nil {
 				return err
 			}
@@ -134,9 +136,9 @@ func defaultFlags() []cli.Flag {
 		},
 	}
 
-	flags = append(flags, logCliFlags()...)
+	flags = append(flags, ilog.MicroCliFlags()...)
 	// flags = append(flags, tlsCliFlags()...)
-	flags = append(flags, configCliFlags()...)
+	flags = append(flags, config.MicroCliFlags()...)
 	// flags = append(flags, jwtFlags()...)
 
 	return flags
@@ -227,27 +229,6 @@ func setupHandlerWrappers(svc micro.Service, opts *Options) {
 	svc.Init(
 		micro.WrapClient(clientWrappers...),
 	)
-}
-
-func setupServer(srv server.Server, opts *Options) error {
-
-	err := srv.Init(
-		// Graceful shutdown of a service using the server.Wait option
-		// The server deregisters the service and waits for handlers to finish executing before exiting.
-		server.Wait(nil),
-	)
-	if err != nil {
-		return err
-	}
-
-	if opts.RegisterServer != nil {
-		err = opts.RegisterServer(srv)
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
 }
 
 func die(err error) {

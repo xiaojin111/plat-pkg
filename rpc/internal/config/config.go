@@ -1,4 +1,4 @@
-package service
+package config
 
 import (
 	"fmt"
@@ -10,6 +10,13 @@ import (
 	"github.com/micro/go-micro/v2/config/source"
 	"github.com/micro/go-micro/v2/config/source/etcd"
 	"github.com/micro/go-micro/v2/config/source/file"
+
+	mlog "github.com/jinmukeji/go-pkg/v2/log"
+)
+
+var (
+	// log is the package global logger
+	log = mlog.StandardLogger()
 )
 
 // Config 相关常量
@@ -18,7 +25,7 @@ const (
 	DefaultConfigEtcdPrefix = "/micro/config/jm/"
 )
 
-func configCliFlags() []cli.Flag {
+func MicroCliFlags() []cli.Flag {
 	return []cli.Flag{
 		// Config 相关
 		&cli.StringSliceFlag{
@@ -45,7 +52,7 @@ func configCliFlags() []cli.Flag {
 	}
 }
 
-func loadServiceConfig(c *cli.Context) error {
+func SetupConfig(c *cli.Context) error {
 	// 加载以下配置信息数据源，优先级依次从低到高：
 	// 1. Etcd K/V 配置中心
 	// 2. 配置文件，YAML格式
