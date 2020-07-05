@@ -98,7 +98,7 @@ func (opts *Options) GetBuildTime() string {
 		return ""
 	}
 
-	return opts.GetBuildTime()
+	return opts.BuildTime
 }
 
 func (opts *Options) GetGoVersion() string {
