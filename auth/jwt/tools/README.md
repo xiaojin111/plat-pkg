@@ -150,13 +150,13 @@ go run sign/main.go \
 	pbcopy
 	
 # 使用公钥进行 JWT 验证
-go run verify/main.go \
+go run verify_std/main.go \
 	-key ${OUT_DIR}/${APP_ID}.pub \
 	-token ${JWT_TOKEN}
 	
 # 使用公钥进行 JWT 验证技巧 (仅 macOS)
 # 从剪切板中读取已拷贝的 JWT Token
-go run verify/main.go \
+go run verify_std/main.go \
 	-key ${OUT_DIR}/${APP_ID}.pub \
 	-token $(pbpaste)
 ```
