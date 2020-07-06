@@ -13,7 +13,7 @@ func ExampleRSAVerifyCustomJWT() {
 	type MyClaims struct {
 		jwt.StandardClaims
 
-		UserId string `json:"user_id"`
+		AccessToken string `json:"access_token"`
 	}
 
 	token := "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTQwNTMyMTQsImlhdCI6MTU5NDA1MjYxNCwiaXNzIjoiYXBwLXRlc3QxIn0.Xj2bALCrcIMHLHmeeI7ipRddoxU21MmigH3EBr9T_wygkZiZyzOOs-KU2VKuwMhnVsI0vU1iQKs0lCoHt8hSUGddHBjQ4oXcgfo9LWeKl0mluAeVzuBVsI-cZqDAapn5vKRrHvw2IsF-luJNB9th9-HY3_4Nif7OOKGc7DoYkzy-gazKl1lqOH76cy9jQBZ_FNYyKKh28_FgBECxoOogAfakyclPLfXjIxqvpAMMYYp3x0Gbeb1NtRToLNEHeJBEAs1W3vgCQ9i3DF2F1PP3XKHWifUp6MANMgt3w1ghPxxUK2MRHe1oX6wnu652GtspKQ0EJq5GnWMTie0KdRZCfw"

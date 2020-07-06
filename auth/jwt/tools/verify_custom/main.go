@@ -18,7 +18,7 @@ const (
 type MyClaims struct {
 	jwt.StandardClaims
 
-	UserId string `json:"user_id"`
+	AccessToken string `json:"access_token"`
 }
 
 func main() {
