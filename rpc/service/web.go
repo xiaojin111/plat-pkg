@@ -13,10 +13,18 @@ import (
 )
 
 type WebOptions struct {
-	Options
+	options
 
 	// WebOptions 其它 Web Option
 	WebOptions []web.Option
+}
+
+func NewWebOptions(namespace, name string) *WebOptions {
+	o := WebOptions{}
+	o.Namespace = namespace
+	o.Name = name
+
+	return &o
 }
 
 func CreateWeb(opts *WebOptions) web.Service {

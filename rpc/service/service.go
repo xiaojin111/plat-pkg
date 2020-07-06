@@ -21,7 +21,7 @@ import (
 )
 
 type ServiceOptions struct {
-	Options
+	options
 
 	// PreServerHandlerWrappers 自定义HandlerWrapper，在标准 HandlerWrapper 之前注册
 	PreServerHandlerWrappers []server.HandlerWrapper
@@ -37,6 +37,14 @@ type ServiceOptions struct {
 
 	// ServiceOptions 其它 Service Option
 	ServiceOptions []micro.Option
+}
+
+func NewServiceOptions(namespace, name string) *ServiceOptions {
+	o := ServiceOptions{}
+	o.Namespace = namespace
+	o.Name = name
+
+	return &o
 }
 
 func CreateService(opts *ServiceOptions) micro.Service {

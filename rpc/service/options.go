@@ -6,11 +6,11 @@ import (
 	"github.com/micro/cli/v2"
 )
 
-type Options struct {
-	// 微服务的名称
-	Name string
+type options struct {
 	// 微服务的命名空间
 	Namespace string
+	// 微服务的名称
+	Name string
 
 	// ProductVersion is current product version.
 	ProductVersion string
@@ -32,7 +32,7 @@ type Options struct {
 }
 
 // FQDN 返回微服务的全名
-func (opts *Options) FQDN() string {
+func (opts *options) FQDN() string {
 	if opts == nil {
 		return ""
 	}
@@ -41,7 +41,7 @@ func (opts *Options) FQDN() string {
 }
 
 // ServiceMetadata 返回微服务的 metadata
-func (opts *Options) ServiceMetadata() map[string]string {
+func (opts *options) ServiceMetadata() map[string]string {
 	if opts == nil {
 		return nil
 	}
@@ -54,11 +54,11 @@ func (opts *Options) ServiceMetadata() map[string]string {
 	}
 }
 
-func (opts *Options) GetProductName() string {
+func (opts *options) GetProductName() string {
 	return opts.FQDN()
 }
 
-func (opts *Options) GetProductVersion() string {
+func (opts *options) GetProductVersion() string {
 	if opts == nil {
 		return ""
 	}
@@ -66,7 +66,7 @@ func (opts *Options) GetProductVersion() string {
 	return opts.ProductVersion
 }
 
-func (opts *Options) GetGitCommit() string {
+func (opts *options) GetGitCommit() string {
 	if opts == nil {
 		return ""
 	}
@@ -74,7 +74,7 @@ func (opts *Options) GetGitCommit() string {
 	return opts.GitCommit
 }
 
-func (opts *Options) GetBuildTime() string {
+func (opts *options) GetBuildTime() string {
 	if opts == nil {
 		return ""
 	}
@@ -82,7 +82,7 @@ func (opts *Options) GetBuildTime() string {
 	return opts.BuildTime
 }
 
-func (opts *Options) GetGoVersion() string {
+func (opts *options) GetGoVersion() string {
 	if opts == nil {
 		return ""
 	}
