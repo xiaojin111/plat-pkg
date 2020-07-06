@@ -78,7 +78,7 @@ func setupWebService(svc web.Service, opts *WebOptions) error {
 		flags = append(flags, opts.Flags...)
 	}
 
-	svc.Init(
+	err := svc.Init(
 		// Setup runtime flags
 		web.Flags(flags...),
 
@@ -113,6 +113,10 @@ func setupWebService(svc web.Service, opts *WebOptions) error {
 			}
 		}),
 	)
+
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
