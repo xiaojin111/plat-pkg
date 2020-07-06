@@ -6,3 +6,7 @@ var (
 	// log is the package global logger
 	log = mlog.StandardLogger()
 )
+
+func Logger() *mlog.Logger {
+	return mlog.StandardLogger()
+}
