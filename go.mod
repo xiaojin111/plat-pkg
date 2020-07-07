@@ -8,8 +8,6 @@ replace (
 	//  https://github.com/etcd-io/etcd/issues/11154
 	//  https://github.com/etcd-io/etcd/pull/11823
 	github.com/coreos/etcd => github.com/skyjia/etcd v3.3.22-grpc1.27-origmodule+incompatible
-	// FIXME: 由于 go-plugins 版本与 go-micro/v2 版本不同步，此处强制替换版本
-	github.com/micro/go-micro/v2 => github.com/micro/go-micro/v2 v2.9.1
 	// FIXME: etcd 与 grpc 1.30+ 版本不兼容，此处降级到 1.29
 	google.golang.org/grpc => google.golang.org/grpc v1.29.1
 )
@@ -24,10 +22,10 @@ require (
 	github.com/jinzhu/gorm v1.9.14
 	github.com/micro/cli/v2 v2.1.2
 	github.com/micro/go-micro/v2 v2.9.1
-	github.com/micro/go-plugins/logger/logrus/v2 v2.8.0
-	github.com/micro/go-plugins/micro/cors/v2 v2.8.0
-	github.com/micro/go-plugins/micro/metadata/v2 v2.8.0
-	github.com/micro/go-plugins/wrapper/service/v2 v2.8.0
+	github.com/micro/go-plugins/logger/logrus/v2 v2.9.1
+	github.com/micro/go-plugins/micro/cors/v2 v2.9.1
+	github.com/micro/go-plugins/micro/metadata/v2 v2.9.1
+	github.com/micro/go-plugins/wrapper/service/v2 v2.9.1
 	github.com/micro/micro/v2 v2.9.3
 	github.com/rs/xid v1.2.1
 	github.com/sirupsen/logrus v1.6.0
