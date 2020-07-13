@@ -2,15 +2,15 @@ package jwt
 
 import (
 	"crypto/rsa"
-    "io/ioutil"
-    "errors"
+	"errors"
+	"io/ioutil"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/smallstep/cli/crypto/pemutil"
 )
 
 var (
-    ErrInvalidPrivateKeyFile = errors.New("invalid private key file")
+	ErrInvalidPrivateKeyFile = errors.New("invalid private key file")
 )
 
 // LoadRSAPrivateKeyFromPEM 从PEM私钥文件 keyFile 与密码文件 passFile 中加载 RSA 私钥

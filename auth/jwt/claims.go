@@ -1,8 +1,8 @@
 package jwt
 
 import (
-    "github.com/dgrijalva/jwt-go"
-) 
+	"github.com/dgrijalva/jwt-go"
+)
 
 type Claims interface {
 	jwt.Claims
@@ -17,7 +17,7 @@ type Claims interface {
 
 // StandardClaims is a wrapper for jwt.StandardClaims.
 type StandardClaims struct {
-    jwt.StandardClaims
+	jwt.StandardClaims
 }
 
 func (c *StandardClaims) GetIssuer() string {

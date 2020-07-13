@@ -50,31 +50,23 @@ const (
 
 	// InvalidOperation 非法的操作
 	InvalidOperation Code = 1014
-
-	// CustomizedExample 一个示例自定义错误
-	CustomizedExample Code = 9000
-
-	// InvokeAlgorithmServerFailure 调用算法服务器失败
-	InvokeAlgorithmServerFailure Code = 9001
 )
 
 var codeToMsg = map[Code]string{
-	OK:                           "ok",
-	Unknown:                      "unknown error",
-	NotImplemented:               "not implemented",
-	Internal:                     "internal error",
-	Unavailable:                  "unavailable",
-	InvalidArgument:              "invalid argument",
-	OutOfRange:                   "out of range",
-	InvalidRequest:               "invalid request",
-	Unauthenticated:              "unauthenticated",
-	PermissionDenied:             "permission denied",
-	NotFound:                     "not found",
-	AlreadyExists:                "already exists",
-	Canceled:                     "canceled",
-	DataLoss:                     "data loss",
-	DataAccessFailed:             "data access failed",
-	InvalidOperation:             "invalid operation",
-	CustomizedExample:            "a customized example error",
-	InvokeAlgorithmServerFailure: "failed to invoke algorithm server",
+	OK:               "ok",
+	Unknown:          "unknown error",
+	NotImplemented:   "not implemented",
+	Internal:         "internal error",
+	Unavailable:      "unavailable",
+	InvalidArgument:  "invalid argument",
+	OutOfRange:       "out of range",
+	InvalidRequest:   "invalid request",
+	Unauthenticated:  "unauthenticated",
+	PermissionDenied: "permission denied",
+	NotFound:         "not found",
+	AlreadyExists:    "already exists",
+	Canceled:         "canceled",
+	DataLoss:         "data loss",
+	DataAccessFailed: "data access failed",
+	InvalidOperation: "invalid operation",
 }
