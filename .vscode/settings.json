@@ -64,6 +64,9 @@
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  },
 
   "python.languageServer": "Microsoft",
   "python.linting.enabled": true,

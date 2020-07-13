@@ -45,7 +45,8 @@
     "koihik.vscode-lua-format",
     "sumneko.lua",
     "actboy168.lua-debug",
-    "trixnz.vscode-lua"
+    "trixnz.vscode-lua",
+    "mtxr.sqltools"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []

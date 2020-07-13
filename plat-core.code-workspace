@@ -13,9 +13,6 @@
             "path": "../go-pkg"
         },
         {
-            "path": "../proto"
-        },
-        {
             "path": "../proto2"
         },
         {
@@ -23,9 +20,6 @@
         },
         {
             "path": "../template-svc"
-        },
-        {
-            "path": "../deployment-config-kv"
         },
         {
             "path": "../security"
@@ -38,33 +32,6 @@
         },
         {
             "path": "../cert"
-        },
-        {
-            "path": "../ptcodec"
-        },
-        {
-            "path": "../web-go"
-        },
-        {
-            "path": "../pulsetest"
-        },
-        {
-            "path": "../plat-config-admin"
-        },
-        {
-            "path": "../plat-developer"
-        },
-        {
-            "path": "../plat-report"
-        },
-        {
-            "path": "../plat-token"
-        },
-        {
-            "path": "../plat-user"
-        },
-        {
-            "path": "../plat-audit"
         }
     ],
     "settings": {
