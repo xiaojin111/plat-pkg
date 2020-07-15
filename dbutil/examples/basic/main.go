@@ -12,6 +12,7 @@ type DBUser struct {
 	Username  string
 	FirstName string
 	LastName  string
+	Birthday  time.Time  // 生日 MySQL Date 类型
 	CreatedAt time.Time  // 创建时间
 	UpdatedAt time.Time  // 更新时间
 	DeletedAt *time.Time // 删除时间
@@ -42,7 +43,7 @@ func main() {
 	// Read
 	var u DBUser
 	// find user with id 1
-	if err := db.First(&u, 1).Error; err != nil {
+	if err := db.First(&u, 2).Error; err != nil {
 		panic(err)
 	}
 
