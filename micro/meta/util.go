@@ -27,3 +27,7 @@ func MustGet(ctx context.Context, key string) string {
 func Set(ctx context.Context, key, value string) context.Context {
 	return metadata.Set(ctx, key, value)
 }
+
+func Delete(ctx context.Context, key string) context.Context {
+	return metadata.Delete(ctx, key)
+}
