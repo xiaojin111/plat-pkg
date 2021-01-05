@@ -1,6 +1,14 @@
-# Platform 公共包
+# plat-pkg
 
-### TODO
+金姆微服务平台基础工具包。
+
+## License
+
+plat-pkg 使用 [LGPLv3 协议](./LICENSE)。
+
+
+
+## TODO
 
 **架构**
 
