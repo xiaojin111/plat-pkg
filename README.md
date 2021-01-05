@@ -1,4 +1,4 @@
-# plat-pkg
+# plat-pkg ![License](https://img.shields.io/github/license/jinmukeji/plat-pkg) [![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/jinmukeji/plat-pkg/v2?tab=doc) [![Go Report Card](https://goreportcard.com/badge/jinmukeji/plat-pkg)](https://goreportcard.com/report/github.com/jinmukeji/plat-pkg) 
 
 金姆微服务平台基础工具包。
 
