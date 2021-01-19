@@ -65,6 +65,15 @@
         },
         {
             "path": "../plat-audit"
+        },
+        {
+            "path": "../go-micro"
+        },
+        {
+            "path": "../go-plugins"
+        },
+        {
+            "path": "../micro"
         }
     ],
     "settings": {
