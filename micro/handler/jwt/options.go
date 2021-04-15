@@ -3,7 +3,7 @@ package jwt
 import (
 	"time"
 
-	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/meta"
 )
 
 type Options struct {

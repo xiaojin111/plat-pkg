@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jinmukeji/go-pkg/v2/log"
-	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
+	"gitee.com/jt-heath/go-pkg/v2/log"
+	"gitee.com/jt-heath/plat-pkg/v2/dbutil/mysql"
 )
 
 type DBUser struct {

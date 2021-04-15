@@ -9,11 +9,11 @@ import (
 	"github.com/micro/cli/v2"
 	"github.com/micro/micro/v2/plugin"
 
-	mlog "github.com/jinmukeji/go-pkg/v2/log"
-	j "github.com/jinmukeji/plat-pkg/v2/auth/jwt"
-	"github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore"
-	mc "github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore/micro-config"
-	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
+	mlog "gitee.com/jt-heath/go-pkg/v2/log"
+	j "gitee.com/jt-heath/plat-pkg/v2/auth/jwt"
+	"gitee.com/jt-heath/plat-pkg/v2/auth/jwt/keystore"
+	mc "gitee.com/jt-heath/plat-pkg/v2/auth/jwt/keystore/micro-config"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/meta"
 )
 
 var (

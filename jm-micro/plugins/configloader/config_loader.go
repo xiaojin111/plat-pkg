@@ -14,7 +14,7 @@ import (
 	"github.com/micro/go-micro/v2/config/source/etcd"
 	"github.com/micro/go-micro/v2/config/source/file"
 
-	mlog "github.com/jinmukeji/go-pkg/v2/log"
+	mlog "gitee.com/jt-heath/go-pkg/v2/log"
 )
 
 // Config 相关常量

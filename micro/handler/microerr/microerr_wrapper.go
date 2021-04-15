@@ -9,7 +9,7 @@ import (
 	"github.com/micro/go-micro/v2/metadata"
 	"github.com/micro/go-micro/v2/server"
 
-	"github.com/jinmukeji/plat-pkg/v2/micro/errors"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/errors"
 )
 
 // 错误样式

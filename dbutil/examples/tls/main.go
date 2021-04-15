@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
+	"gitee.com/jt-heath/plat-pkg/v2/dbutil/mysql"
 )
 
 type DBDeveloper struct {

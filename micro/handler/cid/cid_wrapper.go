@@ -5,8 +5,8 @@ import (
 
 	"github.com/micro/go-micro/v2/server"
 
-	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
-	"github.com/jinmukeji/plat-pkg/v2/micro/tracer"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/meta"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/tracer"
 )
 
 // CidWrapper is a handler wrapper that generate a new cid if cid is not found from request

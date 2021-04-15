@@ -4,7 +4,7 @@ export PATH := ./bin:$(PATH)
 export GO111MODULE := on
 export GOPATH := $(shell go env GOPATH)
 export GOPROXY := https://goproxy.io,direct
-export GOPRIVATE := github.com/jinmukeji/*
+export GOPRIVATE := gitee.com/jt-heath/*
 export GOVERSION := $(shell go version | awk '{print $$3}')
 # GORELEASER is the path to the goreleaser binary.
 export GORELEASER := $(shell which goreleaser)

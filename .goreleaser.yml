@@ -4,7 +4,7 @@ project_name: plat-pkg
 env:
   - GO111MODULE=on
   - GOPROXY=https://goproxy.io,direct
-  - GOPRIVATE=github.com/jinmukeji/*
+  - GOPRIVATE=gitee.com/jt-heath/*
 before:
   hooks:
     # - go mod download

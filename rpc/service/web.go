@@ -7,9 +7,9 @@ import (
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2/web"
 
-	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/config"
-	ilog "github.com/jinmukeji/plat-pkg/v2/rpc/internal/log"
-	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/version"
+	"gitee.com/jt-heath/plat-pkg/v2/rpc/internal/config"
+	ilog "gitee.com/jt-heath/plat-pkg/v2/rpc/internal/log"
+	"gitee.com/jt-heath/plat-pkg/v2/rpc/internal/version"
 )
 
 type WebOptions struct {

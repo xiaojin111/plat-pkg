@@ -2,7 +2,7 @@ package web
 
 import (
 	"github.com/gin-gonic/gin"
-	mlog "github.com/jinmukeji/go-pkg/v2/log"
+	mlog "gitee.com/jt-heath/go-pkg/v2/log"
 )
 
 // PrintRoutes 打印当前已经注册的路由

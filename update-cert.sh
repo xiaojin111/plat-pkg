@@ -5,7 +5,7 @@ set -o pipefail
 
 REF=${1-master} # branch or tag; defaults to 'master' if parameter 1 not present
 REMOTE="cert-origin" # just a name to identify the remote
-REPO="https://github.com/jinmukeji/cert.git" # replace this with your repository URL
+REPO="https://gitee.com/jt-heath/cert.git" # replace this with your repository URL
 FOLDER="cert" # where to mount the subtree
 
 CUR=`dirname $0`

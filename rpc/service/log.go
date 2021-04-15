@@ -1,6 +1,6 @@
 package service
 
-import mlog "github.com/jinmukeji/go-pkg/v2/log"
+import mlog "gitee.com/jt-heath/go-pkg/v2/log"
 
 var (
 	// log is the package global logger

@@ -11,7 +11,7 @@ import (
 	"github.com/micro/go-micro/v2/client"
 	"github.com/micro/go-micro/v2/transport"
 
-	mlog "github.com/jinmukeji/go-pkg/v2/log"
+	mlog "gitee.com/jt-heath/go-pkg/v2/log"
 )
 
 var (

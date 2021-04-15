@@ -1,7 +1,7 @@
 package errors_test
 
 import (
-	"github.com/jinmukeji/plat-pkg/v2/micro/errors"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/errors"
 
 	goerr "errors"
 	"testing"

@@ -5,7 +5,7 @@ import (
 
 	// import mysql driver fo gorm
 	"github.com/go-sql-driver/mysql"
-	"github.com/jinmukeji/plat-pkg/v2/dbutil/gormlogger"
+	"gitee.com/jt-heath/plat-pkg/v2/dbutil/gormlogger"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )

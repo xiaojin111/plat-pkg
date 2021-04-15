@@ -3,7 +3,7 @@ package rpc
 import (
 	"context"
 
-	mlog "github.com/jinmukeji/go-pkg/v2/log"
+	mlog "gitee.com/jt-heath/go-pkg/v2/log"
 	"github.com/sirupsen/logrus"
 )
 

@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 
 	"github.com/go-sql-driver/mysql"
-	"github.com/jinmukeji/go-pkg/v2/log"
+	"gitee.com/jt-heath/go-pkg/v2/log"
 )
 
 type Options struct {

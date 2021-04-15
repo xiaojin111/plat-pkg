@@ -3,7 +3,7 @@ package errors
 import (
 	"fmt"
 
-	"github.com/jinmukeji/plat-pkg/v2/micro/errors/codes"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/errors/codes"
 )
 
 // TODO: 将这个结构体重构为接口

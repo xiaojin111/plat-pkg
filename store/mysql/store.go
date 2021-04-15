@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jinmukeji/plat-pkg/v2/dbutil/mysql"
-	"github.com/jinmukeji/plat-pkg/v2/store"
+	"gitee.com/jt-heath/plat-pkg/v2/dbutil/mysql"
+	"gitee.com/jt-heath/plat-pkg/v2/store"
 )
 
 // complains compiling error if MySqlStore doesn't implement interfaces.

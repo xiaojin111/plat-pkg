@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/coreos/etcd/clientv3"
-	m "github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore/micro-config"
+	m "gitee.com/jt-heath/plat-pkg/v2/auth/jwt/keystore/micro-config"
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/encoder/yaml"
 	"github.com/micro/go-micro/v2/config/source"

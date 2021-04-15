@@ -6,11 +6,11 @@ import (
 	"errors"
 	"strings"
 
-	mlog "github.com/jinmukeji/go-pkg/v2/log"
-	"github.com/jinmukeji/plat-pkg/v2/auth/jwt"
-	"github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore"
-	mc "github.com/jinmukeji/plat-pkg/v2/auth/jwt/keystore/micro-config"
-	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
+	mlog "gitee.com/jt-heath/go-pkg/v2/log"
+	"gitee.com/jt-heath/plat-pkg/v2/auth/jwt"
+	"gitee.com/jt-heath/plat-pkg/v2/auth/jwt/keystore"
+	mc "gitee.com/jt-heath/plat-pkg/v2/auth/jwt/keystore/micro-config"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/meta"
 
 	"github.com/micro/go-micro/v2/server"
 )

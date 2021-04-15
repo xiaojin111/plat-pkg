@@ -1,4 +1,4 @@
-module github.com/jinmukeji/plat-pkg/v2
+module gitee.com/jt-heath/plat-pkg/v2
 
 go 1.14
 
@@ -16,12 +16,12 @@ replace (
 )
 
 require (
+	gitee.com/jt-heath/go-pkg/v2 v2.5.8
 	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gobwas/glob v0.2.3
-	github.com/jinmukeji/go-pkg/v2 v2.5.2
 	github.com/jinzhu/gorm v1.9.16
 	github.com/micro/cli/v2 v2.1.2
 	github.com/micro/go-micro/v2 v2.9.1

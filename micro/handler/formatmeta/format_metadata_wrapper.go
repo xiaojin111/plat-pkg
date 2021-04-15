@@ -5,7 +5,7 @@ import (
 
 	"github.com/micro/go-micro/v2/server"
 
-	pm "github.com/jinmukeji/plat-pkg/v2/micro/meta"
+	pm "gitee.com/jt-heath/plat-pkg/v2/micro/meta"
 	"github.com/micro/go-micro/v2/metadata"
 )
 

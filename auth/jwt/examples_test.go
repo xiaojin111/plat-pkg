@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jinmukeji/plat-pkg/v2/auth/jwt"
+	"gitee.com/jt-heath/plat-pkg/v2/auth/jwt"
 )
 
 func ExampleRSAVerifyCustomJWT() {

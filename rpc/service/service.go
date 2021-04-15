@@ -11,13 +11,13 @@ import (
 
 	wsvc "github.com/micro/go-plugins/wrapper/service/v2"
 
-	wcid "github.com/jinmukeji/plat-pkg/v2/micro/handler/cid"
-	wlog "github.com/jinmukeji/plat-pkg/v2/micro/handler/log"
-	wme "github.com/jinmukeji/plat-pkg/v2/micro/handler/microerr"
+	wcid "gitee.com/jt-heath/plat-pkg/v2/micro/handler/cid"
+	wlog "gitee.com/jt-heath/plat-pkg/v2/micro/handler/log"
+	wme "gitee.com/jt-heath/plat-pkg/v2/micro/handler/microerr"
 
-	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/config"
-	ilog "github.com/jinmukeji/plat-pkg/v2/rpc/internal/log"
-	"github.com/jinmukeji/plat-pkg/v2/rpc/internal/version"
+	"gitee.com/jt-heath/plat-pkg/v2/rpc/internal/config"
+	ilog "gitee.com/jt-heath/plat-pkg/v2/rpc/internal/log"
+	"gitee.com/jt-heath/plat-pkg/v2/rpc/internal/version"
 )
 
 type ServiceOptions struct {

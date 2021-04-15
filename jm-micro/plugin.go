@@ -1,17 +1,17 @@
 package main
 
 import (
-	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/cid"
-	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/configloader"
-	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/healthcheck"
-	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/jwt"
-	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/log"
-	"github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/tcphealthcheck"
+	"gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/cid"
+	"gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/configloader"
+	"gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/healthcheck"
+	"gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/jwt"
+	"gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/log"
+	"gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/tcphealthcheck"
 
 	// NOTE: go-micro/v2 标准框架已经默认采用 gRPC，TLS 设定方式发生变化，本插件不适用于 gRPC.
-	// "github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/tls-client"
+	// "gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/tls-client"
 
-	// "github.com/jinmukeji/plat-pkg/v2/jm-micro/plugins/whitelist"
+	// "gitee.com/jt-heath/plat-pkg/v2/jm-micro/plugins/whitelist"
 
 	"github.com/micro/go-plugins/micro/cors/v2"
 	// "github.com/micro/go-plugins/micro/gzip"

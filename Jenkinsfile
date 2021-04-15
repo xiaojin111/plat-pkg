@@ -7,7 +7,7 @@ pipeline{
         GOBIN="${env.GOPATH}/bin"
         PATH="${env.GOBIN}:${env.GOROOT}/bin:${env.PATH}"
         GOPROXY="https://goproxy.io,direct"
-        GOPRIVATE="github.com/jinmukeji/*"
+        GOPRIVATE="gitee.com/jt-heath/*"
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
         AWS_DEFAULT_REGION    = credentials('jenkins-aws-secret-region')

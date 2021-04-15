@@ -6,8 +6,8 @@ import (
 	"github.com/micro/cli/v2"
 	"github.com/micro/micro/v2/plugin"
 
-	"github.com/jinmukeji/plat-pkg/v2/micro/meta"
-	"github.com/jinmukeji/plat-pkg/v2/micro/tracer"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/meta"
+	"gitee.com/jt-heath/plat-pkg/v2/micro/tracer"
 )
 
 type cidPlugin struct {
