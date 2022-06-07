@@ -2,6 +2,8 @@ package service
 
 import (
 	"fmt"
+	grpc3 "github.com/micro/go-micro/v2/server/grpc"
+	"google.golang.org/grpc"
 	"os"
 
 	"github.com/micro/cli/v2"
@@ -79,6 +81,15 @@ func newService(opts *ServiceOptions) micro.Service {
 
 		// Setup metadata
 		micro.Metadata(versionMeta),
+		func(o *micro.Options) {
+			_ = o.Server.Init(
+				grpc3.MaxMsgSize(1024*1024*100),
+				grpc3.Options(
+					grpc.MaxSendMsgSize(1024*1024*100),
+					grpc.MaxRecvMsgSize(1024*1024*100),
+				),
+			)
+		},
 	}
 	if len(opts.ServiceOptions) > 0 {
 		svcOpts = append(svcOpts, opts.ServiceOptions...)

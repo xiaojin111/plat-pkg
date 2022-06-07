@@ -51,7 +51,7 @@ dockers:
       - jm-micro
     # Templates of the Docker image names.
     image_templates:
-      - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:latest"
+      - "537320800060.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:v2.4.0"
       - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:{{ .Tag }}"
       - "949191617935.dkr.ecr.cn-north-1.amazonaws.com.cn/jm-app/jm-micro:v{{ .Major }}.{{ .Minor }}"
     dockerfile: jm-micro/Dockerfile
